@@ -4,7 +4,9 @@ public class CommandLine {
      * using number inputs as this is easier to link to gui later.
     */
     //Variables
-    public Ship playerShip;
+    public static Ship playerShip;
+    public static String playerName;
+    public static int wallet;
 
 
     //Methods
@@ -12,18 +14,19 @@ public class CommandLine {
     public CommandLine() {
         /**Starts the game with required info*/
        
-       //Get User Inputs
-       String nameInput = Input.get("Name your ship: ");
+       //Set some intial values
+       wallet = 100;
+       playerName = Input.get("Choose your player name: ");
 
+       //Create Ship
+       String nameInput = Input.get("Name your ship: ");
        printOptions(Ship.getShipTypes()); //Print ship options
-        
+
        int typeInput;
        do {
         typeInput = Input.getNum("Choose your Ship type: ");
        } while (!(typeInput < Ship.getShipTypes().length) || !(typeInput >= 1));
        
-
-       //Create Ship
        playerShip = new Ship(nameInput, typeInput);
     }
 

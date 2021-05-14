@@ -1,4 +1,4 @@
-package core;
+package core; 
 import java.util.ArrayList;
 
 public class Ship {
@@ -6,16 +6,22 @@ public class Ship {
      * with them.
      */
     //------------Variables
+    private static final String[] shipTypes = {
+        "Cargo",
+        "Battle",
+        "Cruiser",
+        "Dingy",
+    };
     private final String name;
-    private static final String[] shipTypes = {"Cargo", "Battle", "Cruiser", "Dingy"};
     private String type;
     private int crew;
     private int crewWage;
     private int maxCapacity;
+    private int capacity;
     private int health;
     private int maxHealth;
     private int sailSpeed;
-    //private Item[] cargo;
+    private ArrayList<Item> cargo;
     //private Upgrades[] upgrades;
     //private Island location;
 
@@ -26,6 +32,7 @@ public class Ship {
     public Ship(String name, int shipType){
         /** Creates the ship taking in a Name and Type, Type can be accessed by ShipTypes.<type> */
         this.name = name;
+        this.cargo = new ArrayList<Item>();
 
         //Set the type of the ship
         switch(shipType) {
@@ -62,6 +69,26 @@ public class Ship {
         }
 
         this.health = this.maxHealth;
+        this.capacity = 0;
+    }
+
+    public boolean addCargo(Item[] cargo) {
+        /**Add cargo, if there is enough space available, else return false */
+        int totalWeight = 0;
+        for (int i=0; i < cargo.length; i++) {
+            totalWeight += cargo[i].getWeight();
+        }
+
+        if (totalWeight > this.maxCapacity) {
+            System.out.println("Sorry you do not have enough room for this cargo.");
+            return false;
+        }
+
+        for (int i=0; i < cargo.length; i++) {
+            this.cargo.add(cargo[i]);
+        }
+
+        return true;
     }
 
     public void takeDamage(int amount) {
@@ -94,7 +121,7 @@ public class Ship {
         return crewWage;
     }
 
-    public int getMaxCapacity() {
+    public int getmaxCapacity() {
         return maxCapacity;
     }
 
@@ -112,5 +139,9 @@ public class Ship {
 
     public static String[] getShipTypes() {
         return shipTypes;
+    }
+
+    public ArrayList<Item> getCargo() {
+        return cargo;
     }
 }
