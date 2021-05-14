@@ -3,6 +3,8 @@ import java.util.ArrayList;
 public class GameEnvironment {
     /** Main game environment that holds all key functionality, Application entry point is here.
      * this can also be thought of as the player class.
+     * 
+     * JERMEYS CHANGTES
      */
     
     public static void main(String[] args) {
