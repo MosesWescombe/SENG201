@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Input {
     /** User input functionality. Use getNum for numbers*/
-    //Scanner Object
+    //Scanner Object -
     private static Scanner in = new Scanner(System.in);
 
     //Methods
