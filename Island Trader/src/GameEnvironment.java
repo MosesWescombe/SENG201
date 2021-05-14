@@ -5,8 +5,9 @@ public class GameEnvironment {
      * this can also be thought of as the player class.
      * 
      * JERMEYS CHANGTES
+     * Msoes changes
      */
-    
+
     public static void main(String[] args) {
         /** Main game loop, run methods from here */
 
