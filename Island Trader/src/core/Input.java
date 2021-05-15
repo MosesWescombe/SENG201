@@ -26,7 +26,7 @@ public class Input {
             intInputValue = 0;
             try {
                 intInputValue = Integer.parseInt(input);
-                if (intInputValue <= upper && intInputValue >= lower) { // only exit loop when input is between lower and upper
+                if (intInputValue <= upper && intInputValue >= lower) { // only exit loop when input is between lower and upper - j
                 	break;
                 } else {
                 	System.out.println("The input needs to be between " + lower + " and " + upper);

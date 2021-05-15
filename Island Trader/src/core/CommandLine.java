@@ -18,7 +18,7 @@ public class CommandLine {
        //Set some intial values
        wallet = 100;
        playerName = Input.get("Choose your player name: ");
-       gameDuration = Input.getNum("Choose game duration (days): ", 20, 50);
+       gameDuration = Input.getNum("Choose game duration (days): ", 20, 50);// added upper and lower param to inputs with getNum - j
 
        //Create Ship
        String nameInput = Input.get("Name your ship: ");
@@ -27,14 +27,14 @@ public class CommandLine {
        int typeInput;
        do {
         typeInput = Input.getNum("Choose your Ship type: ", 1, 4);
-       } while (!(typeInput <= Ship.getShipTypes().length) || !(typeInput >= 1)); //changed to <= to include last ship item
+       } while (!(typeInput <= Ship.getShipTypes().length) || !(typeInput >= 1)); //changed to <= to include last ship item -j
        
        playerShip = new Ship(nameInput, typeInput);
     }
 
     public void printOptions(String[] array){
         /**Prints an array of options in order, numbered from 1 to n */
-        for (int i=1; i - 1 < array.length; i++) { //changed i < array.length to i - 1.
+        for (int i=1; i - 1 < array.length; i++) { //changed i < array.length to i - 1. - j
             System.out.println(Integer.toString(i) + ": " + array[i - 1]);
         }
     }
