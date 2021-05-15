@@ -11,7 +11,7 @@ public class GameEnvironment {
         CommandLine game = new CommandLine();
         
 
-        game.updateGame();
+        
 
         game.closeGame();
     }

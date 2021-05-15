@@ -23,7 +23,7 @@ public class Ship {
     private int sailSpeed;
     private ArrayList<Item> cargo;
     //private Upgrades[] upgrades;
-    //private Island location;
+    private Island location;
 
 
     //-----------Methods
@@ -74,19 +74,23 @@ public class Ship {
 
     public boolean addCargo(Item[] cargo) {
         /**Add cargo, if there is enough space available, else return false */
-        int totalWeight = 0;
+
+        //Check all the items fit
+        int totalWeight = this.capacity;
         for (int i=0; i < cargo.length; i++) {
             totalWeight += cargo[i].getWeight();
         }
-
+        //If not return false and add nothing
         if (totalWeight > this.maxCapacity) {
             System.out.println("Sorry you do not have enough room for this cargo.");
             return false;
         }
 
+        //Update the ships cargo and capacity level
         for (int i=0; i < cargo.length; i++) {
             this.cargo.add(cargo[i]);
         }
+        this.capacity = totalWeight;
 
         return true;
     }
@@ -143,5 +147,13 @@ public class Ship {
 
     public ArrayList<Item> getCargo() {
         return cargo;
+    }
+
+    public Island getLocation() {
+        return location;
+    }
+
+    public void setLocation(Island location) {
+        this.location = location;
     }
 }
