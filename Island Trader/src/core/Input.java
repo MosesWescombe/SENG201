@@ -11,9 +11,8 @@ public class Input {
         if (message != "") {
             System.out.print(message);
         }
-        
-        String result = in.nextLine();
-        return result;
+
+        return in.nextLine();
     }
 
     public static int getNum(String message, int lower, int upper) {
@@ -23,7 +22,6 @@ public class Input {
                 System.out.print(message);
             }
             String input = in.nextLine(); //changed next() to nextLine() - j
-            intInputValue = 0;
             try {
                 intInputValue = Integer.parseInt(input);
                 if (intInputValue <= upper && intInputValue >= lower) { // only exit loop when input is between lower and upper - j

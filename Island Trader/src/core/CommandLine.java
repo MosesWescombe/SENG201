@@ -24,17 +24,15 @@ public class CommandLine {
        String nameInput = Input.get("Name your ship: ");
        printOptions(Ship.getShipTypes()); //Print ship options
 
-       int typeInput;
-       do {
-        typeInput = Input.getNum("Choose your Ship type: ", 1, 4);
-       } while (!(typeInput <= Ship.getShipTypes().length) || !(typeInput >= 1)); //changed to <= to include last ship item -j
+       int typeInput = Input.getNum("Choose your Ship type: ", 1, Ship.getShipTypes().length);
+
        
        playerShip = new Ship(nameInput, typeInput);
     }
 
     public void printOptions(String[] array){
         /**Prints an array of options in order, numbered from 1 to n */
-        for (int i=1; i - 1 < array.length; i++) { //changed i < array.length to i - 1. - j
+        for (int i=1; i <= array.length; i++) {
             System.out.println(Integer.toString(i) + ": " + array[i - 1]);
         }
     }
