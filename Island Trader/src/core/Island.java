@@ -21,7 +21,7 @@ public class Island {
 
     private String name;
     private Store store;
-    private Route[] routes;
+    private ArrayList<Route> routes = new ArrayList<Route>();
 
     public Island() {
         //**Initialize each island with values */
@@ -33,10 +33,6 @@ public class Island {
 
         //Set the Islands Store
         this.store = new Store();
-
-        //Set the islands routes
-        int numberOfRoutes = (int)(Math.random() * (5 + 2) + 1); //Choose a route count from 1 to 5
-        this.routes = new Route[numberOfRoutes];
     }
 
     public void openStore() {
@@ -47,12 +43,16 @@ public class Island {
     public void viewRoutes() {
         /**Prints the different route options. */
 
-        for (int i=0; i < routes.length; i++) {
-            System.out.println(Integer.toString(i + 1) + ": " + routes[i]);
+        for (int i=0; i < routes.size(); i++) {
+            System.out.println((i + 1) + ": " + routes.get(i));
         }
     }
 
     public String getName() {
         return this.name;
+    }
+
+    public void addRoute(Route route) {
+        routes.add(route);
     }
 }

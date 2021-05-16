@@ -1,19 +1,20 @@
 package core;
 
 public class Route {
+	/**A route is a path between two islands, each route has a length in days and a event change as a percentage*/
     private int distance;
     private Island destination;
     private Island origin;
     private String description;
     private int eventChance;
     
-    
-    public Route(int distance, Island destination, Island origin, String description, int eventChance) {
-    	this.distance = distance;
-    	this.destination = destination;
+    public Route(Island origin, Island destination) {
+		/**Takes an origin and destination island, randomly generates the distance and event chance */
+    	this.distance = (int)(Math.random() * (5 - 1 + 1) + 1);
+    	this.description = "Wild Ride";
+    	this.eventChance = (int)(Math.random() * (80 - 0 + 1) + 0);	
+        this.destination = destination;
     	this.origin = origin;
-    	this.description = description;
-    	this.eventChance = eventChance;	
     }
     
     
@@ -43,7 +44,7 @@ public class Route {
 	}
 
 	public String toString() { //auto generated toString method
-		return "Route [distance=" + distance + ", destination=" + destination + ", origin=" + origin + ", description="
+		return "Route [distance=" + distance + ", destination=" + destination.getName() + ", origin=" + origin.getName() + ", description="
 				+ description + ", eventChance=" + eventChance + "]";
 	}
     
