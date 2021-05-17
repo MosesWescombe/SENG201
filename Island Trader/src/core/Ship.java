@@ -1,6 +1,5 @@
 package core; 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Ship {
     /**Ship object class, contains all ship status variables and methods that interact directly 
