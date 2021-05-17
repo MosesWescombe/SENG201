@@ -42,29 +42,32 @@ public class CommandLine {
        for (int i=0; i < islands.size() - 1; i++) { //Create minimim routes
            //Route forwards
            Route route = new Route(islands.get(i), islands.get(i+1));
-           islands.get(i).addRoute(route);
+           islands.get(i + 1).addRoute(route);
        }
+       
+       //Add extra route to complete loop
        Route r = new Route(islands.get(islands.size() - 1), islands.get(0)); //Final loop back
-       islands.get(islands.size() - 1).addRoute(r);
+       islands.get(0).addRoute(r);
 
        //Generate any extra routes randomly
-       int extraRoutes = 1;
+       int extraRoutes = 2;
        for (int i=0; i < extraRoutes; i++) {
-        int num1 = (int)(Math.random() * (islands.size()));
-        int num2 = (int)(Math.random() * (islands.size()));
+        int origin = (int)(Math.random() * (islands.size()));
+        int destination = (int)(Math.random() * (islands.size()));
         //Make sure the random numbers aren't the same
-        if (num1 == num2) {
-            if (num1 + 1 < islands.size()) {
-                num1++;
+        if (origin == destination) {
+            if (origin + 1 < islands.size()) {
+            	origin++;
             } else {
-                num1--;
+            	origin--;
             }
         }
-        Route route = new Route(islands.get(num1), islands.get(num2));
-        islands.get(i).addRoute(route);
+        Route route = new Route(islands.get(origin), islands.get(destination));
+        islands.get(destination).addRoute(route);
        }
 
-
+       
+       
        //Set up random Events?
     }
 

@@ -82,6 +82,11 @@ public class GameEnvironment {
     }
 
     private static void viewIslands() {
+    	System.out.println("\nyour ship is currently docked at " + game.getPlayerShip().getLocation() + " island");
+    	for (Island island : game.getIslands()) {
+    		System.out.println(island.viewIsland(game.getPlayerShip().getLocation()));
+    	}
+    	
     }
 
     private static void viewTransactions() {
