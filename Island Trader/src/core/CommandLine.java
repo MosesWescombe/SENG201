@@ -6,12 +6,12 @@ public class CommandLine {
     /**Command line functions, anything that is only used for the command line section should be run from here
      * using number inputs as this is easier to link to gui later.
     */
-    private static final int numberOfIslands = 5;
-    public static ArrayList<Island> islands = new ArrayList<Island>();
-    public static Ship playerShip;
-    public static String playerName;
-    public static int wallet;
-    public static int gameDuration;
+    private  final int numberOfIslands = 5;
+    private  ArrayList<Island> islands = new ArrayList<Island>();
+    private  Ship playerShip;
+    private  String playerName;
+    private  int wallet;
+    private  int gameDuration;
 
     public CommandLine() {
         /**Starts the game with required info*/
@@ -75,8 +75,32 @@ public class CommandLine {
         }
     }
 
-    public void closeGame() {
+    public void closeCommandLine() {
        /** Tidy up the game, close open objects */
        Input.closeInput();
+    }
+
+    public Ship getPlayerShip() {
+        return playerShip;
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public int getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(int wallet) {
+        this.wallet = wallet;
+    }
+
+    public int getGameDuration() {
+        return gameDuration;
+    }
+
+    public ArrayList<Island> getIslands() {
+        return islands;
     }
 }

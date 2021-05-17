@@ -18,7 +18,6 @@ public class Item {
         {"Orange", "Tastes like an apple","5"},
         {"Oil Barrel","Fun to shoot at", "60"},
         {"Cactus", "Little Prickly", "30"},
-        {"Friends", "Don't have any", "100"},
         {"Popcorn", "Not for the faint of heart (high cholesterol)", "2"},
         {"Fried Rice", "Your diet untill you go home", "2"},
         {"Lost Student ID", "Worthless to all, valuable to one.", "0"},
@@ -43,7 +42,8 @@ public class Item {
         {"2022 Kia Soul", "Need gone", "1271"},
         {"Covid-19 Vaccine", "Comes with extra 5G", "1"},
         {"Icecream", "Sweet like me", "4"},
-        {"Your mom", "Priceless", "9999"}
+        {"Your mom", "Priceless", "9999"},
+        {"Sour Krout", "Scientists will reccommend this later", "6"}
     };
     private String name;
     private int purchasePrice;

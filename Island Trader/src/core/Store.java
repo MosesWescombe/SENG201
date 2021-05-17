@@ -29,14 +29,22 @@ public class Store {
         }
     }
 
-    public void displayMenu() {
+    public void openStore() {
         /**Display the options to buy and sell, we can either implement the choice controls in here, or in a seperate
          * fuction with this simply as the display.
         */
+        displayStore();
 
+        //TODO Finish implementing choices
+
+        System.out.println("");
+    }
+
+    private void displayStore() {
+        /**Print The Store Terminal */
         //Print items available to sell to player
         System.out.println("\nSTORE");
-        System.out.println("Items for Sale:");
+        System.out.println("Items for Sale:\tWallet: $" + GameEnvironment.game.getWallet());
         int i = 1;
         for (Item item : itemsSell) {
             //The following prints an orgonized grid
@@ -58,7 +66,7 @@ public class Store {
         i = 1;
         //Check that both the store and the playerShip has the items, if they do then list them
         for (String[] itemBuy : itemsBuy) {
-            for (Item item : CommandLine.playerShip.getCargo()) {
+            for (Item item : GameEnvironment.game.getPlayerShip().getCargo()) {
                 if (item.getName() == itemBuy[0]) {
                     //The following prints an orgonized grid
                     Object[] preFormat = new String[] {
@@ -74,8 +82,6 @@ public class Store {
                 }
             }
         }
-
-        System.out.println("");
     }
 
     public boolean sell(Item[] itemsToSell, Ship shipToLoad) {
@@ -87,7 +93,7 @@ public class Store {
             totalCost += itemsToSell[i].getPurchasePrice();
         }
 
-        if (CommandLine.wallet < totalCost) {
+        if (GameEnvironment.game.getWallet() < totalCost) {
             System.out.println("Sorry you do not have enough money to purchase these items.");
             return false;
         }

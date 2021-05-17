@@ -37,7 +37,7 @@ public class Island {
 
     public void openStore() {
         /**Opens the store by calling the stores functions */
-        this.store.displayMenu();
+        this.store.openStore();
     }
 
     public void viewRoutes() {

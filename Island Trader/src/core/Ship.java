@@ -45,6 +45,7 @@ public class Ship {
                 this.sailSpeed = 60;
                 this.crewWage = 50;
                 this.crew = 80;
+                break;
             case 2:
                 this.type = shipTypes[1] + "Ship";
                 this.maxCapacity = 50; 
@@ -52,6 +53,7 @@ public class Ship {
                 this.sailSpeed = 80;
                 this.crewWage = 80;
                 this.crew = 60;
+                break;
             case 3:
                 this.type = shipTypes[2] + "Ship";
                 this.maxCapacity = 50; 
@@ -59,6 +61,7 @@ public class Ship {
                 this.sailSpeed = 100;
                 this.crewWage = 70;
                 this.crew = 50;
+                break;
             case 4:
                 this.type = shipTypes[3] + "Ship";
                 this.maxCapacity = 10; 
@@ -66,6 +69,7 @@ public class Ship {
                 this.sailSpeed = 10;
                 this.crewWage = 0;
                 this.crew = 10;
+                break;
         }
 
         this.health = this.maxHealth;
@@ -156,4 +160,15 @@ public class Ship {
     public void setLocation(Island location) {
         this.location = location;
     }
+
+    @Override
+    public String toString() {
+        return "Name: " + name +
+            "\n\tType: " + type + 
+            "\n\tHealth: " + health + "/" + maxHealth +
+            "\n\tCrew Size: " + crew + " Daily Wage: " + crewWage +
+            "\n\tRemaining cargo capacity: " + (maxCapacity - capacity);
+    }
+
+    
 }
