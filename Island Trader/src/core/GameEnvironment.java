@@ -44,9 +44,9 @@ public class GameEnvironment {
             i++;
         }
 
-        int userChoice = Input.getNum("Select your choice by number: ", 0, CHOICES.size()); 
+        int userIn = Input.getNum("Select your choice by number: ", 0, CHOICES.size() - 1); 
 
-        switch(userChoice) {
+        switch(userIn) {
             case 0:
                 exit();
                 break;
@@ -57,7 +57,7 @@ public class GameEnvironment {
                 viewShip();
                 break;
             case 3:
-                viewItems();
+                viewTransactions();
                 break;
             case 4:
                 viewIslands();
@@ -84,13 +84,15 @@ public class GameEnvironment {
     private static void viewIslands() {
     }
 
-    private static void viewItems() {
+    private static void viewTransactions() {
+        /**View previouse transitions. A Transition is made when cargo is added or removed from the ships */
+        game.getPlayerShip().displayTransactions();
     }
 
     private static void viewShip() {
         /**View The Ship Properties*/
         System.out.println("Ship Properties :\n");
-        System.out.println("/t" + game.getPlayerShip());
+        System.out.println("\t" + game.getPlayerShip());
     }
 
     private static void viewBallance() {

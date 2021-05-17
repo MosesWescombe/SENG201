@@ -50,6 +50,7 @@ public class Item {
     private int salePrice;
     private String description;
     private int weight;
+    private Island locationOfStore;
 
     public Item() {
         /**Creates an item, Items are stored in ArraList<Item> in the ship and stores*/
@@ -58,12 +59,6 @@ public class Item {
         this.name = POSSIBILE[number][0];
         this.description = POSSIBILE[number][1];
         this.weight =  Integer.parseInt(POSSIBILE[number][2]);
-    }
-
-    public String toString() {
-        //**This does not format nicely, mostly used for testing, create manual grid printing per use. */
-        String format = this.name + ": " + this.description + "\tWeight: " + this.weight;
-        return format;
     }
 
     public static String[] getRandomItem() {
@@ -97,5 +92,19 @@ public class Item {
 
     public void setSalePrice(int salePrice) {
         this.salePrice = salePrice;
+    }
+
+    public Island getLocationOfStore() {
+        return locationOfStore;
+    }
+
+    public void setLocationOfStore(Island locationOfStore) {
+        this.locationOfStore = locationOfStore;
+    }
+
+    public String toString() {
+        //**This does not format nicely, mostly used for testing, create manual grid printing per use. */
+        String format = this.name + ": " + this.description + "\tWeight: " + this.weight;
+        return format;
     }
 }

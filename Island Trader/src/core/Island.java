@@ -32,7 +32,7 @@ public class Island {
         names.remove(value);
 
         //Set the Islands Store
-        this.store = new Store();
+        this.store = new Store(this);
     }
 
     public void openStore() {

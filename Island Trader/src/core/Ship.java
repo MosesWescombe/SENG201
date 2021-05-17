@@ -1,5 +1,6 @@
 package core; 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Ship {
     /**Ship object class, contains all ship status variables and methods that interact directly 
@@ -24,6 +25,7 @@ public class Ship {
     private ArrayList<Item> cargo;
     //private Upgrades[] upgrades;
     private Island location;
+    private ArrayList<String[]> transactionHistory = new ArrayList<String[]>();
 
 
     //-----------Methods
@@ -73,30 +75,66 @@ public class Ship {
         }
 
         this.health = this.maxHealth;
-        this.capacity = 0;
+        this.capacity = this.maxCapacity;
     }
 
-    public boolean addCargo(Item[] cargo) {
-        /**Add cargo, if there is enough space available, else return false */
+    public void displayTransactions() {
+        /**Print the history of all transactions made so far in the game */
+        System.out.println("\nTransaction History:");
 
-        //Check all the items fit
-        int totalWeight = this.capacity;
-        for (int i=0; i < cargo.length; i++) {
-            totalWeight += cargo[i].getWeight();
+        //Print all Transactions
+        for (String[] transaction : transactionHistory) {
+            Object[] preFormat;
+            if (transaction.length > 2) {
+                //If the item was Sold:
+                preFormat = new String[] {
+                    "\t" + transaction[0],
+                    "Purchase Price: $" + transaction[1],
+                    "Sale Price: $" + transaction[2]
+                };
+
+                System.out.println(String.format("%-55s%-55s%-30s", preFormat));
+            } else {
+                //The Item was bought
+                preFormat = new String[] {
+                    "\t" + transaction[0],
+                    "Purchase Price: $" + transaction[1]
+                };
+
+                System.out.println(String.format("%-55s%-55s", preFormat));
+            }
         }
-        //If not return false and add nothing
-        if (totalWeight > this.maxCapacity) {
-            System.out.println("Sorry you do not have enough room for this cargo.");
-            return false;
+    }
+
+    public void addCargo(ArrayList<Item> cargoList) {
+        /**Add cargo to the ship and update capacity*/
+        
+        //Update the ships cargo and capacity level
+        for (Item item : cargoList) {
+            this.cargo.add(item);
+            this.capacity -= item.getWeight();
+
+            //Update Transaction History
+            String[] transaction = {item.getName(), Integer.toString(item.getPurchasePrice())};
+            transactionHistory.add(transaction);
         }
+    }
+
+    public void removeCargo(ArrayList<Item> cargoList) {
+        /**Remove cargo from the ship and update capacity and players wallet*/
 
         //Update the ships cargo and capacity level
-        for (int i=0; i < cargo.length; i++) {
-            this.cargo.add(cargo[i]);
-        }
-        this.capacity = totalWeight;
+        for (Item item : cargoList) {
+            int index = this.cargo.indexOf(item);
+            Item itemTemp = this.cargo.get(index);
+            this.capacity += itemTemp.getWeight(); //Remove the weight
+            GameEnvironment.game.setWallet(GameEnvironment.game.getWallet() + itemTemp.getSalePrice()); //Add profits to wallet
 
-        return true;
+            //Update Transaction History
+            String[] transaction = {itemTemp.getName(), Integer.toString(itemTemp.getPurchasePrice()), Integer.toString(itemTemp.getSalePrice())};
+            transactionHistory.add(transaction);
+            this.cargo.remove(index);
+        }
     }
 
     public void takeDamage(int amount) {
@@ -161,13 +199,34 @@ public class Ship {
         this.location = location;
     }
 
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
     @Override
     public String toString() {
-        return "Name: " + name +
+        String format = "Name: " + name +
             "\n\tType: " + type + 
             "\n\tHealth: " + health + "/" + maxHealth +
-            "\n\tCrew Size: " + crew + " Daily Wage: " + crewWage +
-            "\n\tRemaining cargo capacity: " + (maxCapacity - capacity);
+            "\n\tCrew Size: " + crew + "\tDaily Wage: $" + crewWage +
+            "\n\tRemaining cargo capacity: " + capacity + "/" + maxCapacity + "kg" +
+            "\n\tCargo: ";
+
+        for (Item item : cargo) {
+            Object[] preFormat = new String[] {
+                "\n\t\t" + item.getName(),
+                "\tPurchase Price: $" + item.getPurchasePrice()
+            };
+
+            //Sizing can be changed by altering the % numbers below
+            format += String.format("%-55s%-60s", preFormat);
+        }
+
+        return format;
     }
 
     

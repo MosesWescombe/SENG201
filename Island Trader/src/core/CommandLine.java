@@ -17,7 +17,7 @@ public class CommandLine {
         /**Starts the game with required info*/
        
        //Set some intial values
-       wallet = 100;
+       wallet = 1000;
        playerName = "User";//Input.get("Choose your player name: ");
        gameDuration = 20; //Input.getNum("Choose game duration (days): ", 20, 50); // added upper and lower param to inputs with getNum - j
 
