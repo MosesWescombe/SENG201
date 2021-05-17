@@ -42,9 +42,14 @@ public class Route {
 	public int getEventChance() {
 		return eventChance;
 	}
+	
+	public String viewRoute() {
+		return "A distance of " + distance + " days to " + destination.getName()
+		+ "\n\t\t The route description is: '" + description + "'\n\t\t The chance of an event is " + eventChance + "%";
+	}
 
 	public String toString() { //auto generated toString method
-		return "Route [distance=" + distance + ", destination=" + destination.getName() + ", origin=" + origin.getName() + ", description="
+		return "Route [distance=" + distance + ", origin=" + origin.getName() + ", destination=" + destination.getName() +  ", description="
 				+ description + ", eventChance=" + eventChance + "]";
 	}
     

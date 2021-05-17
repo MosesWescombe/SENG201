@@ -44,7 +44,7 @@ public class GameEnvironment {
             i++;
         }
 
-        int userChoice = Input.getNum("Select your choice by number: ", 0, CHOICES.size()); 
+        int userChoice = Input.getNum("Select your choice by number: ", 0, CHOICES.size() - 1); 
 
         switch(userChoice) {
             case 0:
@@ -82,6 +82,11 @@ public class GameEnvironment {
     }
 
     private static void viewIslands() {
+    	System.out.println("\nyour ship is currently docked at " + game.getPlayerShip().getLocation() + " island");
+    	for (Island island : game.getIslands()) {
+    		System.out.println(island.viewIsland(game.getPlayerShip().getLocation()));
+    	}
+    	
     }
 
     private static void viewItems() {

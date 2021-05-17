@@ -55,4 +55,26 @@ public class Island {
     public void addRoute(Route route) {
         routes.add(route);
     }
+    
+    public String viewIsland(Island currentIsland) {
+    	String finalStr = " ----- Possible routes to " + getName() + "-----";
+    	int routeCount = 1;
+		for (int i=0; i < routes.size(); i++) {
+			if (currentIsland.getName() == routes.get(i).getOrigin().getName()) {
+				finalStr = finalStr + "\n\tRoute " +(routeCount) + ": " + routes.get(i).viewRoute();
+				routeCount++;
+			}
+        }
+		
+		if (routeCount == 1) {
+			finalStr += "\n\tNo possible routes.";
+		}
+		
+		return finalStr;
+    }
+
+	public String toString() {
+		String finalStr = getName();		
+		return finalStr;
+	}
 }
