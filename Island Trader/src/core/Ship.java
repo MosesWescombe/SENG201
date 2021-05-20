@@ -44,32 +44,32 @@ public class Ship {
                 this.maxCapacity = 100; 
                 this.maxHealth = 80;
                 this.sailSpeed = 60;
-                this.crewWage = 50;
-                this.crew = 80;
+                this.crewWage = 10;
+                this.crew = 8;
                 break;
             case 2:
                 this.type = shipTypes[1] + "Ship";
                 this.maxCapacity = 50; 
                 this.maxHealth = 100;
                 this.sailSpeed = 80;
-                this.crewWage = 80;
-                this.crew = 60;
+                this.crewWage = 15;
+                this.crew = 6;
                 break;
             case 3:
                 this.type = shipTypes[2] + "Ship";
                 this.maxCapacity = 50; 
                 this.maxHealth = 80;
                 this.sailSpeed = 100;
-                this.crewWage = 70;
-                this.crew = 50;
+                this.crewWage = 15;
+                this.crew = 5;
                 break;
             case 4:
                 this.type = shipTypes[3] + "Ship";
                 this.maxCapacity = 10; 
                 this.maxHealth = 10;
                 this.sailSpeed = 10;
-                this.crewWage = 0;
-                this.crew = 10;
+                this.crewWage = 5;
+                this.crew = 2;
                 break;
         }
 
@@ -127,7 +127,6 @@ public class Ship {
             int index = this.cargo.indexOf(item);
             Item itemTemp = this.cargo.get(index);
             this.capacity += itemTemp.getWeight(); //Remove the weight
-            GameEnvironment.game.getPlayer().setWallet(GameEnvironment.game.getPlayer().getWallet() + itemTemp.getSalePrice()); //Add profits to wallet
 
             //Update Transaction History
             String[] transaction = {itemTemp.getName(), Integer.toString(itemTemp.getPurchasePrice()), Integer.toString(itemTemp.getSalePrice())};

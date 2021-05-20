@@ -15,13 +15,23 @@ public class CommandLine {
         /**Starts the game with required info*/
        
        //Set some intial values
-       player = new Player();
-       gameDuration = 20; //Input.getNum("Choose game duration (days): ", 20, 50); // added upper and lower param to inputs with getNum - j
+       String name = "User";//Input.get("Choose your player name: ");
+       int initialWallet = 1000;
+        
+        //-------------Create Ship
+       String nameInput = "Dawn Tredder"; //Input.get("Name your ship: ");
+       printOptions(Ship.getShipTypes()); //Print ship options
+       int typeInput = 1; // Input.getNum("Choose your Ship type: ", 1, Ship.getShipTypes().length);
+       Ship ship = new Ship(nameInput, typeInput);
+
+       //Create Player
+       player = new Player(name, ship, initialWallet);
        
        //-------------Set up Islands
        for (int i=0; i < numberOfIslands; i++) {
            islands.add(new Island());
        }
+
        //Set starting Island
        player.getShip().setLocation(islands.get((int)(Math.random() * (islands.size()))));
 
@@ -39,25 +49,32 @@ public class CommandLine {
        islands.get(0).addRoute(r);
 
        //Generate any extra routes randomly
-       int extraRoutes = 2;
+       int extraRoutes = 90;
        for (int i=0; i < extraRoutes; i++) {
-        int origin = (int)(Math.random() * (islands.size()));
-        int destination = (int)(Math.random() * (islands.size()));
-        //Make sure the random numbers aren't the same
-        if (origin == destination) {
-            if (origin + 1 < islands.size()) {
-            	origin++;
-            } else {
-            	origin--;
+            int origin = (int)(Math.random() * (islands.size()));
+            int destination = (int)(Math.random() * (islands.size()));
+            //Make sure the random numbers aren't the same
+            if (origin == destination) {
+                if (origin + 1 < islands.size()) {
+                    origin++;
+                } else {
+                    origin--;
+                }
             }
-        }
-        Route route = new Route(islands.get(origin), islands.get(destination));
-        islands.get(destination).addRoute(route);
+            Route route = new Route(islands.get(origin), islands.get(destination));
+            islands.get(destination).addRoute(route);
        }
 
        
        
        //Set up random Events?
+    }
+
+    private void printOptions(String[] array){
+        /**Prints an array of options in order, numbered from 1 to n*/
+        for (int i=1; i <= array.length; i++) {
+            System.out.println(Integer.toString(i) + ": " + array[i - 1]);
+        }
     }
 
     public void closeCommandLine() {

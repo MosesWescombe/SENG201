@@ -7,8 +7,8 @@ public class GameEnvironment {
     /** Main game environment that holds all key functionality, Application entry point is here.
      * this can also be thought of as the player class.
      */
-    private static boolean exit = false;
     public static CommandLine game;
+    public static Time time;
     private static final ArrayList<String> CHOICES = new ArrayList<String>(Arrays.asList(
         "Exit",
         "View Ballance",
@@ -24,15 +24,22 @@ public class GameEnvironment {
 
         //Initialize game environment
         game = new CommandLine();
+        time = new Time();
         
 
         //Run Game Loop
-        while(!exit) {
+        int actionTracker = 0; //Tracks the number of actions tacken
+        while(true) {
+            //Run an action
             displayChoices();
-        }
+            actionTracker++;
 
-        //Clean Up
-        game.closeCommandLine();
+            //End Day
+            if (actionTracker == 2) {
+                time.endDay();
+                actionTracker = 0;
+            }
+        }
     }
 
     public static void displayChoices() {
@@ -106,10 +113,13 @@ public class GameEnvironment {
         System.out.println("\tRemaining Time: " + game.getGameDuration() + " days");
     }
 
-    private static void exit() {
+    public static void exit() {
         /**Exit Game and clean up */
-        //TODO Display Exit messages based on success or failure of game
         System.out.println("Game Ended");
-        exit = true;
+
+        //Display Exit Screen
+
+        game.closeCommandLine();
+        System.exit(0);
     }
 }

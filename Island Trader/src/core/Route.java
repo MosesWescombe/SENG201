@@ -1,4 +1,6 @@
 package core;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Route {
 	/**A route is a path between two islands, each route has a length in days and a event change as a percentage*/
@@ -7,11 +9,15 @@ public class Route {
     private Island origin;
     private String description;
     private int eventChance;
+	private static final ArrayList<String> descriptions = new ArrayList<String>(Arrays.asList(
+        "Punlim trading route",
+		"North Taijan coastal route"
+    ));
     
     public Route(Island origin, Island destination) {
 		/**Takes an origin and destination island, randomly generates the distance and event chance */
     	this.distance = (int)(Math.random() * (5 - 1 + 1) + 1);
-    	this.description = "Wild Ride";
+    	this.description = descriptions.get((int)(Math.random() * descriptions.size()));
     	this.eventChance = (int)(Math.random() * (80 - 0 + 1) + 0);	
         this.destination = destination;
     	this.origin = origin;

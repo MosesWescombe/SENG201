@@ -41,7 +41,7 @@ public class Store {
         displayStore();
 
         //Get User Choice
-        int userIn = Input.getNum("0: Exit Store\n" +
+        int userIn = Input.getNum("\n0: Exit Store\n" +
         "1: Buy\n" +
         "2: Sell\n" + 
         "Choice: ", 0, 2);
@@ -85,11 +85,13 @@ public class Store {
         System.out.println("");
         System.out.println("Items we would like:");
         i = 1;
+        boolean printed = false;
         //Check that both the store and the playerShip has the items, if they do then list them
         for  (Item item : GameEnvironment.game.getPlayer().getShip().getCargo()) {
             for (String[] itemBuy : itemsBuy) {
                 if (item.getName() == itemBuy[0]) {
                     //The following prints an orgonized grid
+                    printed = true;
                     item.setSalePrice(Integer.parseInt(itemBuy[1]));
                     Object[] preFormat = new String[] {
                         "\t" + i + ": ",
@@ -103,6 +105,10 @@ public class Store {
                     i++;
                 }
             }
+        }
+
+        if (!printed) {
+            System.out.println("\tWe do not require any of your items");
         }
     }
 
@@ -152,7 +158,7 @@ public class Store {
         for (Item item : cart) {
             for (int j=0; j < itemsSell.size(); j++) {
                 if (itemsSell.get(j).getName() == item.getName()) {
-                    GameEnvironment.game.getPlayer().setWallet(GameEnvironment.game.getPlayer().getWallet() - item.getPurchasePrice());
+                    GameEnvironment.game.getPlayer().changeWallet(-item.getPurchasePrice()); //Take money from wallet
                     itemsSell.remove(j);
                 }
             }
@@ -190,6 +196,7 @@ public class Store {
         for (Item item : cart) {
             item.setLocationOfStore(this.location);
             itemsSell.add(item);
+            GameEnvironment.game.getPlayer().changeWallet(item.getSalePrice()); //Add profits to wallet
         }
     }
 }
