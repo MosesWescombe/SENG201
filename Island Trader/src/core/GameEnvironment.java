@@ -78,31 +78,31 @@ public class GameEnvironment {
 
     private static void visitStore() {
         /**Visit Current Islands Store */
-        game.getPlayerShip().getLocation().openStore();
+        game.getPlayer().getShip().getLocation().openStore();
     }
 
     private static void viewIslands() {
-    	System.out.println("\nyour ship is currently docked at " + game.getPlayerShip().getLocation() + " island");
+    	System.out.println("\nyour ship is currently docked at " + game.getPlayer().getShip().getLocation() + " island");
     	for (Island island : game.getIslands()) {
-    		System.out.println(island.viewIsland(game.getPlayerShip().getLocation()));
+    		System.out.println(island.viewIsland(game.getPlayer().getShip().getLocation()));
     	}
     	
     }
 
     private static void viewTransactions() {
         /**View previouse transitions. A Transition is made when cargo is added or removed from the ships */
-        game.getPlayerShip().displayTransactions();
+        game.getPlayer().getShip().displayTransactions();
     }
 
     private static void viewShip() {
         /**View The Ship Properties*/
         System.out.println("Ship Properties :\n");
-        System.out.println("\t" + game.getPlayerShip());
+        System.out.println("\t" + game.getPlayer().getShip());
     }
 
     private static void viewBallance() {
         /**Print the wallet and time variables */
-        System.out.println("\n\tWallet: $" + game.getWallet());
+        System.out.println("\n\tWallet: $" + game.getPlayer().getWallet());
         System.out.println("\tRemaining Time: " + game.getGameDuration() + " days");
     }
 

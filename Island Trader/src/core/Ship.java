@@ -127,7 +127,7 @@ public class Ship {
             int index = this.cargo.indexOf(item);
             Item itemTemp = this.cargo.get(index);
             this.capacity += itemTemp.getWeight(); //Remove the weight
-            GameEnvironment.game.setWallet(GameEnvironment.game.getWallet() + itemTemp.getSalePrice()); //Add profits to wallet
+            GameEnvironment.game.getPlayer().setWallet(GameEnvironment.game.getPlayer().getWallet() + itemTemp.getSalePrice()); //Add profits to wallet
 
             //Update Transaction History
             String[] transaction = {itemTemp.getName(), Integer.toString(itemTemp.getPurchasePrice()), Integer.toString(itemTemp.getSalePrice())};

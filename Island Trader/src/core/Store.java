@@ -65,7 +65,7 @@ public class Store {
         /**Print The Store Terminal */
         //Print items available to sell to player
         System.out.println("\nSTORE");
-        System.out.println("Items for Sale:\tWallet: $" + GameEnvironment.game.getWallet());
+        System.out.println("Items for Sale:\tWallet: $" + GameEnvironment.game.getPlayer().getWallet());
         int i = 1;
         for (Item item : itemsSell) {
             //The following prints an orgonized grid
@@ -86,7 +86,7 @@ public class Store {
         System.out.println("Items we would like:");
         i = 1;
         //Check that both the store and the playerShip has the items, if they do then list them
-        for  (Item item : GameEnvironment.game.getPlayerShip().getCargo()) {
+        for  (Item item : GameEnvironment.game.getPlayer().getShip().getCargo()) {
             for (String[] itemBuy : itemsBuy) {
                 if (item.getName() == itemBuy[0]) {
                     //The following prints an orgonized grid
@@ -114,8 +114,8 @@ public class Store {
 
         //Ask for item selection
         while (true) {
-            int playerWallet = GameEnvironment.game.getWallet();
-            int playerCapacity = GameEnvironment.game.getPlayerShip().getCapacity();
+            int playerWallet = GameEnvironment.game.getPlayer().getWallet();
+            int playerCapacity = GameEnvironment.game.getPlayer().getShip().getCapacity();
 
             //Get Player Selection
             int playerIn = Input.getNum("Select an item (0 when complete): ", 0, itemsSell.size());
@@ -143,7 +143,7 @@ public class Store {
         }
 
 
-        Ship shipToLoad = GameEnvironment.game.getPlayerShip();
+        Ship shipToLoad = GameEnvironment.game.getPlayer().getShip();
 
         //Add cargo to the ship
         shipToLoad.addCargo(cart);
@@ -152,7 +152,7 @@ public class Store {
         for (Item item : cart) {
             for (int j=0; j < itemsSell.size(); j++) {
                 if (itemsSell.get(j).getName() == item.getName()) {
-                    GameEnvironment.game.setWallet(GameEnvironment.game.getWallet() - item.getPurchasePrice());
+                    GameEnvironment.game.getPlayer().setWallet(GameEnvironment.game.getPlayer().getWallet() - item.getPurchasePrice());
                     itemsSell.remove(j);
                 }
             }
@@ -162,7 +162,7 @@ public class Store {
     public void purchase() {
         /**Buys items off the user*/
         ArrayList<Item> cart = new ArrayList<Item>();
-        Ship playersShip = GameEnvironment.game.getPlayerShip();
+        Ship playersShip = GameEnvironment.game.getPlayer().getShip();
 
         //Ask for item selection
         while (true) {
