@@ -49,7 +49,7 @@ public class CommandLine {
        islands.get(0).addRoute(r);
 
        //Generate any extra routes randomly
-       int extraRoutes = 90;
+       int extraRoutes = 2;
        for (int i=0; i < extraRoutes; i++) {
             int origin = (int)(Math.random() * (islands.size()));
             int destination = (int)(Math.random() * (islands.size()));

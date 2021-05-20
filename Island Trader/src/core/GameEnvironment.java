@@ -96,7 +96,6 @@ public class GameEnvironment {
     		System.out.println("\nStore properties at " + island + ":");
     		island.displayStore();
     	}
-    	
     }
 
     private static void viewTransactions() {
