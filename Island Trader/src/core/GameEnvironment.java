@@ -37,7 +37,7 @@ public class GameEnvironment {
 
     public static void displayChoices() {
         /**Display All Choices, and get user to choose*/
-        System.out.println("\nOPTIONS");
+        System.out.println("\nMAIN MENU OPTIONS");
         int i = 0;
         for (String choice : CHOICES) {
             System.out.println("\t" + i + ": " + choice);
@@ -84,13 +84,16 @@ public class GameEnvironment {
     private static void viewIslands() {
     	System.out.println("\nyour ship is currently docked at " + game.getPlayer().getShip().getLocation() + " island");
     	for (Island island : game.getIslands()) {
-    		System.out.println(island.viewIsland(game.getPlayer().getShip().getLocation()));
+    		System.out.println("\n-------======= Island properties for: " + island + " =======-------");
+    		System.out.println(island.viewIslandInfo(game.getPlayer().getShip().getLocation()));
+    		System.out.println("\nStore properties at " + island + ":");
+    		island.displayStore();
     	}
     	
     }
 
     private static void viewTransactions() {
-        /**View previouse transitions. A Transition is made when cargo is added or removed from the ships */
+        /**View previous transitions. A Transition is made when cargo is added or removed from the ships */
         game.getPlayer().getShip().displayTransactions();
     }
 

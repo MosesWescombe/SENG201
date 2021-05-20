@@ -61,7 +61,7 @@ public class Store {
         }
     }
 
-    private void displayStore() {
+    public void displayStore() {
         /**Print The Store Terminal */
         //Print items available to sell to player
         System.out.println("\nSTORE");
