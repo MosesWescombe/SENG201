@@ -20,6 +20,7 @@ public class Time {
             this.timeRemaining -= 1;
         } else {
             System.out.println("Game Over. Not enough time to travel to these locations");
+            GameEnvironment.exit();
         }
         
         //Subtract Wage

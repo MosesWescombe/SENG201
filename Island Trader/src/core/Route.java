@@ -45,8 +45,9 @@ public class Route {
 	
 	public String viewRoute() {
 		int routeDuration = (distance / GameEnvironment.game.getPlayer().getShip().getSailSpeed()) / 24;
-		return "A distance of " + distance + "km " + destination.getName() + ", that is " + routeDuration + " days."
-		+ "\n\t\t The route description is: '" + description + "'\n\t\t The chance of an event is " + eventChance * 100 + "%";
+		return "Route to: " + destination.getName() + 
+		"\n\tDistance: " + distance + "km to " +  " (" + routeDuration + " days)"
+		+ "\n\tDescription: '" + description + "'\n\tEvent Chance: " + eventChance * 100 + "%";
 	}
 
 	public String toString() { //auto generated toString method

@@ -1,6 +1,5 @@
 package core;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Island {
     /**Island class, each island has a store, and multiple routes */
@@ -63,5 +62,9 @@ public class Island {
 
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    public ArrayList<Route> getRoutes() {
+        return this.routes;
     }
 }

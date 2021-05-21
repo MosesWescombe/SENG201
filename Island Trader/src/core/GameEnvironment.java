@@ -30,7 +30,7 @@ public class GameEnvironment {
         //Run Game Loop
         while(true) {
             //Run an action
-            displayChoices();
+            displayChoices(); 
         }
     }
 
@@ -73,15 +73,30 @@ public class GameEnvironment {
     }
 
     private static void sailToIsland() {
-    	int i = 1;
-    	System.out.println("\nSelect an island to view routes:");
-    	for (Island island : game.getIslands()) {
-    		System.out.println("\t" + i + ": " + island);
-    		i++;
-    	}
-    	int userIn = Input.getNum("Select your choice by number: ", 1, 5);
-    	System.out.println(game.getIslands().get(userIn-1).viewIslandInfo(game.getPlayer().getShip().getLocation()));
-    	
+    	ArrayList<Route> routesFrom = new ArrayList<Route>();
+
+        for (Island island : game.getIslands()) {
+            for (Route route : island.getRoutes()) {
+                if (route.getOrigin() == game.getPlayer().getShip().getLocation()) {
+                    routesFrom.add(route);
+                }
+            }
+        }
+
+        System.out.println("");
+        int i = 1;
+        for (Route route : routesFrom) {
+            System.out.println("\n" + i + ": " + route.viewRoute());
+            i++;
+        }
+
+        int userIn = Input.getNum("\nSelect Route (0 for exit): ", 0, routesFrom.size());
+
+        for (int j=0; j < routesFrom.get(userIn - 1).getDistance() / game.getPlayer().getShip().getSailSpeed() / 24; j++) {
+            time.endDay();
+        }
+
+        game.getPlayer().getShip().setLocation(routesFrom.get(userIn - 1).getDestination());
     }
 
     private static void visitStore() {
@@ -113,7 +128,7 @@ public class GameEnvironment {
     private static void viewBallance() {
         /**Print the wallet and time variables */
         System.out.println("\n\tWallet: $" + game.getPlayer().getWallet());
-        System.out.println("\tRemaining Time: " + game.getGameDuration() + " days");
+        System.out.println("\tRemaining Time: " + time.getTimeRemaining() + " days");
     }
 
     public static void exit() {
