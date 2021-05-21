@@ -73,6 +73,15 @@ public class GameEnvironment {
     }
 
     private static void sailToIsland() {
+    	int i = 1;
+    	System.out.println("\nSelect an island to view routes:");
+    	for (Island island : game.getIslands()) {
+    		System.out.println("\t" + i + ": " + island);
+    		i++;
+    	}
+    	int userIn = Input.getNum("Select your choice by number: ", 1, 5);
+    	System.out.println(game.getIslands().get(userIn-1).viewIslandInfo(game.getPlayer().getShip().getLocation()));
+    	
     }
 
     private static void visitStore() {

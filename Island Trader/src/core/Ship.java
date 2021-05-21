@@ -43,7 +43,7 @@ public class Ship {
                 this.type = shipTypes[0] + "Ship";
                 this.maxCapacity = 100; 
                 this.maxHealth = 80;
-                this.sailSpeed = 60;
+                this.sailSpeed = 20;
                 this.crewWage = 10;
                 this.crew = 8;
                 break;
@@ -51,7 +51,7 @@ public class Ship {
                 this.type = shipTypes[1] + "Ship";
                 this.maxCapacity = 50; 
                 this.maxHealth = 100;
-                this.sailSpeed = 80;
+                this.sailSpeed = 30;
                 this.crewWage = 15;
                 this.crew = 6;
                 break;
@@ -59,7 +59,7 @@ public class Ship {
                 this.type = shipTypes[2] + "Ship";
                 this.maxCapacity = 50; 
                 this.maxHealth = 80;
-                this.sailSpeed = 100;
+                this.sailSpeed = 40;
                 this.crewWage = 15;
                 this.crew = 5;
                 break;
@@ -211,6 +211,7 @@ public class Ship {
             "\n\tType: " + type + 
             "\n\tHealth: " + health + "/" + maxHealth +
             "\n\tCrew Size: " + crew + "\tDaily Wage: $" + crewWage +
+            "\n\tShip Speed: " + sailSpeed + "km/h"+
             "\n\tRemaining cargo capacity: " + capacity + "/" + maxCapacity + "kg" +
             "\n\tCargo: ";
 

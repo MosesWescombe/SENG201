@@ -24,7 +24,7 @@ public class CommandLine {
         //-------------Create Ship
        String nameInput = "Dawn Tredder"; //Input.get("Name your ship: ");
        printOptions(Ship.getShipTypes()); //Print ship options
-       int typeInput = 1; // Input.getNum("Choose your Ship type: ", 1, Ship.getShipTypes().length);
+       int typeInput = 3; // Input.getNum("Choose your Ship type: ", 1, Ship.getShipTypes().length);
        Ship ship = new Ship(nameInput, typeInput);
 
        //Create Player
@@ -68,54 +68,54 @@ public class CommandLine {
         /**Create The routes between islands */
         //Route 1
         islands.get(0).addRoute(new Route(
-            islands.get(0),
             islands.get(1),
-            2,
+            islands.get(0),
+            1500,
             "Short And 'SNAPPY'",
             0.8
         ));
 
         //Route 2
         islands.get(1).addRoute(new Route(
-            islands.get(1),
             islands.get(2),
-            5,
+            islands.get(1),
+            2500,
             "Long and un-eventful",
             0.2
         ));
 
         //Route 3
         islands.get(2).addRoute(new Route(
-            islands.get(2),
             islands.get(3),
-            4,
+            islands.get(2),
+            2000,
             "Roller Coaster",
             0.6
         ));
 
         //Route 4
         islands.get(3).addRoute(new Route(
-            islands.get(3),
             islands.get(4),
-            6,
+            islands.get(3),
+            3000,
             "Major Tradeing Route",
             0.4
         ));
 
         //Route 5
         islands.get(4).addRoute(new Route(
-            islands.get(4),
             islands.get(0),
-            7,
+            islands.get(4),
+            3000,
             "Coastal Hugger",
             0.1
         ));
 
         //Route 6
         islands.get(2).addRoute(new Route(
-            islands.get(2),
             islands.get(4),
-            5,
+            islands.get(2),
+            3500,
             "Average Mile",
             0.5
         ));
