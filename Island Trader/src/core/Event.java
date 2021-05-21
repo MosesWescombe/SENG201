@@ -28,7 +28,9 @@ public class Event {
     }
 
     private static void weather() {
-
+        int damage = (int)(Math.random() * (GameEnvironment.game.getPlayer().getShip().getHealth() - 10 + 1) + 10);
+        System.out.println("You and your crew run into some bad weather, big waves and storng winds.\nA giant squid is thrown from a tornado collapses the mast. \nYou must repeair the damage when you arrive at port.");
+        GameEnvironment.game.getPlayer().getShip().takeDamage(damage);
     }
 
     private static void rescue() {

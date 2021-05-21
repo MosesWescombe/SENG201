@@ -37,7 +37,6 @@ public class Ship {
 
         //Set the type of the ship
         switch(shipType) {
-            //TODO, make changes to ship types to better suite the game
             //Also add variables for cargo upgrades and location
             case 1:
                 this.type = shipTypes[0] + "Ship";
