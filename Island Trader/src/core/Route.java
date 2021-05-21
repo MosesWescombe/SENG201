@@ -1,6 +1,4 @@
 package core;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Route {
 	/**A route is a path between two islands, each route has a length in days and a event change as a percentage*/
@@ -8,17 +6,13 @@ public class Route {
     private Island destination;
     private Island origin;
     private String description;
-    private int eventChance;
-	private static final ArrayList<String> descriptions = new ArrayList<String>(Arrays.asList(
-        "Punlim trading route",
-		"North Taijan coastal route"
-    ));
+    private double eventChance;
     
-    public Route(Island origin, Island destination) {
+    public Route(Island origin, Island destination, int distance, String description, double eventChance) {
 		/**Takes an origin and destination island, randomly generates the distance and event chance */
-    	this.distance = (int)(Math.random() * (5 - 1 + 1) + 1);
-    	this.description = descriptions.get((int)(Math.random() * descriptions.size()));
-    	this.eventChance = (int)(Math.random() * (80 - 0 + 1) + 0);	
+    	this.distance = distance;
+    	this.description = description;
+    	this.eventChance = eventChance;	
         this.destination = destination;
     	this.origin = origin;
     }
@@ -45,13 +39,13 @@ public class Route {
 	}
 
 
-	public int getEventChance() {
+	public double getEventChance() {
 		return eventChance;
 	}
 	
 	public String viewRoute() {
 		return "A distance of " + distance + " days to " + destination.getName()
-		+ "\n\t\t The route description is: '" + description + "'\n\t\t The chance of an event is " + eventChance + "%";
+		+ "\n\t\t The route description is: '" + description + "'\n\t\t The chance of an event is " + eventChance * 100 + "%";
 	}
 
 	public String toString() { //auto generated toString method

@@ -10,9 +10,9 @@ public class Store {
     public Store(Island location) {
         /**Create items arrays, setting buy and sell items */
         this.location = location;
-        
+
         //Generate items for store to sell
-        int numberOfItemsSell =  (int)(Math.random() * (15 - 2 + 1) + 2);
+        int numberOfItemsSell =  (int)(Math.random() * (12 - 2 + 1) + 2);
         for (int i=0; i < numberOfItemsSell; i++) {
             this.itemsSell.add(new Item());
             int price = (int)(Math.random() * (100 - 1 + 1) + 1);
@@ -23,7 +23,7 @@ public class Store {
         //Generate items for store to buy, this only creates an array of item names, not item objects
         //The reason I have done this is because an object cannot be both on the island and in the Store's itemBuy array,
         //this means that there would be no way to check that the user has the item the store wants
-        int numberOfItemsBuy =  (int)(Math.random() * (15 - 2 + 1) + 2);
+        int numberOfItemsBuy =  (int)(Math.random() * (12 - 2 + 1) + 2);
         for (int i=0; i < numberOfItemsBuy; i++) {
             String[] values = new String[2];
             values[0] = Item.getRandomItem()[0]; //Get random item name
@@ -195,7 +195,7 @@ public class Store {
         //Add cargo to the store
         for (Item item : cart) {
             item.setLocationOfStore(this.location);
-            itemsSell.add(item);
+            //itemsSell.add(item);
             GameEnvironment.game.getPlayer().changeWallet(item.getSalePrice()); //Add profits to wallet
         }
     }

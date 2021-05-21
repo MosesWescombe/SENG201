@@ -28,17 +28,9 @@ public class GameEnvironment {
         
 
         //Run Game Loop
-        int actionTracker = 0; //Tracks the number of actions tacken
         while(true) {
             //Run an action
             displayChoices();
-            actionTracker++;
-
-            //End Day
-            if (actionTracker == 2) {
-                time.endDay();
-                actionTracker = 0;
-            }
         }
     }
 

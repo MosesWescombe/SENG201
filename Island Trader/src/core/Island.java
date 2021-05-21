@@ -4,35 +4,13 @@ import java.util.Arrays;
 
 public class Island {
     /**Island class, each island has a store, and multiple routes */
-    private static final ArrayList<String> names = new ArrayList<String>(Arrays.asList(
-        "Camoros",
-        "Tanzania",
-        "Choochoo",
-        "Tiquila",
-        "Nassau",
-        "Juman",
-        "Peros",
-        "Tina",
-        "Limot",
-        "Pukakea",
-        "St. Jimbob"
-    ));
-        
-
     private String name;
     private Store store;
     private ArrayList<Route> routes = new ArrayList<Route>();
 
-    public Island() {
+    public Island(String name) {
         //**Initialize each island with values */
-
-        //Generate names from the list of names, remove it so that it isnt chosen twice
-        int value = (int)(Math.random() * (names.size()));
-        this.name = names.get(value);
-        names.remove(value);
-
-        //Set the Islands Store
-        this.store = new Store(this);
+        this.name = name;
     }
 
     public void openStore() {
@@ -81,5 +59,9 @@ public class Island {
 	public String toString() {
 		String finalStr = getName();		
 		return finalStr;
-	}
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
 }

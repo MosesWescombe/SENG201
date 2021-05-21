@@ -1,20 +1,23 @@
 package core;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class CommandLine {
     /**Command line functions, anything that is only used for the command line section should be run from here
      * using number inputs as this is easier to link to gui later.
     */
-    private final int numberOfIslands = 5;
     private ArrayList<Island> islands = new ArrayList<Island>();
     private Player player;
     private int gameDuration;
 
     public CommandLine() {
         /**Starts the game with required info*/
-       
-       //Set some intial values
+       setUpPlayer();
+       setUpIslands();
+       setUpRoutes();
+    }
+
+    private void setUpPlayer() {
+        //Set some intial values
        String name = "User";//Input.get("Choose your player name: ");
        int initialWallet = 1000;
         
@@ -26,48 +29,96 @@ public class CommandLine {
 
        //Create Player
        player = new Player(name, ship, initialWallet);
-       
-       //-------------Set up Islands
-       for (int i=0; i < numberOfIslands; i++) {
-           islands.add(new Island());
-       }
+    }
 
-       //Set starting Island
-       player.getShip().setLocation(islands.get((int)(Math.random() * (islands.size()))));
+    private void setUpIslands() {
+        /**Create Islands and Stores */
+        Island tempIsland;
 
+        //Island 1
+        tempIsland = new Island("Nassau");
+        tempIsland.setStore(new Store(tempIsland));
+        islands.add(tempIsland);
 
-       //-------------Set up routes
-       Collections.shuffle(islands); //Shuffle Island Order
-       for (int i=0; i < islands.size() - 1; i++) { //Create minimim routes
-           //Route forwards
-           Route route = new Route(islands.get(i), islands.get(i+1));
-           islands.get(i + 1).addRoute(route);
-       }
-       
-       //Add extra route to complete loop
-       Route r = new Route(islands.get(islands.size() - 1), islands.get(0)); //Final loop back
-       islands.get(0).addRoute(r);
+        //Island 2
+        tempIsland = new Island("Timplore");
+        tempIsland.setStore(new Store(tempIsland));
+        islands.add(tempIsland);
 
-       //Generate any extra routes randomly
-       int extraRoutes = 2;
-       for (int i=0; i < extraRoutes; i++) {
-            int origin = (int)(Math.random() * (islands.size()));
-            int destination = (int)(Math.random() * (islands.size()));
-            //Make sure the random numbers aren't the same
-            if (origin == destination) {
-                if (origin + 1 < islands.size()) {
-                    origin++;
-                } else {
-                    origin--;
-                }
-            }
-            Route route = new Route(islands.get(origin), islands.get(destination));
-            islands.get(destination).addRoute(route);
-       }
+        //Island 3
+        tempIsland = new Island("Ugriad");
+        tempIsland.setStore(new Store(tempIsland));
+        islands.add(tempIsland);
 
-       
-       
-       //Set up random Events?
+        //Island 4
+        tempIsland = new Island("St. Gerbal");
+        tempIsland.setStore(new Store(tempIsland));
+        islands.add(tempIsland);
+
+        //Island 5
+        tempIsland = new Island("Lucia");
+        tempIsland.setStore(new Store(tempIsland));
+        islands.add(tempIsland);
+
+        //Set starting Island
+        player.getShip().setLocation(islands.get((int)(Math.random() * (islands.size()))));
+    }
+
+    private void setUpRoutes() {
+        /**Create The routes between islands */
+        //Route 1
+        islands.get(0).addRoute(new Route(
+            islands.get(0),
+            islands.get(1),
+            2,
+            "Short And 'SNAPPY'",
+            0.8
+        ));
+
+        //Route 2
+        islands.get(1).addRoute(new Route(
+            islands.get(1),
+            islands.get(2),
+            5,
+            "Long and un-eventful",
+            0.2
+        ));
+
+        //Route 3
+        islands.get(2).addRoute(new Route(
+            islands.get(2),
+            islands.get(3),
+            4,
+            "Roller Coaster",
+            0.6
+        ));
+
+        //Route 4
+        islands.get(3).addRoute(new Route(
+            islands.get(3),
+            islands.get(4),
+            6,
+            "Major Tradeing Route",
+            0.4
+        ));
+
+        //Route 5
+        islands.get(4).addRoute(new Route(
+            islands.get(4),
+            islands.get(0),
+            7,
+            "Coastal Hugger",
+            0.1
+        ));
+
+        //Route 6
+        islands.get(2).addRoute(new Route(
+            islands.get(2),
+            islands.get(4),
+            5,
+            "Average Mile",
+            0.5
+        ));
     }
 
     private void printOptions(String[] array){
