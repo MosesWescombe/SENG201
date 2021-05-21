@@ -1,6 +1,6 @@
 package core;
 
-public class Item {
+public class Item extends Entity {
     /**Item class, holds info about the item */
     public final static String[][] POSSIBILE = {
         //Name, description, weight
@@ -45,12 +45,6 @@ public class Item {
         {"Your mom", "Priceless", "9999"},
         {"Sour Krout", "Scientists will reccommend this later", "6"}
     };
-    private String name;
-    private int purchasePrice;
-    private int salePrice;
-    private String description;
-    private int weight;
-    private Island locationOfStore;
 
     public Item() {
         /**Creates an item, Items are stored in ArraList<Item> in the ship and stores*/
@@ -64,42 +58,6 @@ public class Item {
     public static String[] getRandomItem() {
         /**Returns a random item from POSSIBILE, not this does not return an actual ITEM object */
         return POSSIBILE[(int)(Math.random() * (POSSIBILE.length))];
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public int getPurchasePrice() {
-        return purchasePrice;
-    }
-
-    public void setPurchasePrice(int purchasePrice) {
-        this.purchasePrice = purchasePrice;
-    }
-
-    public int getSalePrice() {
-        return salePrice;
-    }
-
-    public void setSalePrice(int salePrice) {
-        this.salePrice = salePrice;
-    }
-
-    public Island getLocationOfStore() {
-        return locationOfStore;
-    }
-
-    public void setLocationOfStore(Island locationOfStore) {
-        this.locationOfStore = locationOfStore;
     }
 
     public String toString() {

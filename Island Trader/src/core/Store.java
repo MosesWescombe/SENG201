@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Store {
     /**Each Island has a store, stores manage the item buying and selling, items are stored in arrays in each Store object. */
-    private ArrayList<Item> itemsSell = new ArrayList<Item>(); //List of item objects that the user is able to purchase
+    private ArrayList<Entity> itemsSell = new ArrayList<Entity>(); //List of item objects that the user is able to purchase
     private ArrayList<String[]> itemsBuy = new ArrayList<String[]>(); //List of item names to buy from user with coressponding value
     private Island location;
 
@@ -67,7 +67,7 @@ public class Store {
         System.out.println("\nSTORE");
         System.out.println("Items for Sale:\tWallet: $" + GameEnvironment.game.getPlayer().getWallet());
         int i = 1;
-        for (Item item : itemsSell) {
+        for (Entity item : itemsSell) {
             //The following prints an orgonized grid
             Object[] preFormat = new String[] {
                 "\t" + i + ": ",
@@ -87,7 +87,7 @@ public class Store {
         i = 1;
         boolean printed = false;
         //Check that both the store and the playerShip has the items, if they do then list them
-        for  (Item item : GameEnvironment.game.getPlayer().getShip().getCargo()) {
+        for  (Entity item : GameEnvironment.game.getPlayer().getShip().getCargo()) {
             for (String[] itemBuy : itemsBuy) {
                 if (item.getName() == itemBuy[0]) {
                     //The following prints an orgonized grid
@@ -114,7 +114,7 @@ public class Store {
 
     public void sell() {
         /**Sells items to the user if they have enough money in thier wallet*/
-        ArrayList<Item> cart = new ArrayList<Item>();
+        ArrayList<Entity> cart = new ArrayList<Entity>();
         int totalCost = 0;
         int totalWeight = 0;
 
@@ -131,7 +131,7 @@ public class Store {
                 break;
             } else {
                 //Try to add item to the selectedItem, if the item is affordable and can fit on the ship
-                Item selectedItem = itemsSell.get(playerIn - 1);
+                Entity selectedItem = itemsSell.get(playerIn - 1);
                 //If player has enough money
                 if (totalCost + selectedItem.getPurchasePrice() <= playerWallet) {
                     //If player has enough cargo space
@@ -155,7 +155,7 @@ public class Store {
         shipToLoad.addCargo(cart);
 
         //Remove item from Store
-        for (Item item : cart) {
+        for (Entity item : cart) {
             for (int j=0; j < itemsSell.size(); j++) {
                 if (itemsSell.get(j).getName() == item.getName()) {
                     GameEnvironment.game.getPlayer().changeWallet(-item.getPurchasePrice()); //Take money from wallet
@@ -167,7 +167,7 @@ public class Store {
 
     public void purchase() {
         /**Buys items off the user*/
-        ArrayList<Item> cart = new ArrayList<Item>();
+        ArrayList<Entity> cart = new ArrayList<Entity>();
         Ship playersShip = GameEnvironment.game.getPlayer().getShip();
 
         //Ask for item selection
@@ -182,7 +182,7 @@ public class Store {
                 //Check the number is in the range of cargo items
                 if (playerIn <= playersShip.getCargo().size()) {
                     //Add item to cart
-                    Item selectedItem = playersShip.getCargo().get(playerIn);
+                    Entity selectedItem = playersShip.getCargo().get(playerIn);
                     cart.add(selectedItem);
                 } else {
                     System.out.println("Sorry choose a number from the range above.");
@@ -193,7 +193,7 @@ public class Store {
         //Remove cargo from the ship
         playersShip.removeCargo(cart);
         //Add cargo to the store
-        for (Item item : cart) {
+        for (Entity item : cart) {
             item.setLocationOfStore(this.location);
             //itemsSell.add(item);
             GameEnvironment.game.getPlayer().changeWallet(item.getSalePrice()); //Add profits to wallet

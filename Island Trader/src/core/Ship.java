@@ -21,8 +21,8 @@ public class Ship {
     private int health;
     private int maxHealth;
     private int sailSpeed;
-    private ArrayList<Item> cargo;
-    //private Upgrades[] upgrades;
+    private ArrayList<Entity> cargo;
+    private Upgrade[] upgrades;
     private Island location;
     private ArrayList<String[]> transactionHistory = new ArrayList<String[]>();
 
@@ -33,7 +33,7 @@ public class Ship {
     public Ship(String name, int shipType){
         /** Creates the ship taking in a Name and Type, Type can be accessed by ShipTypes.<type> */
         this.name = name;
-        this.cargo = new ArrayList<Item>();
+        this.cargo = new ArrayList<Entity>();
 
         //Set the type of the ship
         switch(shipType) {
@@ -105,11 +105,11 @@ public class Ship {
         }
     }
 
-    public void addCargo(ArrayList<Item> cargoList) {
+    public void addCargo(ArrayList<Entity> cargoList) {
         /**Add cargo to the ship and update capacity*/
         
         //Update the ships cargo and capacity level
-        for (Item item : cargoList) {
+        for (Entity item : cargoList) {
             this.cargo.add(item);
             this.capacity -= item.getWeight();
 
@@ -119,13 +119,13 @@ public class Ship {
         }
     }
 
-    public void removeCargo(ArrayList<Item> cargoList) {
+    public void removeCargo(ArrayList<Entity> cargoList) {
         /**Remove cargo from the ship and update capacity and players wallet*/
 
         //Update the ships cargo and capacity level
-        for (Item item : cargoList) {
+        for (Entity item : cargoList) {
             int index = this.cargo.indexOf(item);
-            Item itemTemp = this.cargo.get(index);
+            Entity itemTemp = this.cargo.get(index);
             this.capacity += itemTemp.getWeight(); //Remove the weight
 
             //Update Transaction History
@@ -185,7 +185,7 @@ public class Ship {
         return shipTypes;
     }
 
-    public ArrayList<Item> getCargo() {
+    public ArrayList<Entity> getCargo() {
         return cargo;
     }
 
@@ -215,7 +215,7 @@ public class Ship {
             "\n\tRemaining cargo capacity: " + capacity + "/" + maxCapacity + "kg" +
             "\n\tCargo: ";
 
-        for (Item item : cargo) {
+        for (Entity item : cargo) {
             Object[] preFormat = new String[] {
                 "\n\t\t" + item.getName(),
                 "\tPurchase Price: $" + item.getPurchasePrice()
