@@ -74,6 +74,12 @@ public class GameEnvironment {
 
     private static void sailToIsland() {
         /**Sail to a new Island, consume days and check for events*/
+
+        if (game.getPlayer().getShip().getHealth() < game.getPlayer().getShip().getMaxHealth()) {
+            System.out.println("Your ship needs repairs.");
+            game.getPlayer().getShip().repair();
+        }
+
     	ArrayList<Route> routesFrom = new ArrayList<Route>();
 
         //Create a list of routes from the current island

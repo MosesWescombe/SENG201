@@ -120,7 +120,21 @@ public class Ship {
     }
     
     public void addUpgrade(Upgrade upgrade) {
+        /**Add upgrade to the ship */
     	this.upgrades.add(upgrade);
+
+        int upgradeType = upgrade.getType();
+
+        //Improve ship stats
+        switch(upgradeType) {
+            case 4:
+                this.maxCapacity += 50;
+                this.capacity += 50;
+                break;
+            case 5:
+                this.sailSpeed += 15;
+                break;
+        }
     }
 
     public void removeCargo(ArrayList<Entity> cargoList) {
@@ -150,25 +164,58 @@ public class Ship {
             int index = this.cargo.indexOf(item);
             Entity itemTemp = this.cargo.get(index);
             this.capacity += itemTemp.getWeight(); //Remove the weight
+
+            this.cargo.remove(index);
+
+            //Remove from upgrades list
+            if (item instanceof Upgrade) {
+                Upgrade upgrade = (Upgrade)item;
+                index = this.upgrades.indexOf(upgrade);
+                this.upgrades.remove(index);
+
+                int upgradeType = upgrade.getType();
+
+                //Remove ship stats
+                switch(upgradeType) {
+                    case 4:
+                        this.maxCapacity -= 50;
+                        break;
+                    case 5:
+                        this.sailSpeed -= 15;
+                        break;
+                }
+            }
         }
     }
 
     public void takeDamage(int amount) {
-        /** Decreases the ships health, cant go below 0 */
+        /** Decreases the ships health, game ends if you have no health */
         this.health -= amount;
-        this.health = Math.max(this.health, 0);
 
-        //TODO add death handling if this is required
+        //check ship destroyed
+        if (this.health <= 0) {
+            System.out.println("Game over, your ship is destroyed");
+            GameEnvironment.exit();
+        }
     }
 
-    public void repair(int amount) {
+    public void repair() {
         /** Increases ships health, cant go above the ships maxHealth Variable */
-        this.health += amount;
-        this.health = Math.min(this.health, this.maxHealth);
+        int difference = this.maxHealth - this.health;
+        int cost = difference * 10;
+
+        //If the player can afford to repair the ship, do so and charge the costs
+        if (GameEnvironment.game.getPlayer().getWallet() >= cost) {
+            GameEnvironment.game.getPlayer().changeWallet(cost);
+            this.health = this.maxHealth;
+
+            System.out.println("Ship Repaired for $" + cost + ". You can now sail.");
+        } else { 
+            //Otherwise end the game
+            System.out.println("You do not have enough money to repair your ship. Unfortunatly you are now bankrupt.");
+            GameEnvironment.exit();
+        }
     }
-
-    //TODO Add methods for other currently unimplemented classes (Items, upgrades, islands..)
-
 
     //Getters And Setters
     public String getName() {
@@ -222,7 +269,19 @@ public class Ship {
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
-    
+
+    public ArrayList<Upgrade> getUpgrades() {
+        return upgrades;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
     @Override
     public String toString() {
         String format = "Name: " + name +

@@ -6,10 +6,13 @@ public class Store {
     private ArrayList<Entity> itemsSell = new ArrayList<Entity>(); //List of item objects that the user is able to purchase
     private ArrayList<String[]> itemsBuy = new ArrayList<String[]>(); //List of item names to buy from user with coressponding value
     private Island location;
+    private Upgrade upgrade;
 
-    public Store(Island location) {
+    public Store(Island location, Upgrade upgrade) {
         /**Create items arrays, setting buy and sell items */
         this.location = location;
+        this.upgrade = upgrade;
+        this.itemsSell.add(this.upgrade);
 
         //Generate items for store to sell
         int numberOfItemsSell =  (int)(Math.random() * (12 - 2 + 1) + 2);
@@ -124,7 +127,7 @@ public class Store {
             int playerCapacity = GameEnvironment.game.getPlayer().getShip().getCapacity();
 
             //Get Player Selection
-            int playerIn = Input.getNum("Select an item (0 when complete): ", 0, itemsSell.size());
+            int playerIn = Input.getNum("Select an item or upgrade (0 when complete): ", 0, itemsSell.size());
 
             if (playerIn == 0) {
                 //Exit Store
@@ -136,6 +139,12 @@ public class Store {
                 if (totalCost + selectedItem.getPurchasePrice() <= playerWallet) {
                     //If player has enough cargo space
                     if (totalWeight + selectedItem.getWeight() <= playerCapacity) {
+                        //If its an upgrade add it directly to the ship
+                        if (selectedItem instanceof Upgrade) {
+                            //Add upgrade to the ship
+                            GameEnvironment.game.getPlayer().getShip().addUpgrade((Upgrade)selectedItem);
+                        }
+                            
                         cart.add(selectedItem);
                         totalWeight += selectedItem.getWeight();
                         totalCost += selectedItem.getPurchasePrice();

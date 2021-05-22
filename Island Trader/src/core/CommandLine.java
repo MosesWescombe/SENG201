@@ -14,7 +14,6 @@ public class CommandLine {
        setUpPlayer();
        setUpIslands();
        setUpRoutes();
-       setUpUpgrades();
     }
 
     private void setUpPlayer() {
@@ -38,27 +37,27 @@ public class CommandLine {
 
         //Island 1
         tempIsland = new Island("Nassau");
-        tempIsland.setStore(new Store(tempIsland));
+        tempIsland.setStore(new Store(tempIsland, new Upgrade(0, tempIsland)));
         islands.add(tempIsland);
 
         //Island 2
         tempIsland = new Island("Timplore");
-        tempIsland.setStore(new Store(tempIsland));
+        tempIsland.setStore(new Store(tempIsland, new Upgrade(1, tempIsland)));
         islands.add(tempIsland);
 
         //Island 3
         tempIsland = new Island("Ugriad");
-        tempIsland.setStore(new Store(tempIsland));
+        tempIsland.setStore(new Store(tempIsland, new Upgrade(2, tempIsland)));
         islands.add(tempIsland);
 
         //Island 4
         tempIsland = new Island("St. Gerbal");
-        tempIsland.setStore(new Store(tempIsland));
+        tempIsland.setStore(new Store(tempIsland, new Upgrade(3, tempIsland)));
         islands.add(tempIsland);
 
         //Island 5
         tempIsland = new Island("Lucia");
-        tempIsland.setStore(new Store(tempIsland));
+        tempIsland.setStore(new Store(tempIsland, new Upgrade(4, tempIsland)));
         islands.add(tempIsland);
 
         //Set starting Island
@@ -120,10 +119,6 @@ public class CommandLine {
             "Average Mile",
             0.5
         ));
-    }
-    
-    private void setUpUpgrades() {
-    	/**adds upgrades to each islands store*/
     }
 
     private void printOptions(String[] array){
