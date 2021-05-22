@@ -102,6 +102,8 @@ public class Event {
     }
 
     private static void rescue() {
-
+    	System.out.println("You and your crew spot a ship wreck in the distance, looks like a giant squid caused some serious damage... I wonder how that happened?"
+    			+ "\nYou rescue 3 thankful saliours\neach gift you $50 for saving their life\n+$150");
+    	GameEnvironment.game.getPlayer().changeWallet(150);
     }
 }

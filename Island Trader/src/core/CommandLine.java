@@ -14,6 +14,7 @@ public class CommandLine {
        setUpPlayer();
        setUpIslands();
        setUpRoutes();
+       setUpUpgrades();
     }
 
     private void setUpPlayer() {
@@ -119,6 +120,10 @@ public class CommandLine {
             "Average Mile",
             0.5
         ));
+    }
+    
+    private void setUpUpgrades() {
+    	/**adds upgrades to each islands store*/
     }
 
     private void printOptions(String[] array){
