@@ -19,8 +19,9 @@ public class StartMenu {
 	private JTextField playerNameInput;
 	private JTextField shipNameInput;
 	private JSlider gameDuration;
-	private int shipType;
+	private int shipType = 1;
 	private JLabel playerNameWarning;
+	private JLabel shipNameWarning;
 
 	/**
 	 * Create the application.
@@ -36,62 +37,96 @@ public class StartMenu {
 
 	public void returnToGame() {
 		/**Returns to the GameEnvironment with the windows variables*/
+		boolean end = true;
 		if (playerNameInput.getText().length() < 3 || playerNameInput.getText().length() > 15) {
 			playerNameWarning.setVisible(true);
+			end = false;
 		} else {
 			playerNameWarning.setVisible(false);
-			GameEnvironment.closeStartMenu(this);
 		}
+		
+		if (shipNameInput.getText().length() < 3 || shipNameInput.getText().length() > 15) {
+			shipNameWarning.setVisible(true);
+			end = false;
+		} else {
+			shipNameWarning.setVisible(false);
+		}
+		
+		
+		if (!end) {
+			return;
+		}
+		
+		
+		playerNameWarning.setVisible(false);
+		shipNameWarning.setVisible(false);
+		GameEnvironment.closeStartMenu(this);
 	}
+	
+	
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		JButton cargoShip = new JButton("Cargo Ship");
+		JButton battleShip = new JButton("Battle Ship");
+		JButton cruiserShip = new JButton("Cruiser Ship");
+		JButton dingy = new JButton("Dingy Ship");
+		
+		
 		startMenuWindow = new JFrame();
 		startMenuWindow.setTitle("Trader Game");
 		startMenuWindow.setBounds(100, 100, 878, 845);
 		startMenuWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		startMenuWindow.getContentPane().setLayout(null);
 		
-		JButton cargoShip = new JButton("Cargo Ship");
-		cargoShip.setBackground(UIManager.getColor("Button.darkShadow"));
+		//JButton cargoShip = new JButton("Cargo Ship");
+		cargoShip.setBackground(SystemColor.activeCaptionBorder);
 		cargoShip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				shipType = 1;
+				resetButton(cargoShip, battleShip, cruiserShip, dingy);
+				cargoShip.setBackground(SystemColor.activeCaptionBorder);
 			}
 		});
 		cargoShip.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		cargoShip.setBounds(458, 495, 177, 73);
+		cargoShip.setBounds(10, 495, 177, 73);
 		startMenuWindow.getContentPane().add(cargoShip);
 		
-		JButton battleShip = new JButton("Battle Ship");
-		battleShip.setBackground(UIManager.getColor("Button.darkShadow"));
+		//JButton battleShip = new JButton("Battle Ship");
+		battleShip.setBackground(UIManager.getColor("CheckBox.darkShadow"));
 		battleShip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				shipType = 2;
+				resetButton(cargoShip, battleShip, cruiserShip, dingy);
+				battleShip.setBackground(SystemColor.activeCaptionBorder);
 			}
 		});
 		battleShip.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		battleShip.setBounds(227, 495, 177, 73);
 		startMenuWindow.getContentPane().add(battleShip);
 		
-		JButton cruiserShip = new JButton("Cruiser Ship");
-		cruiserShip.setBackground(UIManager.getColor("Button.darkShadow"));
+		//JButton cruiserShip = new JButton("Cruiser Ship");
+		cruiserShip.setBackground(UIManager.getColor("CheckBox.darkShadow"));
 		cruiserShip.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		cruiserShip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				shipType = 3;
+				resetButton(cargoShip, battleShip, cruiserShip, dingy);
+				cruiserShip.setBackground(SystemColor.activeCaptionBorder);
 			}
 		});
-		cruiserShip.setBounds(10, 495, 177, 73);
+		cruiserShip.setBounds(458, 495, 177, 73);
 		startMenuWindow.getContentPane().add(cruiserShip);
 		
-		JButton dingy = new JButton("Dingy");
-		dingy.setBackground(UIManager.getColor("Button.darkShadow"));
+		//JButton dingy = new JButton("Dingy Ship");
+		dingy.setBackground(UIManager.getColor("CheckBox.darkShadow"));
 		dingy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				shipType = 4;
+				resetButton(cargoShip, battleShip, cruiserShip, dingy);
+				dingy.setBackground(SystemColor.activeCaptionBorder);
 			}
 		});
 		dingy.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -153,7 +188,7 @@ public class StartMenu {
 		txtpnfasterweakeraverage.setBackground(UIManager.getColor("Button.light"));
 		txtpnfasterweakeraverage.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtpnfasterweakeraverage.setText("-Faster\r\n-Weaker\r\n-Average Cargo\r\n-Average Crew Size");
-		txtpnfasterweakeraverage.setBounds(10, 593, 177, 105);
+		txtpnfasterweakeraverage.setBounds(458, 593, 177, 105);
 		startMenuWindow.getContentPane().add(txtpnfasterweakeraverage);
 		
 		JTextPane txtpnslowerstrongeraverage = new JTextPane();
@@ -167,7 +202,7 @@ public class StartMenu {
 		txtpnslowestaverageHealth.setText("-Slowest\r\n-Average Health\r\n-Large Cargo\r\n-Average Crew Size");
 		txtpnslowestaverageHealth.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtpnslowestaverageHealth.setBackground(SystemColor.controlHighlight);
-		txtpnslowestaverageHealth.setBounds(458, 593, 177, 105);
+		txtpnslowestaverageHealth.setBounds(10, 593, 177, 105);
 		startMenuWindow.getContentPane().add(txtpnslowestaverageHealth);
 		
 		JTextPane txtpnslowestweakestsmallest = new JTextPane();
@@ -191,8 +226,24 @@ public class StartMenu {
 		playerNameWarning.setVisible(false);
 		playerNameWarning.setForeground(new Color(255, 0, 0));
 		playerNameWarning.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		playerNameWarning.setBounds(23, 281, 381, 25);
+		playerNameWarning.setBounds(23, 280, 381, 25);
 		startMenuWindow.getContentPane().add(playerNameWarning);
+		
+		shipNameWarning = new JLabel("Please select a string between 3 and 15 characters.");
+		shipNameWarning.setVisible(false);
+		shipNameWarning.setForeground(new Color(255, 0, 0));
+		shipNameWarning.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		shipNameWarning.setBounds(471, 280, 381, 25);
+		startMenuWindow.getContentPane().add(shipNameWarning);
+		
+	}
+	
+	private void resetButton(JButton cargoShip, JButton battleShip, JButton cruiserShip, JButton dingy) {
+		cargoShip.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		battleShip.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		dingy.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		cruiserShip.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		
 	}
 
 	public JTextField getPlayerNameInput() {
