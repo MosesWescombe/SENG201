@@ -64,7 +64,7 @@ public class Ship {
                 this.crew = 5;
                 break;
             case 4:
-                this.type = shipTypes[3] + "Ship";
+                this.type = shipTypes[3];
                 this.maxCapacity = 10; 
                 this.maxHealth = 10;
                 this.sailSpeed = 10;

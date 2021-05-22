@@ -5,11 +5,11 @@ public class Time {
 
     private int timeRemaining;
 
-    public Time() {
+    public Time(int duration) {
         /**Initialise the game duration */
 
         //Set Time
-        this.timeRemaining = 20; //Input.getNum("Choose game duration (days): ", 20, 50); // added upper and lower param to inputs with getNum - j
+        this.timeRemaining = duration;
     }
 
     public void endDay() {

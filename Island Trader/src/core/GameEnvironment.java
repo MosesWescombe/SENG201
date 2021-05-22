@@ -7,7 +7,7 @@ public class GameEnvironment {
     /** Main game environment that holds all key functionality, Application entry point is here.
      * this can also be thought of as the player class.
      */
-    public static CommandLine game;
+    public static GuiController game;
     public static Time time;
     private static final ArrayList<String> CHOICES = new ArrayList<String>(Arrays.asList(
         "Exit",
@@ -23,15 +23,9 @@ public class GameEnvironment {
         /** Main game loop, run methods from here */
 
         //Initialize game environment
-        game = new CommandLine();
-        time = new Time();
-        
+        new StartMenu();
 
-        //Run Game Loop
-        while(true) {
-            //Run an action
-            displayChoices(); 
-        }
+        
     }
 
     public static void displayChoices() {
@@ -70,6 +64,22 @@ public class GameEnvironment {
             default:
                 System.out.println("This Option is Not Implemented Yet");
         }
+    }
+
+    public static void closeStartMenu(StartMenu state) {
+        /**This runs when the start menu closes*/
+        String playerName = state.getPlayerNameInput().getText();
+        String playerShipName = state.getShipNameInput().getText();
+        int shipType = state.getShipType();
+        int gameDuration = state.getGameDuration().getValue();
+
+
+        game = new GuiController(playerName, playerShipName, shipType);
+        time = new Time(gameDuration);
+
+        state.closeWindow();
+
+        System.out.println(game.getPlayer().getName() + game.getPlayer().getShip().getName() + game.getPlayer().getShip().getType() + time.getTimeRemaining());
     }
 
     private static void sailToIsland() {
