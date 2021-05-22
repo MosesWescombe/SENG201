@@ -22,7 +22,7 @@ public class Ship {
     private int maxHealth;
     private int sailSpeed;
     private ArrayList<Entity> cargo;
-    private Upgrade[] upgrades;
+    private ArrayList<Upgrade> upgrades;
     private Island location;
     private ArrayList<String[]> transactionHistory = new ArrayList<String[]>();
 
@@ -34,6 +34,7 @@ public class Ship {
         /** Creates the ship taking in a Name and Type, Type can be accessed by ShipTypes.<type> */
         this.name = name;
         this.cargo = new ArrayList<Entity>();
+        this.upgrades = new ArrayList<Upgrade>();
 
         //Set the type of the ship
         switch(shipType) {
@@ -116,6 +117,10 @@ public class Ship {
             String[] transaction = {item.getName(), Integer.toString(item.getPurchasePrice())};
             transactionHistory.add(transaction);
         }
+    }
+    
+    public void addUpgrade(Upgrade upgrade) {
+    	this.upgrades.add(upgrade);
     }
 
     public void removeCargo(ArrayList<Entity> cargoList) {
@@ -203,7 +208,7 @@ public class Ship {
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
-
+    
     @Override
     public String toString() {
         String format = "Name: " + name +

@@ -29,11 +29,13 @@ public class Event {
 
     private static void weather() {
         int damage = (int)(Math.random() * (GameEnvironment.game.getPlayer().getShip().getHealth() - 10 + 1) + 10);
-        System.out.println("You and your crew run into some bad weather, big waves and storng winds.\nA giant squid is thrown from a tornado collapses the mast. \nYou must repeair the damage when you arrive at port.");
+        System.out.println("You and your crew run into some bad weather, big waves and storng winds.\nA giant squid is thrown from a tornado and collapses the mast. \nYou must repeair the damage when you arrive at port.");
         GameEnvironment.game.getPlayer().getShip().takeDamage(damage);
     }
 
     private static void rescue() {
-
+    	System.out.println("You and your crew spot a ship wreck in the distance, looks like a giant squid caused some serious damage... I wonder how that happened?"
+    			+ "\nYou rescue 3 thankful saliours\neach gift you $50 for saving their life\n+$150");
+    	GameEnvironment.game.getPlayer().changeWallet(150);
     }
 }
