@@ -16,7 +16,7 @@ public class Ship {
     private String type;
     private int crew;
     private int crewWage;
-    private int maxCapacity;
+    private int maxCapacity; 
     private int capacity;
     private int health;
     private int maxHealth;
@@ -131,6 +131,20 @@ public class Ship {
             String[] transaction = {itemTemp.getName(), Integer.toString(itemTemp.getPurchasePrice()), Integer.toString(itemTemp.getSalePrice())};
             transactionHistory.add(transaction);
             this.cargo.remove(index);
+        }
+    }
+
+    public void removeCargo(ArrayList<Entity> cargoList, boolean pirates) {
+        /**Remove cargo from the ship, do not update transaction as this was pirates*/
+        if (!pirates) {
+            return;
+        }
+        
+        //Update the ships cargo and capacity level
+        for (Entity item : cargoList) {
+            int index = this.cargo.indexOf(item);
+            Entity itemTemp = this.cargo.get(index);
+            this.capacity += itemTemp.getWeight(); //Remove the weight
         }
     }
 
