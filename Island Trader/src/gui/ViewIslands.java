@@ -8,9 +8,11 @@ import core.GameEnvironment;
 import core.Island;
 
 import javax.swing.JTextPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.SystemColor;
@@ -18,6 +20,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import java.awt.Panel;
 
@@ -170,6 +175,79 @@ public class ViewIslands {
 		lblRouteInfo.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblRouteInfo.setBounds(10, 62, 365, 233);
 		panel.add(lblRouteInfo);
+		
+		JButton btnThisSells = new JButton("Store Sells");
+		btnThisSells.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnThisSells.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Items to purchase grid
+				String[] collumnNames = {"Name", "Description", "Value", "Weight"}; //Titles
+				Object[][] itemsForPurchase = currentSelected.getStore().getItemSellObjects(); //Items
+//				Object[][] itemsForPurchase = {
+//					{"This", "That" ,"Price","Other price", ""},
+//					{"This", "That" ,"Price","Other price", ""},
+//					{"This", "That" ,"Price","Other price", ""}
+//				};
+				
+				JTable itemsToPurchase = new JTable(itemsForPurchase, collumnNames);
+				itemsToPurchase.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+				itemsToPurchase.setDefaultEditor(Object.class, null);
+				itemsToPurchase.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				itemsToPurchase.setFillsViewportHeight(true);
+				itemsToPurchase.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+				itemsToPurchase.getColumnModel().getColumn(0).setPreferredWidth(200);
+				itemsToPurchase.getColumnModel().getColumn(1).setPreferredWidth(400);
+				itemsToPurchase.getColumnModel().getColumn(2).setPreferredWidth(100);
+				itemsToPurchase.getColumnModel().getColumn(3).setPreferredWidth(100);
+
+				JScrollPane scrollPane = new JScrollPane(itemsToPurchase);
+				scrollPane.setSize(new Dimension(804, 900));
+				scrollPane.setPreferredSize(new Dimension(804, scrollPane.getPreferredSize().height));
+
+				JOptionPane.showMessageDialog(viewIslandsWindow, scrollPane, "The store at this island sells", JOptionPane.PLAIN_MESSAGE);
+			}
+		});
+		btnThisSells.setBounds(10, 347, 167, 51);
+		panel.add(btnThisSells);
+		
+		JButton btnThisBuys = new JButton("Store Buys");
+		btnThisBuys.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Items to purchase grid
+				String[] collumnNames = {"Name", "Description", "Value", "Weight"}; //Titles
+				Object[][] itemsForSale = currentSelected.getStore().getItemsBuyObjects(); //Items
+//				Object[][] itemsForPurchase = {
+//					{"This", "That" ,"Price","Other price", ""},
+//					{"This", "That" ,"Price","Other price", ""},
+//					{"This", "That" ,"Price","Other price", ""}
+//				};
+				
+				JTable itemsToSell = new JTable(itemsForSale, collumnNames);
+				itemsToSell.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+				itemsToSell.setDefaultEditor(Object.class, null);
+				itemsToSell.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				itemsToSell.setFillsViewportHeight(true);
+				itemsToSell.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+				itemsToSell.getColumnModel().getColumn(0).setPreferredWidth(200);
+				itemsToSell.getColumnModel().getColumn(1).setPreferredWidth(400);
+				itemsToSell.getColumnModel().getColumn(2).setPreferredWidth(100);
+				itemsToSell.getColumnModel().getColumn(3).setPreferredWidth(100);
+
+				JScrollPane scrollPane = new JScrollPane(itemsToSell);
+				scrollPane.setSize(new Dimension(804, 900));
+				scrollPane.setPreferredSize(new Dimension(804, scrollPane.getPreferredSize().height));
+
+				JOptionPane.showMessageDialog(viewIslandsWindow, scrollPane, "The store at this island wants to buy", JOptionPane.PLAIN_MESSAGE);
+			}
+		});
+		btnThisBuys.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnThisBuys.setBounds(208, 347, 167, 51);
+		panel.add(btnThisBuys);
+		
+		JLabel lblStoreButtonInfo = new JLabel("The selected Island store info:");
+		lblStoreButtonInfo.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblStoreButtonInfo.setBounds(10, 306, 365, 32);
+		panel.add(lblStoreButtonInfo);
 		
 		//return to main menu Button
 		JButton btnReturn = new JButton("< Return");

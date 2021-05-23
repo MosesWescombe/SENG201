@@ -4,9 +4,12 @@ import javax.swing.JFrame;
 
 import core.GameEnvironment;
 import javax.swing.JTextPane;
+import javax.swing.ListSelectionModel;
+
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.SystemColor;
 import javax.swing.JTabbedPane;
@@ -14,8 +17,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
 
 public class StoreWindow {
 
@@ -74,8 +75,8 @@ public class StoreWindow {
 		storeWindow.getContentPane().setLayout(null);
 		
 		JTextPane txtIslandStore = new JTextPane();
-		txtIslandStore.setBounds(0, 0, 1313, 78);
-		txtIslandStore.setText("                                Island Store");
+		txtIslandStore.setBounds(0, 0, 1303, 78);
+		txtIslandStore.setText("                  Island Store");
 		txtIslandStore.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		txtIslandStore.setEditable(false);
 		txtIslandStore.setBackground(Color.LIGHT_GRAY);
