@@ -37,6 +37,10 @@ public class MainScreen {
 	public void returnToGame() {
 		GameEnvironment.closeMainScreen(this);
 	}
+	
+	private void openViewIslands() {
+		GameEnvironment.viewIslands(this);
+	}
 
 	/**
 	 * Initialize the contents of the mainScreen.
@@ -48,6 +52,7 @@ public class MainScreen {
 		mainScreen.getContentPane().setLayout(null);
 		
 		JTextPane txtpnMainMenu = new JTextPane();
+		txtpnMainMenu.setEditable(false);
 		txtpnMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		txtpnMainMenu.setText("                   Main Menu");
 		txtpnMainMenu.setBackground(Color.LIGHT_GRAY);
@@ -71,6 +76,11 @@ public class MainScreen {
 		mainScreen.getContentPane().add(btnViewShip);
 		
 		JButton btnViewIslands = new JButton("View Islands");
+		btnViewIslands.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				openViewIslands();
+			}
+		});
 		btnViewIslands.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		btnViewIslands.setBackground(SystemColor.activeCaptionBorder);
 		btnViewIslands.setBounds(30, 615, 209, 73);
@@ -79,6 +89,7 @@ public class MainScreen {
 		JButton btnVisitStore = new JButton("Visit Store");
 		btnVisitStore.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		btnVisitStore.setFont(new Font("Tahoma", Font.PLAIN, 22));

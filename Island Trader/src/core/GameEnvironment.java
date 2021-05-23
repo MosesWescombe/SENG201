@@ -1,5 +1,6 @@
 package core;
 import gui.MainScreen;
+import gui.ViewIslands;
 import gui.StartMenu;
 
 import java.util.ArrayList;
@@ -30,44 +31,6 @@ public class GameEnvironment {
         System.out.println("Messafge");
     }
 
-    public static void displayChoices() {
-        /**Display All Choices, and get user to choose*/
-        System.out.println("\nMAIN MENU OPTIONS");
-        int i = 0;
-        for (String choice : CHOICES) {
-            System.out.println("\t" + i + ": " + choice);
-            i++;
-        }
-
-        int userIn = Input.getNum("Select your choice by number: ", 0, CHOICES.size() - 1); 
-
-        switch(userIn) {
-            case 0:
-                exit();
-                break;
-            case 1:
-                viewBallance();
-                break;
-            case 2:
-                viewShip();
-                break;
-            case 3:
-                viewTransactions();
-                break;
-            case 4:
-                viewIslands();
-                break;
-            case 5:
-                visitStore();
-                break;
-            case 6:
-                sailToIsland();
-                break;
-            default:
-                System.out.println("This Option is Not Implemented Yet");
-        }
-    }
-
     public static void closeStartMenu(StartMenu state) {
         /**This runs when the start menu closes*/
         String playerName = state.getPlayerNameInput().getText();
@@ -86,45 +49,48 @@ public class GameEnvironment {
     public static void closeMainScreen(MainScreen state) {
         state.closeWindow();
     }
+    public static void closeViewIslandsWindow(ViewIslands state) {
+    	state.closeWindow();
+    }
 
     private static void sailToIsland() {
         /**Sail to a new Island, consume days and check for events*/
-
-        if (game.getPlayer().getShip().getHealth() < game.getPlayer().getShip().getMaxHealth()) {
-            System.out.println("Your ship needs repairs.");
-            game.getPlayer().getShip().repair();
-        }
-
-    	ArrayList<Route> routesFrom = new ArrayList<Route>();
-
-        //Create a list of routes from the current island
-        for (Island island : game.getIslands()) {
-            for (Route route : island.getRoutes()) {
-                if (route.getOrigin() == game.getPlayer().getShip().getLocation()) {
-                    routesFrom.add(route);
-                }
-            }
-        }
-
-        //Get Users selection
-        System.out.println("");
-        int i = 1;
-        for (Route route : routesFrom) {
-            System.out.println("\n" + i + ": " + route.viewRoute());
-            i++;
-        }
-        int userIn = Input.getNum("\nSelect Route (0 for exit): ", 0, routesFrom.size());
-
-        //Pass days
-        for (int j=0; j < routesFrom.get(userIn - 1).getDistance() / game.getPlayer().getShip().getSailSpeed() / 24; j++) {
-            time.endDay();
-        }
-
-        //Check for events
-        Event.checkEvent(routesFrom.get(userIn - 1).getEventChance());
-
-        //Change ships location
-        game.getPlayer().getShip().setLocation(routesFrom.get(userIn - 1).getDestination());
+//
+//        if (game.getPlayer().getShip().getHealth() < game.getPlayer().getShip().getMaxHealth()) {
+//            System.out.println("Your ship needs repairs.");
+//            game.getPlayer().getShip().repair();
+//        }
+//
+//    	ArrayList<Route> routesFrom = new ArrayList<Route>();
+//
+//        //Create a list of routes from the current island
+//        for (Island island : game.getIslands()) {
+//            for (Route route : island.getRoutes()) {
+//                if (route.getOrigin() == game.getPlayer().getShip().getLocation()) {
+//                    routesFrom.add(route);
+//                }
+//            }
+//        }
+//
+//        //Get Users selection
+//        System.out.println("");
+//        int i = 1;
+//        for (Route route : routesFrom) {
+//            System.out.println("\n" + i + ": " + route.viewRoute());
+//            i++;
+//        }
+//        int userIn = Input.getNum("\nSelect Route (0 for exit): ", 0, routesFrom.size());
+//
+//        //Pass days
+//        for (int j=0; j < routesFrom.get(userIn - 1).getDistance() / game.getPlayer().getShip().getSailSpeed() / 24; j++) {
+//            time.endDay();
+//        }
+//
+//        //Check for events
+//        Event.checkEvent(routesFrom.get(userIn - 1).getEventChance());
+//
+//        //Change ships location
+//        game.getPlayer().getShip().setLocation(routesFrom.get(userIn - 1).getDestination());
     }
 
     private static void visitStore() {
@@ -132,14 +98,10 @@ public class GameEnvironment {
         game.getPlayer().getShip().getLocation().openStore();
     }
 
-    private static void viewIslands() {
-    	System.out.println("\nyour ship is currently docked at " + game.getPlayer().getShip().getLocation() + " island");
-    	for (Island island : game.getIslands()) {
-    		System.out.println("\n-------======= Island properties for: " + island + " =======-------");
-    		System.out.println(island.viewIslandInfo(game.getPlayer().getShip().getLocation()));
-    		System.out.println("\nStore properties at " + island + ":");
-    		island.displayStore();
-    	}
+    public static void viewIslands(MainScreen state) {
+    	/**opens the ViewIsland window and displays island info */
+    	new ViewIslands();
+    	state.closeWindow();
     }
 
     private static void viewTransactions() {

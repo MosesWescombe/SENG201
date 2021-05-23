@@ -136,6 +136,7 @@ public class StartMenu {
 		startMenuWindow.getContentPane().add(dingy);
 		
 		JTextPane txtpnThisIsA = new JTextPane();
+		txtpnThisIsA.setEditable(false);
 		txtpnThisIsA.setBackground(Color.LIGHT_GRAY);
 		txtpnThisIsA.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		txtpnThisIsA.setText("                  Trader Game");
@@ -187,13 +188,15 @@ public class StartMenu {
 		startMenuWindow.getContentPane().add(lblNewLabel_1_1);
 		
 		JTextPane txtpnfasterweakeraverage = new JTextPane();
-		txtpnfasterweakeraverage.setBackground(UIManager.getColor("Button.light"));
+		txtpnfasterweakeraverage.setEditable(false);
+		txtpnfasterweakeraverage.setBackground(SystemColor.controlHighlight);
 		txtpnfasterweakeraverage.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtpnfasterweakeraverage.setText("-Faster\r\n-Weaker\r\n-Average Cargo\r\n-Average Crew Size");
 		txtpnfasterweakeraverage.setBounds(458, 593, 177, 105);
 		startMenuWindow.getContentPane().add(txtpnfasterweakeraverage);
 		
 		JTextPane txtpnslowerstrongeraverage = new JTextPane();
+		txtpnslowerstrongeraverage.setEditable(false);
 		txtpnslowerstrongeraverage.setText("-Slower\r\n-Stronger\r\n-Average Cargo\r\n-Large Crew Size");
 		txtpnslowerstrongeraverage.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtpnslowerstrongeraverage.setBackground(SystemColor.controlHighlight);
@@ -201,6 +204,7 @@ public class StartMenu {
 		startMenuWindow.getContentPane().add(txtpnslowerstrongeraverage);
 		
 		JTextPane txtpnslowestaverageHealth = new JTextPane();
+		txtpnslowestaverageHealth.setEditable(false);
 		txtpnslowestaverageHealth.setText("-Slowest\r\n-Average Health\r\n-Large Cargo\r\n-Average Crew Size");
 		txtpnslowestaverageHealth.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtpnslowestaverageHealth.setBackground(SystemColor.controlHighlight);
@@ -208,6 +212,7 @@ public class StartMenu {
 		startMenuWindow.getContentPane().add(txtpnslowestaverageHealth);
 		
 		JTextPane txtpnslowestweakestsmallest = new JTextPane();
+		txtpnslowestweakestsmallest.setEditable(false);
 		txtpnslowestweakestsmallest.setText("-Slowest\r\n-Weakest\r\n-Smallest Cargo\r\n-Smallest Crew");
 		txtpnslowestweakestsmallest.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtpnslowestweakestsmallest.setBackground(SystemColor.controlHighlight);
