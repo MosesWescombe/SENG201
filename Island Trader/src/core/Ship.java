@@ -105,18 +105,17 @@ public class Ship {
         }
     }
 
-    public void addCargo(ArrayList<Entity> cargoList) {
+    public void addCargo(Entity item) {
         /**Add cargo to the ship and update capacity*/
         
         //Update the ships cargo and capacity level
-        for (Entity item : cargoList) {
-            this.cargo.add(item);
-            this.capacity -= item.getWeight();
 
-            //Update Transaction History
-            String[] transaction = {item.getName(), Integer.toString(item.getPurchasePrice())};
-            transactionHistory.add(transaction);
-        }
+        this.cargo.add(item);
+        this.capacity -= item.getWeight();
+
+        //Update Transaction History
+        String[] transaction = {item.getName(), Integer.toString(item.getPurchasePrice())};
+        transactionHistory.add(transaction);
     }
     
     public void addUpgrade(Upgrade upgrade) {
@@ -137,20 +136,18 @@ public class Ship {
         }
     }
 
-    public void removeCargo(ArrayList<Entity> cargoList) {
+    public void removeCargo(Entity item) {
         /**Remove cargo from the ship and update capacity and players wallet*/
 
         //Update the ships cargo and capacity level
-        for (Entity item : cargoList) {
-            int index = this.cargo.indexOf(item);
-            Entity itemTemp = this.cargo.get(index);
-            this.capacity += itemTemp.getWeight(); //Remove the weight
+        int index = this.cargo.indexOf(item);
+        Entity itemTemp = this.cargo.get(index);
+        this.capacity += itemTemp.getWeight(); //Remove the weight
 
-            //Update Transaction History
-            String[] transaction = {itemTemp.getName(), Integer.toString(itemTemp.getPurchasePrice()), Integer.toString(itemTemp.getSalePrice())};
-            transactionHistory.add(transaction);
-            this.cargo.remove(index);
-        }
+        //Update Transaction History
+        String[] transaction = {itemTemp.getName(), Integer.toString(itemTemp.getPurchasePrice()), Integer.toString(itemTemp.getSalePrice())};
+        transactionHistory.add(transaction);
+        this.cargo.remove(index);
     }
 
     public void removeCargo(ArrayList<Entity> cargoList, boolean pirates) {

@@ -1,6 +1,8 @@
 package core;
 import java.util.ArrayList;
 
+import gui.StoreWindow;
+
 public class Store {
     /**Each Island has a store, stores manage the item buying and selling, items are stored in arrays in each Store object. */
     private ArrayList<Entity> itemsSell = new ArrayList<Entity>(); //List of item objects that the user is able to purchase
@@ -32,35 +34,6 @@ public class Store {
             values[0] = Item.getRandomItem()[0]; //Get random item name
             values[1] = Integer.toString((int)(Math.random() * (100 - 2 + 1) + 2)); //Random Value, stored as String
             this.itemsBuy.add(values);
-        }
-    }
-
-    public void openStore() {
-        /**Display the options to buy and sell, we can either implement the choice controls in here, or in a seperate
-         * fuction with this simply as the display.
-        */
-
-        //Display Store
-        displayStore();
-
-        //Get User Choice
-        int userIn = Input.getNum("\n0: Exit Store\n" +
-        "1: Buy\n" +
-        "2: Sell\n" + 
-        "Choice: ", 0, 2);
-
-        switch(userIn) {
-            case 0:
-                //Exit
-                break;
-            case 1:
-                //Player wants to buy items
-                sell();
-                break;
-            case 2:
-                //Player wants to sell items
-                purchase();
-                break;
         }
     }
 
@@ -132,100 +105,76 @@ public class Store {
             }
         }
 
+        if (result.length >= 1 && result[0][0] == null) {
+            result[i][0] = "No Items To Sell";
+            result[i][1] = "No Items To Sell";
+            result[i][2] = "No Items To Sell";
+            result[i][3] = "No Items To Sell";
+        }
+
         return result;
     }
 
-    public void sell() {
+    public String sell(StoreWindow state, int index) {
         /**Sells items to the user if they have enough money in thier wallet*/
-        ArrayList<Entity> cart = new ArrayList<Entity>();
-        int totalCost = 0;
-        int totalWeight = 0;
+        int playerWallet = GameEnvironment.game.getPlayer().getWallet();
+        int playerCapacity = GameEnvironment.game.getPlayer().getShip().getCapacity();
+        if (index < 0) {
+            return "NoneSelected";
+        }
 
-        //Ask for item selection
-        while (true) {
-            int playerWallet = GameEnvironment.game.getPlayer().getWallet();
-            int playerCapacity = GameEnvironment.game.getPlayer().getShip().getCapacity();
+        Entity selectedItem = (Entity)state.getItemsForPurchase()[index][4];
 
-            //Get Player Selection
-            int playerIn = Input.getNum("Select an item or upgrade (0 when complete): ", 0, itemsSell.size());
 
-            if (playerIn == 0) {
-                //Exit Store
-                break;
-            } else {
-                //Try to add item to the selectedItem, if the item is affordable and can fit on the ship
-                Entity selectedItem = itemsSell.get(playerIn - 1);
-                //If player has enough money
-                if (totalCost + selectedItem.getPurchasePrice() <= playerWallet) {
-                    //If player has enough cargo space
-                    if (totalWeight + selectedItem.getWeight() <= playerCapacity) {
-                        //If its an upgrade add it directly to the ship
-                        if (selectedItem instanceof Upgrade) {
-                            //Add upgrade to the ship
-                            GameEnvironment.game.getPlayer().getShip().addUpgrade((Upgrade)selectedItem);
-                        }
-                            
-                        cart.add(selectedItem);
-                        totalWeight += selectedItem.getWeight();
-                        totalCost += selectedItem.getPurchasePrice();
-                    } else {
-                        System.out.println("Sorry, not enough room for this Item.");
-                    }
-                }  else {
-                    System.out.println("Sorry, not enough money for this Item.");
+        //Try to add item to the selectedItem, if the item is affordable and can fit on the ship
+        //If player has enough money
+        if (selectedItem.getPurchasePrice() <= playerWallet) {
+            //If player has enough cargo space
+            if (selectedItem.getWeight() <= playerCapacity) {
+                //If its an upgrade add it directly to the ship
+                if (selectedItem instanceof Upgrade) {
+                    //Add upgrade to the ship
+                    GameEnvironment.game.getPlayer().getShip().addUpgrade((Upgrade)selectedItem);
                 }
+            } else {
+                return "WeightError";
             }
+        }  else {
+            return "CostError";
         }
 
 
         Ship shipToLoad = GameEnvironment.game.getPlayer().getShip();
 
         //Add cargo to the ship
-        shipToLoad.addCargo(cart);
+        shipToLoad.addCargo(selectedItem);
 
         //Remove item from Store
-        for (Entity item : cart) {
-            for (int j=0; j < itemsSell.size(); j++) {
-                if (itemsSell.get(j).getName() == item.getName()) {
-                    GameEnvironment.game.getPlayer().changeWallet(-item.getPurchasePrice()); //Take money from wallet
-                    itemsSell.remove(j);
-                }
+        for (int j=0; j < itemsSell.size(); j++) {
+            if (itemsSell.get(j).getName() == selectedItem.getName()) {
+                GameEnvironment.game.getPlayer().changeWallet(-selectedItem.getPurchasePrice()); //Take money from wallet
+                itemsSell.remove(j);
             }
         }
+        System.out.println(itemsSell);
+        return "Success";
     }
 
-    public void purchase() {
+    public void purchase(StoreWindow state, int index) {
         /**Buys items off the user*/
-        ArrayList<Entity> cart = new ArrayList<Entity>();
+        if (index < 0) {
+            return;
+        }
+
+        Entity selectedItem = (Entity)state.getItemsForPurchase()[index][4];
         Ship playersShip = GameEnvironment.game.getPlayer().getShip();
 
-        //Ask for item selection
-        while (true) {
-            //Get Player Selection
-            int playerIn = Input.getNum("Select an item (0 when complete): ", 0, playersShip.getCargo().size());
-
-            if (playerIn == 0) {
-                //Exit Store
-                break;
-            } else {
-                //Check the number is in the range of cargo items
-                if (playerIn <= playersShip.getCargo().size()) {
-                    //Add item to cart
-                    Entity selectedItem = playersShip.getCargo().get(playerIn);
-                    cart.add(selectedItem);
-                } else {
-                    System.out.println("Sorry choose a number from the range above.");
-                }
-            }
-        }
-
         //Remove cargo from the ship
-        playersShip.removeCargo(cart);
+        playersShip.removeCargo(selectedItem);
         //Add cargo to the store
-        for (Entity item : cart) {
-            item.setLocationOfStore(this.location);
-            //itemsSell.add(item);
-            GameEnvironment.game.getPlayer().changeWallet(item.getSalePrice()); //Add profits to wallet
-        }
+
+        //change location of item and update wallet
+        selectedItem.setLocationOfStore(this.location);
+        GameEnvironment.game.getPlayer().changeWallet(selectedItem.getSalePrice()); //Add profits to wallet
     }
 }
