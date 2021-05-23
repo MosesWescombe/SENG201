@@ -43,8 +43,9 @@ public class ViewIslands {
 		viewIslandsWindow.dispose();
 	}
 
-	public void returnToGame() {
-		GameEnvironment.closeViewIslandsWindow(this);
+	public void returnToMenu() {
+		GameEnvironment.returnToMenu();
+		this.closeWindow();
 	}
 
 	/**
@@ -81,7 +82,7 @@ public class ViewIslands {
 			}
 		});
 		btnNassau.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnNassau.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		btnNassau.setBackground(SystemColor.activeCaptionBorder);
 		btnNassau.setBounds(10, 190, 209, 73);
 		viewIslandsWindow.getContentPane().add(btnNassau);
 		
@@ -169,6 +170,18 @@ public class ViewIslands {
 		lblRouteInfo.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblRouteInfo.setBounds(10, 62, 365, 233);
 		panel.add(lblRouteInfo);
+		
+		//return to main menu Button
+		JButton btnReturn = new JButton("< Return");
+		btnReturn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				returnToMenu();
+			}
+		});
+		btnReturn.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		btnReturn.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnReturn.setBounds(449, 89, 209, 73);
+		viewIslandsWindow.getContentPane().add(btnReturn);
 			
 	}
 	
