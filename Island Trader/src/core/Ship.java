@@ -138,16 +138,20 @@ public class Ship {
 
     public void removeCargo(Entity item) {
         /**Remove cargo from the ship and update capacity and players wallet*/
-
-        //Update the ships cargo and capacity level
-        int index = this.cargo.indexOf(item);
-        Entity itemTemp = this.cargo.get(index);
-        this.capacity += itemTemp.getWeight(); //Remove the weight
+        //Remove item from cargo
+        System.out.println(item.getName());
+        System.out.println(cargo);
+        for (int j=0; j < cargo.size(); j++) {
+            if (cargo.get(j).getName() == item.getName()) {
+                GameEnvironment.game.getPlayer().changeWallet(item.getPurchasePrice()); //Take money from wallet
+                cargo.remove(j);
+            }
+        }
+        this.capacity += item.getWeight(); //Remove the weight
 
         //Update Transaction History
-        String[] transaction = {itemTemp.getName(), Integer.toString(itemTemp.getPurchasePrice()), Integer.toString(itemTemp.getSalePrice())};
+        String[] transaction = {item.getName(), Integer.toString(item.getPurchasePrice()), Integer.toString(item.getSalePrice())};
         transactionHistory.add(transaction);
-        this.cargo.remove(index);
     }
 
     public void removeCargo(ArrayList<Entity> cargoList, boolean pirates) {

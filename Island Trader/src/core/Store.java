@@ -92,8 +92,8 @@ public class Store {
     public Object[][] getItemsBuyObjects() {
         Object[][] result = new Object[itemsSell.size()][5];
         int i = 0;
-        for  (Entity item : GameEnvironment.game.getPlayer().getShip().getCargo()) {
-            for (String[] itemBuy : itemsBuy) {
+        for (String[] itemBuy : itemsBuy) {
+            for  (Entity item : GameEnvironment.game.getPlayer().getShip().getCargo()) {
                 if (item.getName() == itemBuy[0]) {
                     result[i][0] = item.getItemDetails()[0];
                     result[i][1] = item.getItemDetails()[1];
@@ -119,7 +119,7 @@ public class Store {
         /**Sells items to the user if they have enough money in thier wallet*/
         int playerWallet = GameEnvironment.game.getPlayer().getWallet();
         int playerCapacity = GameEnvironment.game.getPlayer().getShip().getCapacity();
-        if (index < 0) {
+        if (index < 0 || index >= state.getItemsToBuy().length) {
             return "NoneSelected";
         }
 
@@ -160,21 +160,21 @@ public class Store {
         return "Success";
     }
 
-    public void purchase(StoreWindow state, int index) {
+    public String purchase(StoreWindow state, int index) {
         /**Buys items off the user*/
-        if (index < 0) {
-            return;
+        if (index < 0 || index >= state.getItemsToBuy().length) {
+            return "NoneSelected";
         }
 
-        Entity selectedItem = (Entity)state.getItemsForPurchase()[index][4];
+        Entity selectedItem = (Entity)state.getItemsToBuy()[index][4];
         Ship playersShip = GameEnvironment.game.getPlayer().getShip();
 
         //Remove cargo from the ship
         playersShip.removeCargo(selectedItem);
-        //Add cargo to the store
 
         //change location of item and update wallet
         selectedItem.setLocationOfStore(this.location);
         GameEnvironment.game.getPlayer().changeWallet(selectedItem.getSalePrice()); //Add profits to wallet
+        return "Success";
     }
 }

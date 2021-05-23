@@ -61,7 +61,7 @@ public class MainWindow {
 		txtpnMainMenu.setBounds(0, 0, 864, 78);
 		mainScreen.getContentPane().add(txtpnMainMenu);
 		
-		JButton btnViewTransactions = new JButton("View Transactions");
+		JButton btnViewTransactions = new JButton("View Sales");
 		btnViewTransactions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnViewTransactions.setBackground(SystemColor.activeCaptionBorder);
@@ -71,12 +71,6 @@ public class MainWindow {
 		btnViewTransactions.setBackground(UIManager.getColor("CheckBox.darkShadow"));
 		btnViewTransactions.setBounds(30, 515, 209, 73);
 		mainScreen.getContentPane().add(btnViewTransactions);
-		
-		JButton btnViewShip = new JButton("View Ship");
-		btnViewShip.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnViewShip.setBackground(UIManager.getColor("CheckBox.darkShadow"));
-		btnViewShip.setBounds(30, 717, 209, 73);
-		mainScreen.getContentPane().add(btnViewShip);
 		
 		JButton btnViewIslands = new JButton("View Islands");
 		btnViewIslands.addActionListener(new ActionListener() {
@@ -106,12 +100,12 @@ public class MainWindow {
 		btnSail.setBounds(263, 615, 209, 73);
 		mainScreen.getContentPane().add(btnSail);
 		
-		JButton btnExit = new JButton("Exit");
-		btnExit.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnExit.setBackground(UIManager.getColor("CheckBox.darkShadow"));
-		btnExit.setBounds(263, 717, 209, 73);
-		mainScreen.getContentPane().add(btnExit);
-		btnExit.addActionListener(new ActionListener() {
+		JButton btnEndGame = new JButton("End Game");
+		btnEndGame.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		btnEndGame.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		btnEndGame.setBounds(30, 717, 442, 73);
+		mainScreen.getContentPane().add(btnEndGame);
+		btnEndGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeMainMenu();
 			}

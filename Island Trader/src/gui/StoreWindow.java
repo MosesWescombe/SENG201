@@ -1,6 +1,7 @@
 package gui;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import core.GameEnvironment;
 import javax.swing.JTextPane;
@@ -24,6 +25,7 @@ public class StoreWindow {
 	private JTable itemsToPurchase;
 	private JTable itemsToSell;
 	private Object[][] itemsForPurchase = GameEnvironment.game.getPlayer().getShip().getLocation().getStore().getItemSellObjects(); //Items
+	private Object[][] itemsToBuy = GameEnvironment.game.getPlayer().getShip().getLocation().getStore().getItemsBuyObjects();
 	
 
 	/**
@@ -48,8 +50,14 @@ public class StoreWindow {
 		String result = GameEnvironment.game.getPlayer().getShip().getLocation().getStore().sell(this, index);
 		if (result == "WeightError") {
 			System.out.println("Failure");
+
+			JOptionPane.showMessageDialog(storeWindow, "Not Enough Cargo Capacity to Purchase", "Error", JOptionPane.ERROR_MESSAGE);
 		} else if (result == "CostError") {
 			System.out.println("Failure");
+
+			JOptionPane.showMessageDialog(storeWindow, "Not Enough Money to Purchase", "Error", JOptionPane.ERROR_MESSAGE);
+		} else if (result == "NoneSelected") {
+
 		} else {
 			System.out.println("Success");
 			//Update Window
@@ -60,9 +68,16 @@ public class StoreWindow {
 
 	public void sellItem() {
 		int index = itemsToSell.getSelectedRow();
-		GameEnvironment.game.getPlayer().getShip().getLocation().getStore().purchase(this, index);
+		String result = GameEnvironment.game.getPlayer().getShip().getLocation().getStore().purchase(this, index);
 
-		new StoreWindow();
+		if (result == "WeightError") {
+			System.out.println("Failure");
+
+			JOptionPane.showMessageDialog(storeWindow, "Not Enough Cargo Capacity to Purchase", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			closeWindow();
+			new StoreWindow();
+		}
 	}
 
 	/**
@@ -88,7 +103,27 @@ public class StoreWindow {
 		panel_2.setBackground(Color.WHITE);
 		storeWindow.getContentPane().add(panel_2);
 		panel_2.setLayout(new GridLayout(1, 0, 0, 0));
-		
+			
+			JButton btnCompleteTransaction = new JButton("Purchase Selected");
+			btnCompleteTransaction.setFont(new Font("Tahoma", Font.PLAIN, 22));
+			btnCompleteTransaction.setBackground(SystemColor.activeCaptionBorder);
+			btnCompleteTransaction.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					buyItem();
+				}
+			});
+			panel_2.add(btnCompleteTransaction);
+			
+			JButton btnSellSelected = new JButton("Sell Selected");
+			btnSellSelected.setFont(new Font("Tahoma", Font.PLAIN, 22));
+			btnSellSelected.setBackground(SystemColor.activeCaptionBorder);
+			btnSellSelected.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					sellItem();
+				}
+			});
+			panel_2.add(btnSellSelected);
+			
 			JButton btnExitWithoutSale = new JButton("Exit Without Sale");
 			btnExitWithoutSale.setFont(new Font("Tahoma", Font.PLAIN, 22));
 			btnExitWithoutSale.setBackground(SystemColor.activeCaptionBorder);
@@ -98,17 +133,6 @@ public class StoreWindow {
 				}
 			});
 			panel_2.add(btnExitWithoutSale);
-			
-			JButton btnCompleteTransaction = new JButton("Purchase Selected");
-			btnCompleteTransaction.setFont(new Font("Tahoma", Font.PLAIN, 22));
-			btnCompleteTransaction.setBackground(SystemColor.activeCaptionBorder);
-			btnCompleteTransaction.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					buyItem();
-					sellItem();
-				}
-			});
-			panel_2.add(btnCompleteTransaction);
 		
 
 		//Tabbed Pannel
@@ -121,8 +145,10 @@ public class StoreWindow {
 			JPanel purchasePanel = new JPanel();
 			tabbedPane.addTab("Items To Purchase", null, purchasePanel, null);
 			purchasePanel.setLayout(new GridLayout(0, 1, 0, 0));
-			
+				
+				//Add Grid
 				updatePurchaseGrid();
+
 				JScrollPane scrollPane = new JScrollPane(itemsToPurchase);
 				purchasePanel.add(scrollPane);
 			
@@ -130,7 +156,8 @@ public class StoreWindow {
 			JPanel itemsToSellPanel = new JPanel();
 			tabbedPane.addTab("Items To Sell", null, itemsToSellPanel, null);
 			itemsToSellPanel.setLayout(new GridLayout(0, 1, 0, 0));
-
+				
+				//Add Grid
 				updateSellGrid();
 
 				JScrollPane scrollPaneSell = new JScrollPane(itemsToSell);
@@ -144,7 +171,7 @@ public class StoreWindow {
 	private void updateSellGrid() {
 		//Items to purchase grid
 		String[] collumnNames = new String[] {"Name", "Description", "Value", "Weight"}; //Titles
-		Object[][] itemsToBuy = GameEnvironment.game.getPlayer().getShip().getLocation().getStore().getItemsBuyObjects(); //Items
+		itemsToBuy = GameEnvironment.game.getPlayer().getShip().getLocation().getStore().getItemsBuyObjects(); //Items
 		// Object[][] itemsToBuy = {
 		// 	{"This", "That" ,"Price","Other price", ""},
 		// 	{"This", "That" ,"Price","Other price", ""},
@@ -185,5 +212,9 @@ public class StoreWindow {
 
 	public void setItemsForPurchase(Object[][] itemsForPurchase) {
 		this.itemsForPurchase = itemsForPurchase;
+	}
+
+	public Object[][] getItemsToBuy() {
+		return itemsToBuy;
 	}
 }
