@@ -102,13 +102,14 @@ public class Store {
     }
 
     public Object[][] getItemSellObjects() {
-        Object[][] result = new Object[itemsSell.size()][4];
+        Object[][] result = new Object[itemsSell.size()][5];
         int i = 0;
         for (Entity item : itemsSell) {
             result[i][0] = item.getItemDetails()[0];
             result[i][1] = item.getItemDetails()[1];
             result[i][2] = item.getItemDetails()[2];
             result[i][3] = item.getItemDetails()[3];
+            result[i][4] = item;
             i++;
         }
 
@@ -116,7 +117,7 @@ public class Store {
     }
 
     public Object[][] getItemsBuyObjects() {
-        Object[][] result = new Object[itemsSell.size()][4];
+        Object[][] result = new Object[itemsSell.size()][5];
         int i = 0;
         for  (Entity item : GameEnvironment.game.getPlayer().getShip().getCargo()) {
             for (String[] itemBuy : itemsBuy) {
@@ -125,6 +126,8 @@ public class Store {
                     result[i][1] = item.getItemDetails()[1];
                     result[i][2] = item.getItemDetails()[2];
                     result[i][3] = item.getItemDetails()[3];
+                    result[i][4] = item;
+                    i++;
                 }
             }
         }
