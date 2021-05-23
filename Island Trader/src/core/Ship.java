@@ -105,6 +105,21 @@ public class Ship {
         }
     }
 
+    public Object[][] getTransactionHistoryObject() {
+        Object[][] result = new Object[transactionHistory.size()][4];
+
+        int i = 0;
+        for (String[] transaction : transactionHistory) {
+            result[i][0] = transaction[0];
+            result[i][1] = transaction[1];
+            result[i][2] = transaction[2];
+            result[i][3] = transaction[3];
+            i++;
+        }
+
+        return result;
+    }
+
     public void addCargo(Entity item) {
         /**Add cargo to the ship and update capacity*/
         
@@ -114,7 +129,7 @@ public class Ship {
         this.capacity -= item.getWeight();
 
         //Update Transaction History
-        String[] transaction = {item.getName(), Integer.toString(item.getPurchasePrice())};
+        String[] transaction = {item.getName(), item.getLocationOfStore().getName(), Integer.toString(item.getPurchasePrice()), "Not Applicable"};
         transactionHistory.add(transaction);
     }
     
@@ -136,11 +151,22 @@ public class Ship {
         }
     }
 
+    public Object[][] getUpgradeObjects() {
+        Object[][] result = new Object[upgrades.size()][2];
+
+        int i = 0;
+        for (Upgrade upgrade : upgrades) {
+            result[i][0] = upgrade.getName();
+            result[i][1] = upgrade.getDescription();
+            i++;
+        }
+
+        return result;
+    }
+
     public void removeCargo(Entity item) {
         /**Remove cargo from the ship and update capacity and players wallet*/
         //Remove item from cargo
-        System.out.println(item.getName());
-        System.out.println(cargo);
         for (int j=0; j < cargo.size(); j++) {
             if (cargo.get(j).getName() == item.getName()) {
                 GameEnvironment.game.getPlayer().changeWallet(item.getPurchasePrice()); //Take money from wallet
@@ -150,16 +176,12 @@ public class Ship {
         this.capacity += item.getWeight(); //Remove the weight
 
         //Update Transaction History
-        String[] transaction = {item.getName(), Integer.toString(item.getPurchasePrice()), Integer.toString(item.getSalePrice())};
+        String[] transaction = {item.getName(), item.getLocationOfStore().getName(), "Not Applicable", Integer.toString(item.getSalePrice())};
         transactionHistory.add(transaction);
     }
 
-    public void removeCargo(ArrayList<Entity> cargoList, boolean pirates) {
+    public void removeCargo(ArrayList<Entity> cargoList) {
         /**Remove cargo from the ship, do not update transaction as this was pirates*/
-        if (!pirates) {
-            return;
-        }
-        
         //Update the ships cargo and capacity level
         for (Entity item : cargoList) {
             int index = this.cargo.indexOf(item);
@@ -281,6 +303,10 @@ public class Ship {
 
     public void setMaxHealth(int maxHealth) {
         this.maxHealth = maxHealth;
+    }
+
+    public ArrayList<String[]> getTransactionHistory() {
+        return transactionHistory;
     }
 
     @Override

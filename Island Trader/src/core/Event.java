@@ -87,7 +87,7 @@ public class Event {
 
             if (value >= piratesCost) {
                 System.out.println("The pirates are satisfied with your items, they re-board thier ship with your items and leave with a smile and a wave.");
-                GameEnvironment.game.getPlayer().getShip().removeCargo(piratesLoot, true);
+                GameEnvironment.game.getPlayer().getShip().removeCargo(piratesLoot);
                 return;
             }
         }

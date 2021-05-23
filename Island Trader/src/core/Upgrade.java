@@ -4,7 +4,7 @@ public class Upgrade extends Entity{
     /**These upgrade items can effect ship stats, or assist in events */
 	private int type;
 	private String[][] upgradeOptions = {
-		{"Cannon", "Gives you an extra chance when encountering pirates", "100"},
+		{"Cannon", "Extra Chance", "100"},
 		{"Telescope", "Improves chance of seeing stranded crew", "100"},
 		{"Steel Hull", "Strengthens the ship, reducing damage from storms", "100"},
 		{"Larger storage", "Increases the ships capacity by 50", "100"},

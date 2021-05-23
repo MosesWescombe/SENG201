@@ -95,11 +95,6 @@ public class GameEnvironment {
     	state.closeWindow();
     }
 
-    private static void viewTransactions() {
-        /**View previous transitions. A Transition is made when cargo is added or removed from the ships */
-        game.getPlayer().getShip().displayTransactions();
-    }
-
     public static void exit() {
         /**Exit Game and clean up */
         System.out.println("Game Ended");

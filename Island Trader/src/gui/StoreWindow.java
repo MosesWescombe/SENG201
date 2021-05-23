@@ -1,23 +1,20 @@
 package gui;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 import core.GameEnvironment;
 import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
-
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
-import java.awt.SystemColor;
 import javax.swing.JTabbedPane;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
+import javax.swing.UIManager;
 
 public class StoreWindow {
 
@@ -49,17 +46,8 @@ public class StoreWindow {
 		int index = itemsToPurchase.getSelectedRow();
 		String result = GameEnvironment.game.getPlayer().getShip().getLocation().getStore().sell(this, index);
 		if (result == "WeightError") {
-			System.out.println("Failure");
-
-			JOptionPane.showMessageDialog(storeWindow, "Not Enough Cargo Capacity to Purchase", "Error", JOptionPane.ERROR_MESSAGE);
 		} else if (result == "CostError") {
-			System.out.println("Failure");
-
-			JOptionPane.showMessageDialog(storeWindow, "Not Enough Money to Purchase", "Error", JOptionPane.ERROR_MESSAGE);
-		} else if (result == "NoneSelected") {
-
 		} else {
-			System.out.println("Success");
 			//Update Window
 			closeWindow();
 			new StoreWindow();
@@ -68,17 +56,11 @@ public class StoreWindow {
 
 	public void sellItem() {
 		int index = itemsToSell.getSelectedRow();
-		String result = GameEnvironment.game.getPlayer().getShip().getLocation().getStore().purchase(this, index);
+		GameEnvironment.game.getPlayer().getShip().getLocation().getStore().purchase(this, index);
 
-		if (result == "WeightError") {
-			System.out.println("Failure");
-
-			JOptionPane.showMessageDialog(storeWindow, "Not Enough Cargo Capacity to Purchase", "Error", JOptionPane.ERROR_MESSAGE);
-		} else {
-			closeWindow();
-			new StoreWindow();
-		}
+		new StoreWindow();
 	}
+
 
 	/**
 	 * Initialize the contents of the frame.
@@ -90,55 +72,18 @@ public class StoreWindow {
 		storeWindow.getContentPane().setLayout(null);
 		
 		JTextPane txtIslandStore = new JTextPane();
-		txtIslandStore.setBounds(0, 0, 1303, 78);
+		txtIslandStore.setBounds(0, 0, 1313, 78);
 		txtIslandStore.setText("                  Island Store");
 		txtIslandStore.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		txtIslandStore.setEditable(false);
 		txtIslandStore.setBackground(Color.LIGHT_GRAY);
 		storeWindow.getContentPane().add(txtIslandStore);
 		
-		//Button Pannel
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(10, 654, 1293, 136);
-		panel_2.setBackground(Color.WHITE);
-		storeWindow.getContentPane().add(panel_2);
-		panel_2.setLayout(new GridLayout(1, 0, 0, 0));
-			
-			JButton btnCompleteTransaction = new JButton("Purchase Selected");
-			btnCompleteTransaction.setFont(new Font("Tahoma", Font.PLAIN, 22));
-			btnCompleteTransaction.setBackground(SystemColor.activeCaptionBorder);
-			btnCompleteTransaction.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					buyItem();
-				}
-			});
-			panel_2.add(btnCompleteTransaction);
-			
-			JButton btnSellSelected = new JButton("Sell Selected");
-			btnSellSelected.setFont(new Font("Tahoma", Font.PLAIN, 22));
-			btnSellSelected.setBackground(SystemColor.activeCaptionBorder);
-			btnSellSelected.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					sellItem();
-				}
-			});
-			panel_2.add(btnSellSelected);
-			
-			JButton btnExitWithoutSale = new JButton("Exit Without Sale");
-			btnExitWithoutSale.setFont(new Font("Tahoma", Font.PLAIN, 22));
-			btnExitWithoutSale.setBackground(SystemColor.activeCaptionBorder);
-			btnExitWithoutSale.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					returnToMenu();
-				}
-			});
-			panel_2.add(btnExitWithoutSale);
-		
 
 		//Tabbed Pannel
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		tabbedPane.setBounds(10, 128, 1293, 515);
+		tabbedPane.setBounds(0, 128, 1313, 515);
 		storeWindow.getContentPane().add(tabbedPane);
 		
 			//Items to purchase grid
@@ -162,6 +107,39 @@ public class StoreWindow {
 
 				JScrollPane scrollPaneSell = new JScrollPane(itemsToSell);
 				itemsToSellPanel.add(scrollPaneSell);
+				
+				JButton btnCompleteTransaction = new JButton("Purchase Selected");
+				btnCompleteTransaction.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						buyItem();
+					}
+				});
+				btnCompleteTransaction.setFont(new Font("Tahoma", Font.PLAIN, 22));
+				btnCompleteTransaction.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+				btnCompleteTransaction.setBounds(10, 654, 423, 136);
+				storeWindow.getContentPane().add(btnCompleteTransaction);
+				
+				JButton btnSellSelected = new JButton("Sell Selected");
+				btnSellSelected.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						sellItem();
+					}
+				});
+				btnSellSelected.setFont(new Font("Tahoma", Font.PLAIN, 22));
+				btnSellSelected.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+				btnSellSelected.setBounds(441, 654, 431, 136);
+				storeWindow.getContentPane().add(btnSellSelected);
+				
+				JButton btnExitWithoutSale = new JButton("Leave Store");
+				btnExitWithoutSale.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						returnToMenu();
+					}
+				});
+				btnExitWithoutSale.setFont(new Font("Tahoma", Font.PLAIN, 22));
+				btnExitWithoutSale.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+				btnExitWithoutSale.setBounds(882, 654, 421, 136);
+				storeWindow.getContentPane().add(btnExitWithoutSale);
 	}
 
 	public Object[][] getItemsForPurchase() {

@@ -17,7 +17,8 @@ public class Entity {
             this.name,
             this.description,
             this.getPurchasePrice(),
-            this.getWeight()
+            this.getWeight(),
+            this.getSalePrice()
         };
     }
 

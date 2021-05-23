@@ -90,14 +90,15 @@ public class Store {
     }
 
     public Object[][] getItemsBuyObjects() {
-        Object[][] result = new Object[itemsSell.size()][5];
+        Object[][] result = new Object[itemsBuy.size()][5];
         int i = 0;
         for (String[] itemBuy : itemsBuy) {
             for  (Entity item : GameEnvironment.game.getPlayer().getShip().getCargo()) {
                 if (item.getName() == itemBuy[0]) {
+                    item.setSalePrice(Integer.parseInt(itemBuy[1]));
                     result[i][0] = item.getItemDetails()[0];
                     result[i][1] = item.getItemDetails()[1];
-                    result[i][2] = item.getItemDetails()[2];
+                    result[i][2] = item.getItemDetails()[4];
                     result[i][3] = item.getItemDetails()[3];
                     result[i][4] = item;
                     i++;
@@ -119,12 +120,14 @@ public class Store {
         /**Sells items to the user if they have enough money in thier wallet*/
         int playerWallet = GameEnvironment.game.getPlayer().getWallet();
         int playerCapacity = GameEnvironment.game.getPlayer().getShip().getCapacity();
-        if (index < 0 || index >= state.getItemsToBuy().length) {
+        if (index < 0) {
             return "NoneSelected";
         }
 
         Entity selectedItem = (Entity)state.getItemsForPurchase()[index][4];
-
+        if (selectedItem == null) {
+            return "NoneSelected";
+        }
 
         //Try to add item to the selectedItem, if the item is affordable and can fit on the ship
         //If player has enough money
@@ -156,17 +159,19 @@ public class Store {
                 itemsSell.remove(j);
             }
         }
-        System.out.println(itemsSell);
         return "Success";
     }
 
     public String purchase(StoreWindow state, int index) {
         /**Buys items off the user*/
-        if (index < 0 || index >= state.getItemsToBuy().length) {
+        if (index < 0) {
             return "NoneSelected";
         }
 
         Entity selectedItem = (Entity)state.getItemsToBuy()[index][4];
+        if (selectedItem == null) {
+            return "NoneSelected";
+        }
         Ship playersShip = GameEnvironment.game.getPlayer().getShip();
 
         //Remove cargo from the ship

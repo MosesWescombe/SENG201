@@ -2,15 +2,11 @@ package gui;
 
 
 import javax.swing.JFrame;
-
-import core.CommandLine;
 import core.GameEnvironment;
 import core.Island;
-
 import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -23,7 +19,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import java.awt.Panel;
 
 public class ViewIslands {
