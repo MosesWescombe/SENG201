@@ -62,16 +62,17 @@ public class MainScreen {
 		JButton btnViewTransactions = new JButton("View Transactions");
 		btnViewTransactions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				btnViewTransactions.setBackground(SystemColor.activeCaptionBorder);
 			}
 		});
 		btnViewTransactions.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnViewTransactions.setBackground(SystemColor.activeCaptionBorder);
+		btnViewTransactions.setBackground(UIManager.getColor("CheckBox.darkShadow"));
 		btnViewTransactions.setBounds(30, 515, 209, 73);
 		mainScreen.getContentPane().add(btnViewTransactions);
 		
 		JButton btnViewShip = new JButton("View Ship");
 		btnViewShip.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnViewShip.setBackground(SystemColor.activeCaptionBorder);
+		btnViewShip.setBackground(UIManager.getColor("CheckBox.darkShadow"));
 		btnViewShip.setBounds(30, 717, 209, 73);
 		mainScreen.getContentPane().add(btnViewShip);
 		
@@ -82,7 +83,7 @@ public class MainScreen {
 			}
 		});
 		btnViewIslands.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnViewIslands.setBackground(SystemColor.activeCaptionBorder);
+		btnViewIslands.setBackground(UIManager.getColor("CheckBox.darkShadow"));
 		btnViewIslands.setBounds(30, 615, 209, 73);
 		mainScreen.getContentPane().add(btnViewIslands);
 		
@@ -93,19 +94,19 @@ public class MainScreen {
 			}
 		});
 		btnVisitStore.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnVisitStore.setBackground(SystemColor.activeCaptionBorder);
+		btnVisitStore.setBackground(UIManager.getColor("CheckBox.darkShadow"));
 		btnVisitStore.setBounds(263, 515, 209, 73);
 		mainScreen.getContentPane().add(btnVisitStore);
 		
 		JButton btnSail = new JButton("Sail");
 		btnSail.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnSail.setBackground(SystemColor.activeCaptionBorder);
+		btnSail.setBackground(UIManager.getColor("CheckBox.darkShadow"));
 		btnSail.setBounds(263, 615, 209, 73);
 		mainScreen.getContentPane().add(btnSail);
 		
 		JButton btnExit = new JButton("Exit");
 		btnExit.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnExit.setBackground(SystemColor.activeCaptionBorder);
+		btnExit.setBackground(UIManager.getColor("CheckBox.darkShadow"));
 		btnExit.setBounds(263, 717, 209, 73);
 		mainScreen.getContentPane().add(btnExit);
 		
