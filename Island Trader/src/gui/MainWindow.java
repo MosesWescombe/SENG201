@@ -2,6 +2,7 @@ package gui;
 
 import javax.swing.JFrame;
 import javax.swing.JTextPane;
+import javax.swing.UIManager;
 
 import core.GameEnvironment;
 
