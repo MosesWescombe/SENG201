@@ -63,7 +63,7 @@ public class GuiController {
         islands.get(0).addRoute(new Route(
             islands.get(1),
             islands.get(0),
-            1500,
+            1000,
             "Short And 'SNAPPY'",
             0.8
         ));
@@ -72,7 +72,7 @@ public class GuiController {
         islands.get(1).addRoute(new Route(
             islands.get(2),
             islands.get(1),
-            2500,
+            2000,
             "Long and un-eventful",
             0.2
         ));
@@ -99,7 +99,7 @@ public class GuiController {
         islands.get(4).addRoute(new Route(
             islands.get(0),
             islands.get(4),
-            3000,
+            4000,
             "Coastal Hugger",
             0.1
         ));
@@ -108,8 +108,17 @@ public class GuiController {
         islands.get(2).addRoute(new Route(
             islands.get(4),
             islands.get(2),
-            3500,
+            3000,
             "Average Mile",
+            0.5
+        ));
+        
+      //Route 7
+        islands.get(0).addRoute(new Route(
+            islands.get(3),
+            islands.get(0),
+            5000,
+            "The long way round",
             0.5
         ));
     }
