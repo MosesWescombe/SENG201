@@ -12,16 +12,6 @@ public class Island {
         this.name = name;
     }
 
-    public void openStore() {
-        /**Opens the store by calling the stores functions */
-        this.store.openStore();
-    }
-    
-    public void displayStore() {
-    	/**only displays the items in the store of the island*/
-    	this.store.displayStore();
-    }
-
     public void viewRoutes() {
         /**Prints the different route options. */
 
@@ -37,7 +27,8 @@ public class Island {
     public void addRoute(Route route) {
         routes.add(route);
     }
-    
+
+
     public String viewIslandInfo(Island currentIsland) {
     	String finalStr = "Possible routes to " + getName();
     	int routeCount = 1;
@@ -58,6 +49,10 @@ public class Island {
 	public String toString() {
 		String finalStr = getName();		
 		return finalStr;
+    }
+
+    public Store getStore() {
+        return store;
     }
 
     public void setStore(Store store) {

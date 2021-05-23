@@ -62,7 +62,13 @@ public class Item extends Entity {
 
     public String toString() {
         //**This does not format nicely, mostly used for testing, create manual grid printing per use. */
-        String format = this.name + ": " + this.description + "\tWeight: " + this.weight;
+        Object[] preFormat = new String[] {
+            this.name + ":      " + this.getDescription(),
+            "Price: $" + this.getPurchasePrice(),
+            "Weight: " + this.getWeight() + "kg"
+        };
+        //Sizing can be changed by altering the % numbers below
+        String format = String.format("%-120s%-30s%-30s", preFormat);
         return format;
     }
 }

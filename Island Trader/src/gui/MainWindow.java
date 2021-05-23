@@ -1,7 +1,5 @@
 package gui;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JTextPane;
 
@@ -13,19 +11,17 @@ import javax.swing.JButton;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.UIManager;
 
-public class MainScreen {
+public class MainWindow {
 
 	private JFrame mainScreen;
 
 	/**
 	 * Create the application.
 	 */
-	public MainScreen() {
+	public MainWindow() {
 		initialize();
 		mainScreen.setVisible(true);
 	}
@@ -34,12 +30,17 @@ public class MainScreen {
 		mainScreen.dispose();
 	}
 
-	public void returnToGame() {
+	public void closeMainMenu() {
 		GameEnvironment.closeMainScreen(this);
 	}
 	
 	private void openViewIslands() {
 		GameEnvironment.viewIslands(this);
+	}
+
+	private void openStore() {
+		GameEnvironment.openStoreWindow();
+		this.closeWindow();
 	}
 
 	/**
@@ -89,7 +90,7 @@ public class MainScreen {
 		JButton btnVisitStore = new JButton("Visit Store");
 		btnVisitStore.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				openStore();
 			}
 		});
 		btnVisitStore.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -108,6 +109,11 @@ public class MainScreen {
 		btnExit.setBackground(SystemColor.activeCaptionBorder);
 		btnExit.setBounds(263, 717, 209, 73);
 		mainScreen.getContentPane().add(btnExit);
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				closeMainMenu();
+			}
+		});
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(null);

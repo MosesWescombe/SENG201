@@ -64,6 +64,10 @@ public class Store {
         }
     }
 
+    public ArrayList<Entity> getItemsSell() {
+        return itemsSell;
+    }
+
     public void displayStore() {
         /**Print The Store Terminal */
         //Print items available to sell to player
@@ -90,29 +94,42 @@ public class Store {
         i = 1;
         boolean printed = false;
         //Check that both the store and the playerShip has the items, if they do then list them
-        for  (Entity item : GameEnvironment.game.getPlayer().getShip().getCargo()) {
-            for (String[] itemBuy : itemsBuy) {
-                if (item.getName() == itemBuy[0]) {
-                    //The following prints an orgonized grid
-                    printed = true;
-                    item.setSalePrice(Integer.parseInt(itemBuy[1]));
-                    Object[] preFormat = new String[] {
-                        "\t" + i + ": ",
-                        item.getName() + ": " + item.getDescription(),
-                        "Value: $" + item.getSalePrice(),
-                        "Weight: " + item.getWeight() + "kg"
-                    };
-                    //Sizing can be changed by altering the % numbers below
-                    String format = String.format("%-6s%-90s%-15s%-15s", preFormat);
-                    System.out.println(format);
-                    i++;
-                }
-            }
-        }
+        
 
         if (!printed) {
             System.out.println("\tWe do not require any of your items");
         }
+    }
+
+    public Object[][] getItemSellObjects() {
+        Object[][] result = new Object[itemsSell.size()][4];
+        int i = 0;
+        for (Entity item : itemsSell) {
+            result[i][0] = item.getItemDetails()[0];
+            result[i][1] = item.getItemDetails()[1];
+            result[i][2] = item.getItemDetails()[2];
+            result[i][3] = item.getItemDetails()[3];
+            i++;
+        }
+
+        return result;
+    }
+
+    public Object[][] getItemsBuyObjects() {
+        Object[][] result = new Object[itemsSell.size()][4];
+        int i = 0;
+        for  (Entity item : GameEnvironment.game.getPlayer().getShip().getCargo()) {
+            for (String[] itemBuy : itemsBuy) {
+                if (item.getName() == itemBuy[0]) {
+                    result[i][0] = item.getItemDetails()[0];
+                    result[i][1] = item.getItemDetails()[1];
+                    result[i][2] = item.getItemDetails()[2];
+                    result[i][3] = item.getItemDetails()[3];
+                }
+            }
+        }
+
+        return result;
     }
 
     public void sell() {

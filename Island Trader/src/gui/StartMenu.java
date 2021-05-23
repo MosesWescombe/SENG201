@@ -144,12 +144,14 @@ public class StartMenu {
 		startMenuWindow.getContentPane().add(txtpnThisIsA);
 		
 		playerNameInput = new JTextField();
+		playerNameInput.setText("Default");
 		playerNameInput.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		playerNameInput.setBounds(37, 212, 319, 58);
 		startMenuWindow.getContentPane().add(playerNameInput);
 		playerNameInput.setColumns(10);
 		
 		shipNameInput = new JTextField();
+		shipNameInput.setText("Default");
 		shipNameInput.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		shipNameInput.setColumns(10);
 		shipNameInput.setBounds(500, 212, 319, 58);

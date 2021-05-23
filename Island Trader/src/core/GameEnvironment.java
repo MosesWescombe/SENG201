@@ -1,10 +1,8 @@
 package core;
-import gui.MainScreen;
+import gui.MainWindow;
 import gui.ViewIslands;
 import gui.StartMenu;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import gui.StoreWindow;
 
 public class GameEnvironment {
     /** Main game environment that holds all key functionality, Application entry point is here.
@@ -12,23 +10,12 @@ public class GameEnvironment {
      */
     public static GuiController game;
     public static Time time;
-    private static final ArrayList<String> CHOICES = new ArrayList<String>(Arrays.asList(
-        "Exit",
-        "View Ballance",
-        "View ship properties",
-        "View Purchased Items",
-        "View Islands",
-        "Visit Store",
-        "Sail To New Island"
-    ));
 
     public static void main(String[] args) {
         /** Main game loop, run methods from here */
 
         //Initialize game environment
         new StartMenu();
-
-        System.out.println("Messafge");
     }
 
     public static void closeStartMenu(StartMenu state) {
@@ -43,10 +30,10 @@ public class GameEnvironment {
         time = new Time(gameDuration);
 
         state.closeWindow();
-        new MainScreen();
+        new MainWindow();
     }
 
-    public static void closeMainScreen(MainScreen state) {
+    public static void closeMainScreen(MainWindow state) {
         state.closeWindow();
     }
     public static void closeViewIslandsWindow(ViewIslands state) {
@@ -93,12 +80,16 @@ public class GameEnvironment {
 //        game.getPlayer().getShip().setLocation(routesFrom.get(userIn - 1).getDestination());
     }
 
-    private static void visitStore() {
-        /**Visit Current Islands Store */
-        game.getPlayer().getShip().getLocation().openStore();
+    public static void openStoreWindow() {
+        /**Visit Current Islands Store*/
+        new StoreWindow();
     }
 
-    public static void viewIslands(MainScreen state) {
+    public static void returnToMenu() {
+        new MainWindow();
+    }
+
+    public static void viewIslands(MainWindow state) {
     	/**opens the ViewIsland window and displays island info */
     	new ViewIslands();
     	state.closeWindow();
@@ -107,18 +98,6 @@ public class GameEnvironment {
     private static void viewTransactions() {
         /**View previous transitions. A Transition is made when cargo is added or removed from the ships */
         game.getPlayer().getShip().displayTransactions();
-    }
-
-    private static void viewShip() {
-        /**View The Ship Properties*/
-        System.out.println("Ship Properties :\n");
-        System.out.println("\t" + game.getPlayer().getShip());
-    }
-
-    private static void viewBallance() {
-        /**Print the wallet and time variables */
-        System.out.println("\n\tWallet: $" + game.getPlayer().getWallet());
-        System.out.println("\tRemaining Time: " + time.getTimeRemaining() + " days");
     }
 
     public static void exit() {

@@ -12,6 +12,15 @@ public class Entity {
     public Entity() {
     }
 
+    public Object[] getItemDetails() {
+        return new Object[] {
+            this.name,
+            this.description,
+            this.getPurchasePrice(),
+            this.getWeight()
+        };
+    }
+
     public int getWeight() {
         return weight;
     }
