@@ -61,6 +61,7 @@ public class StartMenu {
 		
 		playerNameWarning.setVisible(false);
 		shipNameWarning.setVisible(false);
+		//Go back to game environment
 		GameEnvironment.closeStartMenu(this);
 	}
 	
@@ -78,7 +79,7 @@ public class StartMenu {
 		
 		startMenuWindow = new JFrame();
 		startMenuWindow.setTitle("Trader Game");
-		startMenuWindow.setBounds(100, 100, 878, 845);
+		startMenuWindow.setBounds(100, 100, 880, 840);
 		startMenuWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		startMenuWindow.getContentPane().setLayout(null);
 		

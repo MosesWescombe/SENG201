@@ -7,7 +7,6 @@ public class GuiController {
     */
     private ArrayList<Island> islands = new ArrayList<Island>();
     private Player player;
-    private int gameDuration;
 
     public GuiController(String playerName, String shipName, int shipType) {
         /**Starts the game with required info*/
@@ -115,20 +114,9 @@ public class GuiController {
         ));
     }
 
-    private void printOptions(String[] array){
-        /**Prints an array of options in order, numbered from 1 to n*/
-        for (int i=1; i <= array.length; i++) {
-            System.out.println(Integer.toString(i) + ": " + array[i - 1]);
-        }
-    }
-
     public void closeCommandLine() {
        /** Tidy up the game, close open objects */
        Input.closeInput();
-    }
-
-    public int getGameDuration() {
-        return gameDuration;
     }
 
     public ArrayList<Island> getIslands() {

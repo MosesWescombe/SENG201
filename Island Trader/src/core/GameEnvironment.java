@@ -1,4 +1,5 @@
 package core;
+import gui.MainScreen;
 import gui.StartMenu;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class GameEnvironment {
         //Initialize game environment
         new StartMenu();
 
-        
+        System.out.println("Messafge");
     }
 
     public static void displayChoices() {
@@ -79,8 +80,11 @@ public class GameEnvironment {
         time = new Time(gameDuration);
 
         state.closeWindow();
+        new MainScreen();
+    }
 
-        System.out.println(game.getPlayer().getName() + game.getPlayer().getShip().getName() + game.getPlayer().getShip().getType() + time.getTimeRemaining());
+    public static void closeMainScreen(MainScreen state) {
+        state.closeWindow();
     }
 
     private static void sailToIsland() {
