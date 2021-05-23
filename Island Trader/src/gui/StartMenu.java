@@ -1,4 +1,5 @@
-package core;
+package gui;
+import core.GameEnvironment;
 
 import javax.swing.JFrame;
 import javax.swing.JTextPane;
