@@ -20,6 +20,8 @@ public class SailScreen {
 	
 	private ArrayList<Island> islands = GameEnvironment.game.getIslands();
 	private Island currentSelected = islands.get(0);
+	
+	private JLabel lblShowRoute;
 
 	/**
 	 * Create the application.
@@ -69,6 +71,7 @@ public class SailScreen {
 				resetButton(btnNassau, btnTimplore, btnUgriad, btnStGerbal, btnLucia);
 				btnNassau.setBackground(SystemColor.activeCaptionBorder);
 				currentSelected = islands.get(0);
+				updateWindow();
 			}
 		});
 		btnNassau.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -82,6 +85,7 @@ public class SailScreen {
 				resetButton(btnNassau, btnTimplore, btnUgriad, btnStGerbal, btnLucia);
 				btnTimplore.setBackground(SystemColor.activeCaptionBorder);
 				currentSelected = islands.get(1);
+				updateWindow();
 			}
 		});
 		btnTimplore.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -95,6 +99,7 @@ public class SailScreen {
 				resetButton(btnNassau, btnTimplore, btnUgriad, btnStGerbal, btnLucia);
 				btnUgriad.setBackground(SystemColor.activeCaptionBorder);
 				currentSelected = islands.get(2);
+				updateWindow();
 			}
 		});
 		btnUgriad.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -108,6 +113,7 @@ public class SailScreen {
 				resetButton(btnNassau, btnTimplore, btnUgriad, btnStGerbal, btnLucia);
 				btnStGerbal.setBackground(SystemColor.activeCaptionBorder);
 				currentSelected = islands.get(3);
+				updateWindow();
 			}
 		});
 		btnStGerbal.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -121,6 +127,7 @@ public class SailScreen {
 				resetButton(btnNassau, btnTimplore, btnUgriad, btnStGerbal, btnLucia);
 				btnLucia.setBackground(SystemColor.activeCaptionBorder);
 				currentSelected = islands.get(4);
+				updateWindow();
 			}
 		});
 		btnLucia.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -133,6 +140,22 @@ public class SailScreen {
 		panel.setBackground(SystemColor.activeCaption);
 		panel.setBounds(276, 190, 385, 409);
 		sailScreen.getContentPane().add(panel);
+		
+		lblShowRoute = new JLabel("");
+		lblShowRoute.setText(currentSelected.viewIslandInfo(GameEnvironment.game.getPlayer().getShip().getLocation()));
+		lblShowRoute.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblShowRoute.setBounds(10, 69, 365, 238);
+		panel.add(lblShowRoute);
+		
+		JLabel lblRouteInfo = new JLabel("Route info:");
+		lblRouteInfo.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblRouteInfo.setBounds(10, 11, 351, 25);
+		panel.add(lblRouteInfo);
+		
+		JButton btnNewButton = new JButton("Set Sail!");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnNewButton.setBounds(110, 331, 166, 48);
+		panel.add(btnNewButton);
 		
 		JButton btnReturn = new JButton("< Return");
 		btnReturn.addActionListener(new ActionListener() {
@@ -155,6 +178,10 @@ public class SailScreen {
 		lblSelectionInfo.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblSelectionInfo.setBounds(10, 141, 351, 25);
 		sailScreen.getContentPane().add(lblSelectionInfo);
+	}
+	
+	private void updateWindow() {
+		lblShowRoute.setText(currentSelected.viewIslandInfo(GameEnvironment.game.getPlayer().getShip().getLocation()));
 	}
 	
 	private void resetButton(JButton btnNassau, JButton btnTimplore, JButton btnUgriad, JButton btnStGerbal, JButton btnLucia) {
