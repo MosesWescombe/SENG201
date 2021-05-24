@@ -1,6 +1,8 @@
 package gui;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import core.GameEnvironment;
 import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
@@ -15,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.UIManager;
+import javax.swing.JLabel;
 
 public class StoreWindow {
 
@@ -45,8 +48,14 @@ public class StoreWindow {
 	public void buyItem() {
 		int index = itemsToPurchase.getSelectedRow();
 		String result = GameEnvironment.game.getPlayer().getShip().getLocation().getStore().sell(this, index);
+
+		//Handle Errors
 		if (result == "WeightError") {
+			JOptionPane.showMessageDialog(storeWindow, "You do not have enough CARGO CAPACITY to purchase this item.", "Cannot Select Item", JOptionPane.ERROR_MESSAGE);
 		} else if (result == "CostError") {
+			JOptionPane.showMessageDialog(storeWindow, "You do not have enough MONEY to purchase this item.", "Cannot Select Item", JOptionPane.ERROR_MESSAGE);
+		} else if (result == "NoneSelected") {
+			//Do Nothing
 		} else {
 			//Update Window
 			closeWindow();
@@ -56,9 +65,16 @@ public class StoreWindow {
 
 	public void sellItem() {
 		int index = itemsToSell.getSelectedRow();
-		GameEnvironment.game.getPlayer().getShip().getLocation().getStore().purchase(this, index);
+		String result = GameEnvironment.game.getPlayer().getShip().getLocation().getStore().purchase(this, index);
 
-		new StoreWindow();
+		//Handle Errors
+		if (result == "NoneSelected") {
+			//Do Nothing
+		} else {
+			//Update Window
+			closeWindow();
+			new StoreWindow();
+		}
 	}
 
 
@@ -73,7 +89,7 @@ public class StoreWindow {
 		
 		JTextPane txtIslandStore = new JTextPane();
 		txtIslandStore.setBounds(0, 0, 1313, 78);
-		txtIslandStore.setText("                  Island Store");
+		txtIslandStore.setText("                                 Island Store");
 		txtIslandStore.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		txtIslandStore.setEditable(false);
 		txtIslandStore.setBackground(Color.LIGHT_GRAY);
@@ -140,6 +156,18 @@ public class StoreWindow {
 				btnExitWithoutSale.setBackground(UIManager.getColor("CheckBox.darkShadow"));
 				btnExitWithoutSale.setBounds(882, 654, 421, 136);
 				storeWindow.getContentPane().add(btnExitWithoutSale);
+				
+				JLabel lblPlayerWallet = new JLabel("Player Wallet: $");
+				lblPlayerWallet.setText(lblPlayerWallet.getText() + GameEnvironment.game.getPlayer().getWallet());
+				lblPlayerWallet.setFont(new Font("Tahoma", Font.PLAIN, 18));
+				lblPlayerWallet.setBounds(825, 104, 234, 53);
+				storeWindow.getContentPane().add(lblPlayerWallet);
+				
+				JLabel lblCargoCapacity = new JLabel("Cargo Capacity: ");
+				lblCargoCapacity.setText(lblCargoCapacity.getText() + GameEnvironment.game.getPlayer().getShip().getCapacity() + "/" + GameEnvironment.game.getPlayer().getShip().getmaxCapacity() + "kg");
+				lblCargoCapacity.setFont(new Font("Tahoma", Font.PLAIN, 18));
+				lblCargoCapacity.setBounds(1069, 104, 234, 53);
+				storeWindow.getContentPane().add(lblCargoCapacity);
 	}
 
 	public Object[][] getItemsForPurchase() {
