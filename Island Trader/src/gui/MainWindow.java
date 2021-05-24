@@ -124,7 +124,11 @@ public class MainWindow {
 		JButton btnSail = new JButton("Sail");
 		btnSail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (GameEnvironment.game.getPlayer().getShip().getHealth() == GameEnvironment.game.getPlayer().getShip().getMaxHealth()) {
 				openSailScreen();
+				} else {
+					JOptionPane.showMessageDialog(mainScreen, "Your Ship needs repairs before you can sail!", "Ship Repairs Needed", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		btnSail.setFont(new Font("Tahoma", Font.PLAIN, 22));
