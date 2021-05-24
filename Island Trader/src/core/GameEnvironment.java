@@ -1,4 +1,6 @@
 package core;
+import java.util.ArrayList;
+
 import gui.MainWindow;
 import gui.SailScreen;
 import gui.ViewIslands;
@@ -41,13 +43,8 @@ public class GameEnvironment {
     	state.closeWindow();
     }
 
-    private static void sailToIsland() {
-        /**Sail to a new Island, consume days and check for events*/
-//
-//        if (game.getPlayer().getShip().getHealth() < game.getPlayer().getShip().getMaxHealth()) {
-//            System.out.println("Your ship needs repairs.");
-//            game.getPlayer().getShip().repair();
-//        }
+//    private static void sailToIsland(Route route) {
+//        /**Sail to a new Island, consume days and check for events*/
 //
 //    	ArrayList<Route> routesFrom = new ArrayList<Route>();
 //
@@ -60,26 +57,17 @@ public class GameEnvironment {
 //            }
 //        }
 //
-//        //Get Users selection
-//        System.out.println("");
-//        int i = 1;
-//        for (Route route : routesFrom) {
-//            System.out.println("\n" + i + ": " + route.viewRoute());
-//            i++;
-//        }
-//        int userIn = Input.getNum("\nSelect Route (0 for exit): ", 0, routesFrom.size());
-//
 //        //Pass days
-//        for (int j=0; j < routesFrom.get(userIn - 1).getDistance() / game.getPlayer().getShip().getSailSpeed() / 24; j++) {
-//            time.endDay();
-//        }
+//        //for (int j=0; j < routesFrom.get(userIn - 1).getDistance() / game.getPlayer().getShip().getSailSpeed() / 24; j++) {
+//        //    time.endDay();
+//        //}
 //
 //        //Check for events
-//        Event.checkEvent(routesFrom.get(userIn - 1).getEventChance());
+//        //Event.checkEvent(routesFrom.get(userIn - 1).getEventChance());
 //
 //        //Change ships location
 //        game.getPlayer().getShip().setLocation(routesFrom.get(userIn - 1).getDestination());
-    }
+//    }
 
     public static void openStoreWindow() {
         /**Visit Current Islands Store*/
