@@ -153,6 +153,11 @@ public class SailScreen {
 		panel.add(lblRouteInfo);
 		
 		JButton btnNewButton = new JButton("Set Sail!");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnNewButton.setBounds(110, 331, 166, 48);
 		panel.add(btnNewButton);
