@@ -1,5 +1,6 @@
 package core;
 import gui.MainWindow;
+import gui.SailScreen;
 import gui.ViewIslands;
 import gui.StartMenu;
 import gui.StoreWindow;
@@ -92,6 +93,12 @@ public class GameEnvironment {
     public static void viewIslands(MainWindow state) {
     	/**opens the ViewIsland window and displays island info */
     	new ViewIslands();
+    	state.closeWindow();
+    }
+    
+    public static void sailScreen(MainWindow state) {
+    	/**opens the sail window and avalible islands to sail to*/
+    	new SailScreen();
     	state.closeWindow();
     }
 

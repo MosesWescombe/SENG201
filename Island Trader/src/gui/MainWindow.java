@@ -42,6 +42,10 @@ public class MainWindow {
 	private void openViewIslands() {
 		GameEnvironment.viewIslands(this);
 	}
+	
+	private void openSailScreen() {
+		GameEnvironment.sailScreen(this);
+	}
 
 	private void openStore() {
 		GameEnvironment.openStoreWindow();
@@ -118,6 +122,11 @@ public class MainWindow {
 		mainScreen.getContentPane().add(btnVisitStore);
 		
 		JButton btnSail = new JButton("Sail");
+		btnSail.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				openSailScreen();
+			}
+		});
 		btnSail.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		btnSail.setBackground(UIManager.getColor("CheckBox.darkShadow"));
 		btnSail.setBounds(288, 615, 228, 73);
@@ -202,8 +211,8 @@ public class MainWindow {
 		btnRepair.setBounds(352, 151, 145, 31);
 		panel_2.add(btnRepair);
 					
-					Object[][] upgrades = GameEnvironment.game.getPlayer().getShip().getUpgradeObjects();
-					//Object[][] upgrades = {{"",""},{"",""}};
+					//Object[][] upgrades = GameEnvironment.game.getPlayer().getShip().getUpgradeObjects();
+					Object[][] upgrades = {{"",""},{"",""}};
 					String[] header = {"Name", "Description"};
 
 		
