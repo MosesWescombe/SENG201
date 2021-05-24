@@ -92,7 +92,8 @@ public class StoreWindow {
 		txtIslandStore.setText("                                 Island Store");
 		txtIslandStore.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		txtIslandStore.setEditable(false);
-		txtIslandStore.setBackground(Color.LIGHT_GRAY);
+		txtIslandStore.setBackground(new Color(0, 0, 51));
+		txtIslandStore.setForeground(new Color(255, 255, 255));
 		storeWindow.getContentPane().add(txtIslandStore);
 		
 

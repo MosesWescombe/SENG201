@@ -73,7 +73,7 @@ public class Ship {
                 break;
         }
 
-        this.health = this.maxHealth;
+        this.health = 10;//this.maxHealth;
         this.capacity = this.maxCapacity;
     }
 
@@ -114,6 +114,20 @@ public class Ship {
             result[i][1] = transaction[1];
             result[i][2] = transaction[2];
             result[i][3] = transaction[3];
+            i++;
+        }
+
+        return result;
+    }
+
+    public Object[][] getCargoObject() {
+        Object[][] result = new Object[cargo.size()][3];
+
+        int i = 0;
+        for (Entity item : cargo) {
+            result[i][0] = item.getName();
+            result[i][1] = item.getDescription();
+            result[i][2] = item.getWeight();
             i++;
         }
 
@@ -222,21 +236,22 @@ public class Ship {
         }
     }
 
-    public void repair() {
+    public String repair() {
         /** Increases ships health, cant go above the ships maxHealth Variable */
         int difference = this.maxHealth - this.health;
-        int cost = difference * 10;
+        int cost = difference * 1;
 
         //If the player can afford to repair the ship, do so and charge the costs
         if (GameEnvironment.game.getPlayer().getWallet() >= cost) {
-            GameEnvironment.game.getPlayer().changeWallet(cost);
+            GameEnvironment.game.getPlayer().changeWallet(-cost);
             this.health = this.maxHealth;
 
-            System.out.println("Ship Repaired for $" + cost + ". You can now sail.");
+            return "Ship Repaired for $" + cost + ". You can now sail.";
         } else { 
             //Otherwise end the game
             System.out.println("You do not have enough money to repair your ship. Unfortunatly you are now bankrupt.");
             GameEnvironment.exit();
+            return "";
         }
     }
 

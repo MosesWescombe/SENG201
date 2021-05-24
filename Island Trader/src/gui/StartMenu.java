@@ -136,8 +136,9 @@ public class StartMenu {
 		startMenuWindow.getContentPane().add(dingy);
 		
 		JTextPane txtpnThisIsA = new JTextPane();
+		txtpnThisIsA.setForeground(new Color(255, 255, 255));
 		txtpnThisIsA.setEditable(false);
-		txtpnThisIsA.setBackground(Color.LIGHT_GRAY);
+		txtpnThisIsA.setBackground(new Color(0, 0, 51));
 		txtpnThisIsA.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		txtpnThisIsA.setText("                  Trader Game");
 		txtpnThisIsA.setBounds(0, 0, 862, 81);
