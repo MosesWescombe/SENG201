@@ -1,6 +1,6 @@
 package core;
-import java.util.ArrayList;
 
+import gui.EndWindow;
 import gui.MainWindow;
 import gui.SailScreen;
 import gui.ViewIslands;
@@ -35,39 +35,33 @@ public class GameEnvironment {
         state.closeWindow();
         new MainWindow();
     }
-
-    public static void closeMainScreen(MainWindow state) {
-        state.closeWindow();
-    }
+    
     public static void closeViewIslandsWindow(ViewIslands state) {
     	state.closeWindow();
     }
 
-//    private static void sailToIsland(Route route) {
-//        /**Sail to a new Island, consume days and check for events*/
-//
-//    	ArrayList<Route> routesFrom = new ArrayList<Route>();
-//
-//        //Create a list of routes from the current island
-//        for (Island island : game.getIslands()) {
-//            for (Route route : island.getRoutes()) {
-//                if (route.getOrigin() == game.getPlayer().getShip().getLocation()) {
-//                    routesFrom.add(route);
-//                }
-//            }
-//        }
-//
-//        //Pass days
-//        //for (int j=0; j < routesFrom.get(userIn - 1).getDistance() / game.getPlayer().getShip().getSailSpeed() / 24; j++) {
-//        //    time.endDay();
-//        //}
-//
-//        //Check for events
-//        //Event.checkEvent(routesFrom.get(userIn - 1).getEventChance());
-//
-//        //Change ships location
-//        game.getPlayer().getShip().setLocation(routesFrom.get(userIn - 1).getDestination());
-//    }
+    public static String sailToIsland(Island destination) {
+        /**Sail to a new Island, consume days and check for events*/
+        //Find route
+        Route currentRoute = null;
+        for (Route route : destination.getRoutes()) {
+            if (game.getPlayer().getShip().getLocation().getName() == route.getOrigin().getName()) {
+                currentRoute = route;
+                break;
+            }
+        }
+
+        //Pass days
+        for (int j=0; j < currentRoute.getDistance() / game.getPlayer().getShip().getSailSpeed() / 24; j++) {
+            time.endDay();
+        }
+
+        //Change ships location
+        game.getPlayer().getShip().setLocation(currentRoute.getDestination());
+
+        //Check for events
+        return Event.checkEvent(currentRoute.getEventChance());
+    }
 
     public static void openStoreWindow() {
         /**Visit Current Islands Store*/
@@ -90,13 +84,10 @@ public class GameEnvironment {
     	state.closeWindow();
     }
 
-    public static void exit() {
+    public static void exit(String message) {
         /**Exit Game and clean up */
-        System.out.println("Game Ended");
 
         //Display Exit Screen
-
-        game.closeCommandLine();
-        System.exit(0);
+        new EndWindow(message);
     }
 }

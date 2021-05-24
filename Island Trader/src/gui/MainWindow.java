@@ -4,7 +4,6 @@ import javax.swing.JFrame;
 import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
-
 import core.GameEnvironment;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -36,7 +35,8 @@ public class MainWindow {
 	}
 
 	public void closeMainMenu() {
-		GameEnvironment.closeMainScreen(this);
+		closeWindow();
+		GameEnvironment.exit("Farewell Traveller");
 	}
 	
 	private void openViewIslands() {
@@ -56,7 +56,7 @@ public class MainWindow {
 		if (GameEnvironment.game.getPlayer().getShip().getHealth() < GameEnvironment.game.getPlayer().getShip().getMaxHealth()) {
 			String result = GameEnvironment.game.getPlayer().getShip().repair();
 
-			JOptionPane.showMessageDialog(mainScreen, "Successfully Repaired", result, JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(mainScreen, result, "Successfully Repaired", JOptionPane.INFORMATION_MESSAGE);
 			this.closeWindow();
 			new MainWindow();
 		}

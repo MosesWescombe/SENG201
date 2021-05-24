@@ -29,9 +29,10 @@ public class Island {
     }
 
 
-    public String viewIslandInfo(Island currentIsland) {
+    public String[] viewIslandInfo(Island currentIsland) {
     	String finalStr = "<html>Possible routes to " + getName();
     	int routeCount = 1;
+        String found = "true";
 		for (int i=0; i < routes.size(); i++) {
 			if (currentIsland.getName() == routes.get(i).getOrigin().getName()) {
 				finalStr = finalStr + "<br/>Route " +(routeCount) + ": " + routes.get(i).viewRoute() + "</html>";
@@ -41,9 +42,10 @@ public class Island {
 		
 		if (routeCount == 1) {
 			finalStr += "<br/>No possible routes.</html>";
+            found = "false";
 		}
 		
-		return finalStr;
+		return new String[] {finalStr,found};
     }
     
     

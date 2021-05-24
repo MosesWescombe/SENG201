@@ -44,7 +44,7 @@ public class Ship {
                 this.maxCapacity = 100; 
                 this.maxHealth = 80;
                 this.sailSpeed = 20;
-                this.crewWage = 10;
+                this.crewWage = 1;
                 this.crew = 8;
                 break;
             case 2:
@@ -52,7 +52,7 @@ public class Ship {
                 this.maxCapacity = 50; 
                 this.maxHealth = 100;
                 this.sailSpeed = 30;
-                this.crewWage = 15;
+                this.crewWage = 2;
                 this.crew = 6;
                 break;
             case 3:
@@ -60,7 +60,7 @@ public class Ship {
                 this.maxCapacity = 50; 
                 this.maxHealth = 80;
                 this.sailSpeed = 40;
-                this.crewWage = 15;
+                this.crewWage = 2;
                 this.crew = 5;
                 break;
             case 4:
@@ -68,12 +68,12 @@ public class Ship {
                 this.maxCapacity = 10; 
                 this.maxHealth = 10;
                 this.sailSpeed = 10;
-                this.crewWage = 5;
+                this.crewWage = 0;
                 this.crew = 2;
                 break;
         }
 
-        this.health = 10;//this.maxHealth;
+        this.health = this.maxHealth;
         this.capacity = this.maxCapacity;
     }
 
@@ -155,11 +155,15 @@ public class Ship {
 
         //Improve ship stats
         switch(upgradeType) {
-            case 4:
-                this.maxCapacity += 50;
-                this.capacity += 50;
+            case 2:
+                this.maxHealth += 50;
+                this.health += 50;
                 break;
-            case 5:
+            case 3:
+                this.maxCapacity += 100;
+                this.capacity += 100;
+                break;
+            case 4:
                 this.sailSpeed += 15;
                 break;
         }
@@ -231,8 +235,7 @@ public class Ship {
 
         //check ship destroyed
         if (this.health <= 0) {
-            System.out.println("Game over, your ship is destroyed");
-            GameEnvironment.exit();
+            GameEnvironment.exit("Game over, your ship is destroyed");
         }
     }
 
@@ -249,8 +252,7 @@ public class Ship {
             return "Ship Repaired for $" + cost + ". You can now sail.";
         } else { 
             //Otherwise end the game
-            System.out.println("You do not have enough money to repair your ship. Unfortunatly you are now bankrupt.");
-            GameEnvironment.exit();
+            GameEnvironment.exit("You do not have enough money to repair your ship. Unfortunatly you are now bankrupt.");
             return "";
         }
     }

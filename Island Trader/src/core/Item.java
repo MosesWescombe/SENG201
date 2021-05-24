@@ -21,8 +21,6 @@ public class Item extends Entity {
         {"Popcorn", "Not for the faint of heart (high cholesterol)", "2"},
         {"Fried Rice", "Your diet untill you go home", "2"},
         {"Lost Student ID", "Worthless to all, valuable to one.", "0"},
-        {"Spare Concert Ticket from last year", "Only twice the price", "1"},
-        {"Pregnancy Test", "Used", "2"},
         {"Treasure Map", "Used", "3"},
         {"Toilet Paper","1-Ply (2.5 rolls, 1 clean)","7"},
         {"10X Bitcoin", "Trust me this is gonna be huge", "0"},
@@ -34,15 +32,12 @@ public class Item extends Entity {
         {"Apple Pie", "Delxixcous", "5"},
         {"Gorilla", "Someone fell in his cage so we shot him", "90"},
         {"Jar Of Dirt", "Good place to hide a heart", "4"},
-        {"Britney Spears", "Overrated but still in the news", "57"},
         {"Shrek Series", "Started as a classic, went downhill the more they made", "2"},
         {"Dress", "Gold and White?", "3"},
         {"How to train a dragon", "Didn't work, donkey fell in love with it", "2"},
         {"Avatar", "Why are they touching tails?", "140"},
-        {"2022 Kia Soul", "Need gone", "1271"},
         {"Covid-19 Vaccine", "Comes with extra 5G", "1"},
         {"Icecream", "Sweet like me", "4"},
-        {"Your mom", "Priceless", "9999"},
         {"Sour Krout", "Scientists will reccommend this later", "6"}
     };
 

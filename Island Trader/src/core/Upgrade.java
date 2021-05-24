@@ -6,8 +6,8 @@ public class Upgrade extends Entity{
 	private String[][] upgradeOptions = {
 		{"Cannon", "Extra Chance", "100"},
 		{"Telescope", "Improves chance of seeing stranded crew", "100"},
-		{"Steel Hull", "Strengthens the ship, reducing damage from storms", "100"},
-		{"Larger storage", "Increases the ships capacity by 50", "100"},
+		{"Steel Hull", "Strengthens the ship, adding 50 max health.", "100"},
+		{"Larger storage", "Increases the ships capacity by 100", "100"},
 		{"Bigger Sails", "Increases the ships sail speed by 15", "100"}
 	};
 	

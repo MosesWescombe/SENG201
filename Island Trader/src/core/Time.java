@@ -19,8 +19,7 @@ public class Time {
         if (this.timeRemaining > 0) {
             this.timeRemaining -= 1;
         } else {
-            System.out.println("Game Over. Not enough time to travel to these locations");
-            GameEnvironment.exit();
+            GameEnvironment.exit("Game Over. Not enough time to travel to these locations");
         }
         
         //Subtract Wage
@@ -28,8 +27,7 @@ public class Time {
         if (GameEnvironment.game.getPlayer().getWallet() >= crewCosts) {
             GameEnvironment.game.getPlayer().changeWallet(-crewCosts);
         } else {
-            System.out.println("Game Over. Not enough funds to pay crew, a mutany has occured and you have died!");
-            GameEnvironment.exit();
+            GameEnvironment.exit("Game Over. Not enough funds to pay crew, a mutany has occured and you have died!");
         }
     }
 

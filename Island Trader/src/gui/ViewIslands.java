@@ -166,7 +166,7 @@ public class ViewIslands {
 		lblForIsland.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
 		lblRouteInfo = new JLabel("");
-		lblRouteInfo.setText(currentSelected.viewIslandInfo(GameEnvironment.game.getPlayer().getShip().getLocation()));
+		lblRouteInfo.setText(currentSelected.viewIslandInfo(GameEnvironment.game.getPlayer().getShip().getLocation())[0]);
 		lblRouteInfo.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblRouteInfo.setBounds(10, 62, 365, 233);
 		panel.add(lblRouteInfo);
@@ -260,7 +260,7 @@ public class ViewIslands {
 	
 	private void updateWindow() {
 		lblForIsland.setText("Island Properties for: " + currentSelected.getName());
-		lblRouteInfo.setText(currentSelected.viewIslandInfo(GameEnvironment.game.getPlayer().getShip().getLocation()));
+		lblRouteInfo.setText(currentSelected.viewIslandInfo(GameEnvironment.game.getPlayer().getShip().getLocation())[0]);
 	}
 	
 	private void resetButton(JButton btnNassau, JButton btnTimplore, JButton btnUgriad, JButton btnStGerbal, JButton btnLucia) {
