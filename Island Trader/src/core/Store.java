@@ -155,8 +155,11 @@ public class Store {
         //Remove item from Store
         for (int j=0; j < itemsSell.size(); j++) {
             if (itemsSell.get(j).getName() == selectedItem.getName()) {
-                GameEnvironment.game.getPlayer().changeWallet(-selectedItem.getPurchasePrice()); //Take money from wallet
-                itemsSell.remove(j);
+                if (itemsSell.get(j).getPurchasePrice() == selectedItem.getPurchasePrice()) {
+                    GameEnvironment.game.getPlayer().changeWallet(-selectedItem.getPurchasePrice()); //Take money from wallet
+                    itemsSell.remove(j);
+                    break;
+                }
             }
         }
         return "Success";
