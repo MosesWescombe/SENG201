@@ -1,6 +1,5 @@
 package gui;
 
-
 import javax.swing.JFrame;
 import core.GameEnvironment;
 import core.Island;
@@ -25,7 +24,7 @@ public class ViewIslands {
 
 	private JFrame viewIslandsWindow;
 	
-	private ArrayList<Island> islands = GameEnvironment.game.getIslands();
+	private ArrayList<Island> islands = GameEnvironment.getIslands();
 	private Island currentSelected = islands.get(0);
 	private JLabel lblForIsland;
 	private JLabel lblRouteInfo;
@@ -39,11 +38,11 @@ public class ViewIslands {
 		viewIslandsWindow.setVisible(true);
 	}
 	
-	public void closeWindow() {
+	private void closeWindow() {
 		viewIslandsWindow.dispose();
 	}
 
-	public void returnToMenu() {
+	private void returnToMenu() {
 		GameEnvironment.returnToMenu();
 		this.closeWindow();
 	}
@@ -143,7 +142,7 @@ public class ViewIslands {
 		viewIslandsWindow.getContentPane().add(btnLucia);
 		
 		JLabel lblLocationInfo = new JLabel("You ship is currently docked at: ");
-		lblLocationInfo.setText(lblLocationInfo.getText() + GameEnvironment.game.getPlayer().getShip().getLocation().getName());
+		lblLocationInfo.setText(lblLocationInfo.getText() + GameEnvironment.getPlayer().getShip().getLocation().getName());
 		lblLocationInfo.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblLocationInfo.setBounds(10, 89, 447, 41);
 		viewIslandsWindow.getContentPane().add(lblLocationInfo);
@@ -166,7 +165,7 @@ public class ViewIslands {
 		lblForIsland.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
 		lblRouteInfo = new JLabel("");
-		lblRouteInfo.setText(currentSelected.viewIslandInfo(GameEnvironment.game.getPlayer().getShip().getLocation())[0]);
+		lblRouteInfo.setText(currentSelected.viewIslandInfo(GameEnvironment.getPlayer().getShip().getLocation())[0]);
 		lblRouteInfo.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblRouteInfo.setBounds(10, 62, 365, 233);
 		panel.add(lblRouteInfo);
@@ -260,7 +259,7 @@ public class ViewIslands {
 	
 	private void updateWindow() {
 		lblForIsland.setText("Island Properties for: " + currentSelected.getName());
-		lblRouteInfo.setText(currentSelected.viewIslandInfo(GameEnvironment.game.getPlayer().getShip().getLocation())[0]);
+		lblRouteInfo.setText(currentSelected.viewIslandInfo(GameEnvironment.getPlayer().getShip().getLocation())[0]);
 	}
 	
 	private void resetButton(JButton btnNassau, JButton btnTimplore, JButton btnUgriad, JButton btnStGerbal, JButton btnLucia) {

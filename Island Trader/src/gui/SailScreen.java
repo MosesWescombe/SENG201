@@ -20,7 +20,7 @@ public class SailScreen {
 
 	private JFrame sailScreen;
 	
-	private ArrayList<Island> islands = GameEnvironment.game.getIslands();
+	private ArrayList<Island> islands = GameEnvironment.getIslands();
 	private Island currentSelected = islands.get(0);
 	
 	private JLabel lblShowRoute;
@@ -160,7 +160,7 @@ public class SailScreen {
 		sailScreen.getContentPane().add(panel);
 		
 		lblShowRoute = new JLabel("");
-		lblShowRoute.setText(currentSelected.viewIslandInfo(GameEnvironment.game.getPlayer().getShip().getLocation())[0]);
+		lblShowRoute.setText(currentSelected.viewIslandInfo(GameEnvironment.getPlayer().getShip().getLocation())[0]);
 		lblShowRoute.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblShowRoute.setBounds(10, 69, 365, 238);
 		panel.add(lblShowRoute);
@@ -192,7 +192,7 @@ public class SailScreen {
 		sailScreen.getContentPane().add(btnReturn);
 		
 		JLabel lblLocationStatus = new JLabel("You ship is currently docked at: ");
-		lblLocationStatus.setText(lblLocationStatus.getText() + GameEnvironment.game.getPlayer().getShip().getLocation().getName());
+		lblLocationStatus.setText(lblLocationStatus.getText() + GameEnvironment.getPlayer().getShip().getLocation().getName());
 		lblLocationStatus.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblLocationStatus.setBounds(10, 89, 447, 41);
 		sailScreen.getContentPane().add(lblLocationStatus);
@@ -206,7 +206,7 @@ public class SailScreen {
 	}
 	
 	private void updateWindow() {
-		String[] result = currentSelected.viewIslandInfo(GameEnvironment.game.getPlayer().getShip().getLocation());
+		String[] result = currentSelected.viewIslandInfo(GameEnvironment.getPlayer().getShip().getLocation());
 		lblShowRoute.setText(result[0]);
 		if (result[1] == "false") {
 			btnSetSail.setVisible(false);

@@ -1,36 +1,38 @@
 package core;
+
 import java.util.ArrayList;
 
+/**
+ * Island class. Each Island has:
+ * 
+ * Name - Name of the island
+ * Store - Store that is located at the Island
+ * Routes - ArrayList containing all the routes to the Island
+ */
 public class Island {
-    /**Island class, each island has a store, and multiple routes */
     private String name;
     private Store store;
     private ArrayList<Route> routes = new ArrayList<Route>();
 
+    /**
+     * Initialise an Island with a name. Store and routes are added later.
+     * 
+     * @param name String, Island Name
+     */
     public Island(String name) {
-        //**Initialize each island with values */
         this.name = name;
     }
 
-    public void viewRoutes() {
-        /**Prints the different route options. */
-
-        for (int i=0; i < routes.size(); i++) {
-            System.out.println((i + 1) + ": " + routes.get(i));
-        }
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void addRoute(Route route) {
-        routes.add(route);
-    }
-
-
+    /**
+     * View Island Info, generates a string containing information about an island, formatted nicely.
+     * 
+     * @param currentIsland Island, the island that you want to get info on
+     * @return String[], [0] String displaying island info, [1] 'true' or 'false' declaring if there are any possible routes.
+     */
     public String[] viewIslandInfo(Island currentIsland) {
     	String finalStr = "<html>Possible routes to " + getName();
+
+        //Find all routes and display some info from the route.
     	int routeCount = 1;
         String found = "true";
 		for (int i=0; i < routes.size(); i++) {
@@ -40,6 +42,7 @@ public class Island {
 			}
         }
 		
+        //If no routes have been found set found to 'false'
 		if (routeCount == 1) {
 			finalStr += "<br/>No possible routes.</html>";
             found = "false";
@@ -47,22 +50,21 @@ public class Island {
 		
 		return new String[] {finalStr,found};
     }
-    
-    
 
-	public String toString() {
-		String finalStr = getName();		
-		return finalStr;
+    
+    //Getters/Setters
+    public void addRoute(Route route) {
+        routes.add(route);
     }
-
+    public String getName() {
+        return this.name;
+    }
     public Store getStore() {
         return store;
     }
-
     public void setStore(Store store) {
         this.store = store;
     }
-
     public ArrayList<Route> getRoutes() {
         return this.routes;
     }

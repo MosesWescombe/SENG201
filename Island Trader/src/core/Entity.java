@@ -1,17 +1,29 @@
 package core;
 
-public class Entity {
-    /**Parent class of, upgrade and item*/
+/**
+ * Entity is the parent abstract class of Item and Upgrade. This holds the shared variables and methods of each.
+ * 
+ * Name - Item Name
+ * Description - Item Description
+ * LocationOfStore - Island that the item was created at/is currently available
+ * Weight - Item weight in kg
+ * SalePrice - price a store is willing to pay for the item
+ * PurchasePrice - Price the store is/was selling the item for
+ */
+public abstract class Entity {
     protected String name;
-    protected int purchasePrice;
-    protected int salePrice;
     protected String description;
     protected Island locationOfStore;
     protected int weight;
+    protected int purchasePrice;
+    protected int salePrice;
 
-    public Entity() {
-    }
-
+    /**
+     * Generates an object array consisting of name, description, purchasePrice, weight and salePrice.
+     * This format is used to display on JTables.
+     * 
+     * @return Object[] Holding info on the Entity
+     */
     public Object[] getItemDetails() {
         return new Object[] {
             this.name,
@@ -22,6 +34,8 @@ public class Entity {
         };
     }
 
+    
+    //Getters/Setters
     public int getWeight() {
         return weight;
     }

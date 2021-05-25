@@ -1,20 +1,26 @@
 package core;
 
+/**
+ * Time Class. Manages the time functionality of the game.
+ * 
+ * TimeRemaining - Remainging time in days
+ */
 public class Time {
-    /**Time manager, this holds the functions that manage the time. When a day passes multiple functions will need to be called. */
-
     private int timeRemaining;
 
+    /**
+     * Initialise the Time object. Sets the games duration.
+     * 
+     * @param duration int, number of days you want the game to go
+     */
     public Time(int duration) {
-        /**Initialise the game duration */
-
-        //Set Time
         this.timeRemaining = duration;
     }
-
+    
+    /**
+     * End Day. Subtract day from timeRemaining and subtract crew wages
+     */
     public void endDay() {
-        /**Subtract a day, check for game ended and charge player the crews wages */
-
         //Subtract Day
         if (this.timeRemaining > 0) {
             this.timeRemaining -= 1;
@@ -23,14 +29,16 @@ public class Time {
         }
         
         //Subtract Wage
-        int crewCosts = GameEnvironment.game.getPlayer().getShip().getCrew() * GameEnvironment.game.getPlayer().getShip().getCrewWage();
-        if (GameEnvironment.game.getPlayer().getWallet() >= crewCosts) {
-            GameEnvironment.game.getPlayer().changeWallet(-crewCosts);
+        int crewCosts = GameEnvironment.getPlayer().getShip().getCrew() * GameEnvironment.getPlayer().getShip().getCrewWage();
+        if (GameEnvironment.getPlayer().getWallet() >= crewCosts) {
+            GameEnvironment.getPlayer().changeWallet(-crewCosts);
         } else {
             GameEnvironment.exit("Game Over. Not enough funds to pay crew, a mutany has occured and you have died!");
         }
     }
 
+    
+    //Getters/Setters
     public int getTimeRemaining() {
         return timeRemaining;
     }

@@ -15,8 +15,8 @@ public class EndWindow {
 
 	private JFrame endWindow;
 	private JLabel lblFinalMessage;
-	private int daysRemaining = GameEnvironment.time.getTimeRemaining();
-	private int wallet = GameEnvironment.game.getPlayer().getWallet();
+	private int daysRemaining = GameEnvironment.getTime().getTimeRemaining();
+	private int wallet = GameEnvironment.getPlayer().getWallet();
 
 	/**
 	 * Create the application.

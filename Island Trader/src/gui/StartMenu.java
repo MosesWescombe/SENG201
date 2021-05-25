@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.Color;
@@ -39,20 +41,30 @@ public class StartMenu {
 	public void returnToGame() {
 		/**Returns to the GameEnvironment with the windows variables*/
 		boolean end = true;
-		if (playerNameInput.getText().length() < 3 || playerNameInput.getText().length() > 15) {
+		
+		//Check no special characters or double spaces
+		Pattern pattern = Pattern.compile("[a-z]+[ [a-z]+]*", Pattern.CASE_INSENSITIVE);
+		Matcher matcher = pattern.matcher(playerNameInput.getText());
+		boolean matchFound = matcher.matches();
+
+		//Check the length
+		if (playerNameInput.getText().length() < 3 || playerNameInput.getText().length() > 15 || !matchFound) {
 			playerNameWarning.setVisible(true);
 			end = false;
 		} else {
 			playerNameWarning.setVisible(false);
 		}
 		
-		if (shipNameInput.getText().length() < 3 || shipNameInput.getText().length() > 15) {
+		//Check no special characters or double spaces
+		matcher = pattern.matcher(shipNameInput.getText());
+		matchFound = matcher.find();
+		//Check the length
+		if (shipNameInput.getText().length() < 3 || shipNameInput.getText().length() > 15 || !matchFound) {
 			shipNameWarning.setVisible(true);
 			end = false;
 		} else {
 			shipNameWarning.setVisible(false);
 		}
-		
 		
 		if (!end) {
 			return;
@@ -232,14 +244,14 @@ public class StartMenu {
 		btnNewButton_2.setBounds(10, 722, 842, 73);
 		startMenuWindow.getContentPane().add(btnNewButton_2);
 		
-		playerNameWarning = new JLabel("Please select a string between 3 and 15 characters.");
+		playerNameWarning = new JLabel("Please input a name (3-15, non special characters)");
 		playerNameWarning.setVisible(false);
 		playerNameWarning.setForeground(new Color(255, 0, 0));
 		playerNameWarning.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		playerNameWarning.setBounds(23, 280, 381, 25);
 		startMenuWindow.getContentPane().add(playerNameWarning);
 		
-		shipNameWarning = new JLabel("Please select a string between 3 and 15 characters.");
+		shipNameWarning = new JLabel("Please input a name (3-15, non special characters)");
 		shipNameWarning.setVisible(false);
 		shipNameWarning.setForeground(new Color(255, 0, 0));
 		shipNameWarning.setFont(new Font("Tahoma", Font.PLAIN, 16));

@@ -30,7 +30,7 @@ public class MainWindow {
 		mainScreen.setVisible(true);
 	}
 	
-	public void closeWindow() {
+	private void closeWindow() {
 		mainScreen.dispose();
 	}
 
@@ -40,21 +40,23 @@ public class MainWindow {
 	}
 	
 	private void openViewIslands() {
-		GameEnvironment.viewIslands(this);
+		new ViewIslands();
+		this.closeWindow();
 	}
 	
 	private void openSailScreen() {
-		GameEnvironment.sailScreen(this);
+		new SailScreen();
+		this.closeWindow();
 	}
 
-	private void openStore() {
-		GameEnvironment.openStoreWindow();
+	private void openNewStore() {
+		new StoreWindow();
 		this.closeWindow();
 	}
 
 	private void repair() {
-		if (GameEnvironment.game.getPlayer().getShip().getHealth() < GameEnvironment.game.getPlayer().getShip().getMaxHealth()) {
-			String result = GameEnvironment.game.getPlayer().getShip().repair();
+		if (GameEnvironment.getPlayer().getShip().getHealth() < GameEnvironment.getPlayer().getShip().getMaxHealth()) {
+			String result = GameEnvironment.getPlayer().getShip().repair();
 
 			JOptionPane.showMessageDialog(mainScreen, result, "Successfully Repaired", JOptionPane.INFORMATION_MESSAGE);
 			this.closeWindow();
@@ -86,7 +88,7 @@ public class MainWindow {
 			public void actionPerformed(ActionEvent e) {
 				//Items to purchase grid
 				String[] collumnNames = {"Name", "Sale Location", "Purchase Price", "Sale Price"}; //Titles
-				Object[][] transactionHistory = GameEnvironment.game.getPlayer().getShip().getTransactionHistoryObject();
+				Object[][] transactionHistory = GameEnvironment.getPlayer().getShip().getTransactionHistoryObjects();
 				
 				JTable transactionsTable = new JTable(transactionHistory, collumnNames);
 				transactionsTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -125,7 +127,7 @@ public class MainWindow {
 		JButton btnVisitStore = new JButton("Visit Store");
 		btnVisitStore.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				openStore();
+				openNewStore();
 			}
 		});
 		btnVisitStore.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -136,7 +138,7 @@ public class MainWindow {
 		JButton btnSail = new JButton("Sail");
 		btnSail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (GameEnvironment.game.getPlayer().getShip().getHealth() == GameEnvironment.game.getPlayer().getShip().getMaxHealth()) {
+				if (GameEnvironment.getPlayer().getShip().getHealth() == GameEnvironment.getPlayer().getShip().getMaxHealth()) {
 				openSailScreen();
 				} else {
 					JOptionPane.showMessageDialog(mainScreen, "Your Ship needs repairs before you can sail!", "Ship Repairs Needed", JOptionPane.ERROR_MESSAGE);
@@ -171,7 +173,7 @@ public class MainWindow {
 		cargoPanel.setBounds(511, 0, 593, 251);
 		panel_1.add(cargoPanel);
 
-			Object[][] cargo = GameEnvironment.game.getPlayer().getShip().getCargoObject();
+			Object[][] cargo = GameEnvironment.getPlayer().getShip().getCargoObjects();
 			//Object[][] cargo = {{"","", ""},{"","", ""}};
 			String[] cargoTableHeader = {"Name", "Description", "Weight (kg)"};
 			cargoPanel.setLayout(null);
@@ -204,31 +206,31 @@ public class MainWindow {
 		mainScreen.getContentPane().add(panel_2);
 		
 			JLabel lblCapacity = new JLabel("Capacity: ");
-			lblCapacity.setText(lblCapacity.getText() + GameEnvironment.game.getPlayer().getShip().getCapacity() + "/" + GameEnvironment.game.getPlayer().getShip().getmaxCapacity() + "kg");
+			lblCapacity.setText(lblCapacity.getText() + GameEnvironment.getPlayer().getShip().getCapacity() + "/" + GameEnvironment.getPlayer().getShip().getmaxCapacity() + "kg");
 			lblCapacity.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			lblCapacity.setBounds(352, 99, 165, 38);
 			panel_2.add(lblCapacity);
 			
 			JLabel lblSpeed = new JLabel("Speed: ");
-			lblSpeed.setText(lblSpeed.getText() + GameEnvironment.game.getPlayer().getShip().getSailSpeed() + "km/h");
+			lblSpeed.setText(lblSpeed.getText() + GameEnvironment.getPlayer().getShip().getSailSpeed() + "km/h");
 			lblSpeed.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			lblSpeed.setBounds(53, 96, 150, 44);
 			panel_2.add(lblSpeed);
 			
 			JLabel lblHealth = new JLabel("Health: ");
-			lblHealth.setText(lblHealth.getText() + GameEnvironment.game.getPlayer().getShip().getHealth() + "/" + GameEnvironment.game.getPlayer().getShip().getMaxHealth());
+			lblHealth.setText(lblHealth.getText() + GameEnvironment.getPlayer().getShip().getHealth() + "/" + GameEnvironment.getPlayer().getShip().getMaxHealth());
 			lblHealth.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			lblHealth.setBounds(53, 45, 161, 54);
 			panel_2.add(lblHealth);
 			
 			JLabel lblShipProperties = new JLabel("Ship Properties for ");
-			lblShipProperties.setText(lblShipProperties.getText() + GameEnvironment.game.getPlayer().getShip().getName());
+			lblShipProperties.setText(lblShipProperties.getText() + GameEnvironment.getPlayer().getShip().getName());
 			lblShipProperties.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			lblShipProperties.setBounds(170, 11, 267, 38);
 			panel_2.add(lblShipProperties);
 			
 			JLabel lblCrew = new JLabel("Crew: ");
-			lblCrew.setText(lblCrew.getText() + GameEnvironment.game.getPlayer().getShip().getCrew());
+			lblCrew.setText(lblCrew.getText() + GameEnvironment.getPlayer().getShip().getCrew());
 			lblCrew.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			lblCrew.setBounds(356, 53, 145, 38);
 			panel_2.add(lblCrew);
@@ -254,7 +256,7 @@ public class MainWindow {
 			btnRepair.setBounds(352, 151, 145, 31);
 			panel_2.add(btnRepair);
 					
-			Object[][] upgrades = GameEnvironment.game.getPlayer().getShip().getUpgradeObjects();
+			Object[][] upgrades = GameEnvironment.getPlayer().getShip().getUpgradeObjects();
 			//Object[][] upgrades = {{"",""},{"",""}};
 			String[] header = {"Name", "Description"};
 
@@ -279,25 +281,25 @@ public class MainWindow {
 		panel_3.setLayout(null);
 		
 		JLabel lblWelcome = new JLabel("Welcome, ");
-		lblWelcome.setText(lblWelcome.getText() + GameEnvironment.game.getPlayer().getName());
+		lblWelcome.setText(lblWelcome.getText() + GameEnvironment.getPlayer().getName());
 		lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblWelcome.setBounds(10, 11, 189, 46);
 		panel_3.add(lblWelcome);
 		
 		JLabel lblWallet = new JLabel("Wallet: $");
-		lblWallet.setText(lblWallet.getText() + GameEnvironment.game.getPlayer().getWallet());
+		lblWallet.setText(lblWallet.getText() + GameEnvironment.getPlayer().getWallet());
 		lblWallet.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblWallet.setBounds(260, 68, 160, 36);
 		panel_3.add(lblWallet);
 		
 		JLabel lblDuration = new JLabel("Time Remaining: ");
-		lblDuration.setText(lblDuration.getText() + GameEnvironment.time.getTimeRemaining() + "days");
+		lblDuration.setText(lblDuration.getText() + GameEnvironment.getTime().getTimeRemaining() + "days");
 		lblDuration.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblDuration.setBounds(10, 72, 216, 29);
 		panel_3.add(lblDuration);
 		
 		JLabel lblLocation = new JLabel("Location: ");
-		lblLocation.setText(lblLocation.getText() + GameEnvironment.game.getPlayer().getShip().getLocation().getName());
+		lblLocation.setText(lblLocation.getText() + GameEnvironment.getPlayer().getShip().getLocation().getName());
 		lblLocation.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblLocation.setBounds(260, 20, 216, 29);
 		panel_3.add(lblLocation);

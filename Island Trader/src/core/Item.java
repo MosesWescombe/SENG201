@@ -1,7 +1,10 @@
 package core;
 
+/**
+ * Item class represents an item, each item has all of the same parameters as an Entity object.
+ */
 public class Item extends Entity {
-    /**Item class, holds info about the item */
+    //List of all possible item names, descriptions and weights
     public final static String[][] POSSIBILE = {
         //Name, description, weight
         {"Tomato", "Juicy little fruit", "1"},
@@ -41,8 +44,10 @@ public class Item extends Entity {
         {"Sour Krout", "Scientists will reccommend this later", "6"}
     };
 
+    /**
+     * Creates an item randomly selecting it from pre defined POSSIBLE items.
+     */
     public Item() {
-        /**Creates an item, Items are stored in ArraList<Item> in the ship and stores*/
         int number = (int)(Math.random() * (POSSIBILE.length));
 
         this.name = POSSIBILE[number][0];
@@ -50,13 +55,22 @@ public class Item extends Entity {
         this.weight =  Integer.parseInt(POSSIBILE[number][2]);
     }
 
+    /**
+     * Gets a random item from the POSSIBLE array. This does not create or return a item object.
+     * 
+     * @return  String[], Name, Description, Weight of randomly retrieved item from POSSIBLE.
+     */
     public static String[] getRandomItem() {
-        /**Returns a random item from POSSIBILE, not this does not return an actual ITEM object */
         return POSSIBILE[(int)(Math.random() * (POSSIBILE.length))];
     }
 
+    /** Generates a string of the item in the format
+     * <name>: <description>      Price: $<price>     Weight: <weight>kg
+     * Where price is the purchase price.
+     * 
+     * @return String, formatted string representing the item.
+     */
     public String toString() {
-        //**This does not format nicely, mostly used for testing, create manual grid printing per use. */
         Object[] preFormat = new String[] {
             this.name + ":      " + this.getDescription(),
             "Price: $" + this.getPurchasePrice(),

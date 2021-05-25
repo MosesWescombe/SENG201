@@ -1,59 +1,66 @@
 package core;
 
+/**
+ * Route Class. Routes are a path that a Ship may take to travel between two Islands. Each route is stored in its destination Island.
+ * 
+ * Distance - Distance from the origin to the destination in km
+ * Description - A brief description of features of the routes
+ * Event Change - A decimal percentage representing the change of an event occuring
+ * Origin - The origin Island
+ * Destination - The destination Island
+ */
 public class Route {
-	/**A route is a path between two islands, each route has a length in days and a event change as a percentage*/
     private int distance;
-    private Island destination;
-    private Island origin;
-    private String description;
+	private String description;
     private double eventChance;
+	private Island origin;
+    private Island destination;
     
+	/**
+	 * Creates a Route object, setting its variables.
+	 * 
+	 * @param origin	Island, start of the route
+	 * @param destination	Island, end of the route
+	 * @param distance	int, distance between the destination and origin in km
+	 * @param description	String, breif description of the route.
+	 * @param eventChance	double, decimal percentage representing the chance of an event occuring.
+	 */
     public Route(Island origin, Island destination, int distance, String description, double eventChance) {
-		/**Takes an origin and destination island, randomly generates the distance and event chance */
     	this.distance = distance;
     	this.description = description;
     	this.eventChance = eventChance;	
         this.destination = destination;
     	this.origin = origin;
     }
-    
-    
-    //getters
-	public int getDistance() {
-		return distance;
-	}
 
-
-	public Island getDestination() {
-		return destination;
-	}
-
-
-	public Island getOrigin() {
-		return origin;
-	}
-
-
-	public String getDescription() {
-		return description;
-	}
-
-
-	public double getEventChance() {
-		return eventChance;
-	}
-	
+	/**
+	 * Generates a String format displaying route information.
+	 * 
+	 * @return	String, paragraphed route information
+	 */
 	public String viewRoute() {
-		int routeDuration = (distance / GameEnvironment.game.getPlayer().getShip().getSailSpeed()) / 24;
+		//Get a route duration in days
+		int routeDuration = (distance / GameEnvironment.getPlayer().getShip().getSailSpeed()) / 24;
 		return "Route to: " + destination.getName() + 
 		"<br/>Distance: " + distance + "km " +  " (" + routeDuration + " days)"
 		+ "<br/>Description: '" + description + "<br/>Event Chance: " + eventChance * 100 + "%";
 	}
-
-	public String toString() { //auto generated toString method
-		return "Route [distance=" + distance + ", origin=" + origin.getName() + ", destination=" + destination.getName() +  ", description="
-				+ description + ", eventChance=" + eventChance + "]";
+	
+    
+    //Getters/Setters
+	public int getDistance() {
+		return distance;
 	}
-    
-    
+	public Island getDestination() {
+		return destination;
+	}
+	public Island getOrigin() {
+		return origin;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public double getEventChance() {
+		return eventChance;
+	}
 }

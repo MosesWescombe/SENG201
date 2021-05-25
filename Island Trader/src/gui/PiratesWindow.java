@@ -41,12 +41,12 @@ public class PiratesWindow {
 	private void pirateEvent(String direction) {
 		String result = Event.piratesGame(direction);
 
-		if (result == "Failure") {
+		if (result == "FAILURE") {
 			attemptsRemaining--;
 			JOptionPane.showMessageDialog(piratesWindow, "Oh NO! The pirates take the same route, try again!", "Wrong Direction!", JOptionPane.INFORMATION_MESSAGE);
 
 			updateAttempts();
-		} else {
+		} else { //Success
 			JOptionPane.showMessageDialog(piratesWindow, "The pirates have been avoided! You will not suffer any concequences", "Success!", JOptionPane.INFORMATION_MESSAGE);
 			returnToMenu();
 		}

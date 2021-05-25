@@ -1,20 +1,29 @@
 package core;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import gui.StoreWindow;
 
+/**
+ * Store Class. A store is what the user interacts with when trading goods.
+ * 
+ * ItemsSell - Items the user is able to purchase
+ * ItemsBuy - List of item names the user is able to sell, along with the corresponding value
+ * Location - Locatiion of the store
+ */
 public class Store {
-    /**Each Island has a store, stores manage the item buying and selling, items are stored in arrays in each Store object. */
-    private ArrayList<Entity> itemsSell = new ArrayList<Entity>(); //List of item objects that the user is able to purchase
-    private ArrayList<String[]> itemsBuy = new ArrayList<String[]>(); //List of item names to buy from user with coressponding value
+    private ArrayList<Entity> itemsSell = new ArrayList<Entity>();
+    private ArrayList<String[]> itemsBuy = new ArrayList<String[]>();
     private Island location;
-    private Upgrade upgrade;
 
+    /**
+     * Create a Store object.
+     * 
+     * @param location Island, Location of the store
+     * @param upgrade Upgrade, upgrade entity that the store will add to the itemsSell array
+     */
     public Store(Island location, Upgrade upgrade) {
-        /**Create items arrays, setting buy and sell items */
         this.location = location;
-        this.upgrade = upgrade;
-        this.itemsSell.add(this.upgrade);
+        this.itemsSell.add(upgrade);
 
         //Generate items for store to sell
         int numberOfItemsSell =  (int)(Math.random() * (12 - 2 + 1) + 2);
@@ -37,93 +46,23 @@ public class Store {
         }
     }
 
-    public ArrayList<Entity> getItemsSell() {
-        return itemsSell;
-    }
-
-    public void displayStore() {
-        /**Print The Store Terminal */
-        //Print items available to sell to player
-        System.out.println("\nSTORE");
-        System.out.println("Items for Sale:\tWallet: $" + GameEnvironment.game.getPlayer().getWallet());
-        int i = 1;
-        for (Entity item : itemsSell) {
-            //The following prints an orgonized grid
-            Object[] preFormat = new String[] {
-                "\t" + i + ": ",
-                item.getName() + ": " + item.getDescription(),
-                "Price: $" + item.getPurchasePrice(),
-                "Weight: " + item.getWeight() + "kg"
-            };
-            //Sizing can be changed by altering the % numbers below
-            String format = String.format("%-6s%-90s%-15s%-15s", preFormat);
-            System.out.println(format);
-            i++;
-        }
-
-        //Print items that are available to buy from player
-        System.out.println("");
-        System.out.println("Items we would like:");
-        i = 1;
-        boolean printed = false;
-        //Check that both the store and the playerShip has the items, if they do then list them
-        
-
-        if (!printed) {
-            System.out.println("\tWe do not require any of your items");
-        }
-    }
-
-    public Object[][] getItemSellObjects() {
-        Object[][] result = new Object[itemsSell.size()][5];
-        int i = 0;
-        for (Entity item : itemsSell) {
-            result[i][0] = item.getItemDetails()[0];
-            result[i][1] = item.getItemDetails()[1];
-            result[i][2] = item.getItemDetails()[2];
-            result[i][3] = item.getItemDetails()[3];
-            result[i][4] = item;
-            i++;
-        }
-
-        return result;
-    }
-
-    public Object[][] getItemsBuyObjects() {
-        Object[][] result = new Object[itemsBuy.size()][5];
-        int i = 0;
-        for (String[] itemBuy : itemsBuy) {
-            for  (Entity item : GameEnvironment.game.getPlayer().getShip().getCargo()) {
-                if (item.getName() == itemBuy[0]) {
-                    item.setSalePrice(Integer.parseInt(itemBuy[1]));
-                    result[i][0] = item.getItemDetails()[0];
-                    result[i][1] = item.getItemDetails()[1];
-                    result[i][2] = item.getItemDetails()[4];
-                    result[i][3] = item.getItemDetails()[3];
-                    result[i][4] = item;
-                    i++;
-                }
-            }
-        }
-
-        if (result.length >= 1 && result[0][0] == null) {
-            result[i][0] = "No Items To Sell";
-            result[i][1] = "No Items To Sell";
-            result[i][2] = "No Items To Sell";
-            result[i][3] = "No Items To Sell";
-        }
-
-        return result;
-    }
-
+    /**
+     * Sell an item. A user may purchase an item from the store, this method manages all the sale functions.
+     * 
+     * @param state StoreWindow, store window to close and reopen to update the items.
+     * @param index int, Index of the item in the JTable that the user selected
+     * @return String, {'NoneSelected', 'WeightError', 'CostError'} depending on different checks
+     */
     public String sell(StoreWindow state, int index) {
-        /**Sells items to the user if they have enough money in thier wallet*/
-        int playerWallet = GameEnvironment.game.getPlayer().getWallet();
-        int playerCapacity = GameEnvironment.game.getPlayer().getShip().getCapacity();
+        int playerWallet = GameEnvironment.getPlayer().getWallet();
+        int playerCapacity = GameEnvironment.getPlayer().getShip().getCapacity();
+
+        //Check if none are selected
         if (index < 0) {
             return "NoneSelected";
-        }
+        }   
 
+        //Find the item that the user selected
         Entity selectedItem = (Entity)state.getItemsForPurchase()[index][4];
         if (selectedItem == null) {
             return "NoneSelected";
@@ -137,7 +76,7 @@ public class Store {
                 //If its an upgrade add it directly to the ship
                 if (selectedItem instanceof Upgrade) {
                     //Add upgrade to the ship
-                    GameEnvironment.game.getPlayer().getShip().addUpgrade((Upgrade)selectedItem);
+                    GameEnvironment.getPlayer().getShip().addUpgrade((Upgrade)selectedItem);
                 }
             } else {
                 return "WeightError";
@@ -146,8 +85,7 @@ public class Store {
             return "CostError";
         }
 
-
-        Ship shipToLoad = GameEnvironment.game.getPlayer().getShip();
+        Ship shipToLoad = GameEnvironment.getPlayer().getShip();
 
         //Add cargo to the ship
         shipToLoad.addCargo(selectedItem);
@@ -156,7 +94,7 @@ public class Store {
         for (int j=0; j < itemsSell.size(); j++) {
             if (itemsSell.get(j).getName() == selectedItem.getName()) {
                 if (itemsSell.get(j).getPurchasePrice() == selectedItem.getPurchasePrice()) {
-                    GameEnvironment.game.getPlayer().changeWallet(-selectedItem.getPurchasePrice()); //Take money from wallet
+                    GameEnvironment.getPlayer().changeWallet(-selectedItem.getPurchasePrice()); //Take money from wallet
                     itemsSell.remove(j);
                     break;
                 }
@@ -165,24 +103,102 @@ public class Store {
         return "Success";
     }
 
+    /**
+     * Purchase an item. A user may sell an item from the store, this method manages all the sale functions.
+     * 
+     * @param state StoreWindow, store window to close and reopen to update the items.
+     * @param index int, Index of the item in the JTable that the user selected
+     * @return String, {'NoneSelected', 'Success'} depending on different checks
+     */
     public String purchase(StoreWindow state, int index) {
-        /**Buys items off the user*/
+        //Check the user selected an item
         if (index < 0) {
             return "NoneSelected";
         }
 
+        //Find the item selected
         Entity selectedItem = (Entity)state.getItemsToBuy()[index][4];
         if (selectedItem == null) {
             return "NoneSelected";
         }
-        Ship playersShip = GameEnvironment.game.getPlayer().getShip();
+
+        Ship playersShip = GameEnvironment.getPlayer().getShip();
 
         //Remove cargo from the ship
         playersShip.removeCargo(selectedItem);
 
         //change location of item and update wallet
         selectedItem.setLocationOfStore(this.location);
-        GameEnvironment.game.getPlayer().changeWallet(selectedItem.getSalePrice()); //Add profits to wallet
+        GameEnvironment.getPlayer().changeWallet(selectedItem.getSalePrice()); //Add profits to wallet
         return "Success";
+    }
+
+    /**
+     * Create a Object[][] full of strings representing the items the store is selling to the. Used to display in a JTable.
+     *  The array is of the format: {Name, Description, Price, Weight}
+     * 
+     * @return Object[][], array item info as Strings
+     */
+    public Object[][] getItemSellObjects() {
+        Object[][] result = new Object[itemsSell.size() + 1][5];
+        int i = 0;
+        for (Entity item : itemsSell) {
+            result[i][0] = item.getItemDetails()[0];
+            result[i][1] = item.getItemDetails()[1];
+            result[i][2] = item.getItemDetails()[2];
+            result[i][3] = item.getItemDetails()[3];
+            result[i][4] = item;
+            i++;
+        }
+
+        //If no items to sell return 'No Items To Purchase'
+        if (result.length == 1 && result[0][0] == null) {
+            result[i][0] = "No Items To Purchase";
+            result[i][1] = "N/A";
+            result[i][2] = "N/A";
+            result[i][3] = "N/A";
+        }
+
+        return result;
+    }
+
+    /**
+     * Create a Object[][] full of strings representing the items the store is wanting from the user. Used to display in a JTable.
+     *  The array is of the format: {Name, Description, Price, Weight}
+     * 
+     * @return Object[][], array item info as Strings
+     */
+    public Object[][] getItemsBuyObjects() {
+        Object[][] result = new Object[itemsBuy.size()][5];
+        int i = 0;
+        for (String[] itemBuy : itemsBuy) {
+            for  (Entity item : GameEnvironment.getPlayer().getShip().getCargo()) {
+                if (item.getName() == itemBuy[0]) {
+                    item.setSalePrice(Integer.parseInt(itemBuy[1]));
+                    result[i][0] = item.getItemDetails()[0];
+                    result[i][1] = item.getItemDetails()[1];
+                    result[i][2] = itemBuy[1];
+                    result[i][3] = item.getItemDetails()[3];
+                    result[i][4] = item;
+                    i++;
+                }
+            }
+        }
+
+        //If no items to sell return this
+        if (result.length >= 1 && result[0][0] == null) {
+            result[i][0] = "No Items To Sell";
+            result[i][1] = "N/A";
+            result[i][2] = "N/A";
+            result[i][3] = "N/A";
+        }
+
+        return result;
+    }
+
+
+    //Getters/Setters
+    public ArrayList<Entity> getItemsSell() {
+        return itemsSell;
     }
 }

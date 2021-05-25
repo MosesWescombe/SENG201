@@ -24,8 +24,8 @@ public class StoreWindow {
 	private JFrame storeWindow;
 	private JTable itemsToPurchase;
 	private JTable itemsToSell;
-	private Object[][] itemsForPurchase = GameEnvironment.game.getPlayer().getShip().getLocation().getStore().getItemSellObjects(); //Items
-	private Object[][] itemsToBuy = GameEnvironment.game.getPlayer().getShip().getLocation().getStore().getItemsBuyObjects();
+	private Object[][] itemsForPurchase = GameEnvironment.getPlayer().getShip().getLocation().getStore().getItemSellObjects(); //Items
+	private Object[][] itemsToBuy = GameEnvironment.getPlayer().getShip().getLocation().getStore().getItemsBuyObjects();
 	
 
 	/**
@@ -47,7 +47,7 @@ public class StoreWindow {
 	
 	public void buyItem() {
 		int index = itemsToPurchase.getSelectedRow();
-		String result = GameEnvironment.game.getPlayer().getShip().getLocation().getStore().sell(this, index);
+		String result = GameEnvironment.getPlayer().getShip().getLocation().getStore().sell(this, index);
 
 		//Handle Errors
 		if (result == "WeightError") {
@@ -65,7 +65,7 @@ public class StoreWindow {
 
 	public void sellItem() {
 		int index = itemsToSell.getSelectedRow();
-		String result = GameEnvironment.game.getPlayer().getShip().getLocation().getStore().purchase(this, index);
+		String result = GameEnvironment.getPlayer().getShip().getLocation().getStore().purchase(this, index);
 
 		//Handle Errors
 		if (result == "NoneSelected") {
@@ -159,13 +159,13 @@ public class StoreWindow {
 				storeWindow.getContentPane().add(btnExitWithoutSale);
 				
 				JLabel lblPlayerWallet = new JLabel("Player Wallet: $");
-				lblPlayerWallet.setText(lblPlayerWallet.getText() + GameEnvironment.game.getPlayer().getWallet());
+				lblPlayerWallet.setText(lblPlayerWallet.getText() + GameEnvironment.getPlayer().getWallet());
 				lblPlayerWallet.setFont(new Font("Tahoma", Font.PLAIN, 18));
 				lblPlayerWallet.setBounds(825, 104, 234, 53);
 				storeWindow.getContentPane().add(lblPlayerWallet);
 				
 				JLabel lblCargoCapacity = new JLabel("Cargo Capacity: ");
-				lblCargoCapacity.setText(lblCargoCapacity.getText() + GameEnvironment.game.getPlayer().getShip().getCapacity() + "/" + GameEnvironment.game.getPlayer().getShip().getmaxCapacity() + "kg");
+				lblCargoCapacity.setText(lblCargoCapacity.getText() + GameEnvironment.getPlayer().getShip().getCapacity() + "/" + GameEnvironment.getPlayer().getShip().getmaxCapacity() + "kg");
 				lblCargoCapacity.setFont(new Font("Tahoma", Font.PLAIN, 18));
 				lblCargoCapacity.setBounds(1069, 104, 234, 53);
 				storeWindow.getContentPane().add(lblCargoCapacity);
@@ -178,7 +178,7 @@ public class StoreWindow {
 	private void updateSellGrid() {
 		//Items to purchase grid
 		String[] collumnNames = new String[] {"Name", "Description", "Value", "Weight"}; //Titles
-		itemsToBuy = GameEnvironment.game.getPlayer().getShip().getLocation().getStore().getItemsBuyObjects(); //Items
+		itemsToBuy = GameEnvironment.getPlayer().getShip().getLocation().getStore().getItemsBuyObjects(); //Items
 		// Object[][] itemsToBuy = {
 		// 	{"This", "That" ,"Price","Other price", ""},
 		// 	{"This", "That" ,"Price","Other price", ""},
@@ -198,7 +198,7 @@ public class StoreWindow {
 	private void updatePurchaseGrid() {
 		//Items to purchase grid
 		String[] collumnNames = {"Name", "Description", "Value", "Weight"}; //Titles
-		itemsForPurchase = GameEnvironment.game.getPlayer().getShip().getLocation().getStore().getItemSellObjects(); //Items
+		itemsForPurchase = GameEnvironment.getPlayer().getShip().getLocation().getStore().getItemSellObjects(); //Items
 		// Object[][] itemsForPurchase = {
 		// 	{"This", "That" ,"Price","Other price", ""},
 		// 	{"This", "That" ,"Price","Other price", ""},
