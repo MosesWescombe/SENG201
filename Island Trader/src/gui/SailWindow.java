@@ -95,11 +95,11 @@ public class SailWindow {
 	 * @param btnLucia Lucia button
 	 */
 	private void resetButton(JButton btnNassau, JButton btnTimplore, JButton btnUgriad, JButton btnStGerbal, JButton btnLucia) {
-		btnNassau.setBackground(UIManager.getColor("CheckBox.darkShadow"));
-		btnTimplore.setBackground(UIManager.getColor("CheckBox.darkShadow"));
-		btnUgriad.setBackground(UIManager.getColor("CheckBox.darkShadow"));
-		btnStGerbal.setBackground(UIManager.getColor("CheckBox.darkShadow"));
-		btnLucia.setBackground(UIManager.getColor("CheckBox.darkShadow"));	
+		btnNassau.setBackground(UIManager.getColor("Button.darkShadow"));
+		btnTimplore.setBackground(UIManager.getColor("Button.darkShadow"));
+		btnUgriad.setBackground(UIManager.getColor("Button.darkShadow"));
+		btnStGerbal.setBackground(UIManager.getColor("Button.darkShadow"));
+		btnLucia.setBackground(UIManager.getColor("Button.darkShadow"));	
 	}
 
 	/**
@@ -151,7 +151,7 @@ public class SailWindow {
 			}
 		});
 		btnTimplore.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnTimplore.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		btnTimplore.setBackground(UIManager.getColor("Button.darkShadow"));
 		btnTimplore.setBounds(10, 274, 209, 73);
 		sailScreen.getContentPane().add(btnTimplore);
 		
@@ -165,7 +165,7 @@ public class SailWindow {
 			}
 		});
 		btnUgriad.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnUgriad.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		btnUgriad.setBackground(UIManager.getColor("Button.darkShadow"));
 		btnUgriad.setBounds(10, 358, 209, 73);
 		sailScreen.getContentPane().add(btnUgriad);
 		
@@ -179,7 +179,7 @@ public class SailWindow {
 			}
 		});
 		btnStGerbal.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnStGerbal.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		btnStGerbal.setBackground(UIManager.getColor("Button.darkShadow"));
 		btnStGerbal.setBounds(10, 442, 209, 73);
 		sailScreen.getContentPane().add(btnStGerbal);
 		
@@ -193,7 +193,7 @@ public class SailWindow {
 			}
 		});
 		btnLucia.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnLucia.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		btnLucia.setBackground(UIManager.getColor("Button.darkShadow"));
 		btnLucia.setBounds(10, 526, 209, 73);
 		sailScreen.getContentPane().add(btnLucia);
 		
@@ -231,7 +231,7 @@ public class SailWindow {
 			}
 		});
 		btnReturn.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnReturn.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		btnReturn.setBackground(UIManager.getColor("Button.darkShadow"));
 		btnReturn.setBounds(452, 96, 209, 73);
 		sailScreen.getContentPane().add(btnReturn);
 		

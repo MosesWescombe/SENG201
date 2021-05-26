@@ -69,10 +69,10 @@ public class StartMenuWindow {
 	 * @param dingy Dingy button
 	 */
 	private void resetButton(JButton cargoShip, JButton battleShip, JButton cruiserShip, JButton dingy) {
-		cargoShip.setBackground(UIManager.getColor("CheckBox.darkShadow"));
-		battleShip.setBackground(UIManager.getColor("CheckBox.darkShadow"));
-		dingy.setBackground(UIManager.getColor("CheckBox.darkShadow"));
-		cruiserShip.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		cargoShip.setBackground(UIManager.getColor("Button.darkShadow"));
+		battleShip.setBackground(UIManager.getColor("Button.darkShadow"));
+		dingy.setBackground(UIManager.getColor("Button.darkShadow"));
+		cruiserShip.setBackground(UIManager.getColor("Button.darkShadow"));
 		
 	}
 
@@ -106,7 +106,7 @@ public class StartMenuWindow {
 		startMenuWindow.getContentPane().add(cargoShip);
 		
 		//Battle ship button
-		battleShip.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		battleShip.setBackground(UIManager.getColor("Button.darkShadow"));
 		battleShip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				shipType = 2;
@@ -119,7 +119,7 @@ public class StartMenuWindow {
 		startMenuWindow.getContentPane().add(battleShip);
 		
 		//Cruiser Ship button
-		cruiserShip.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		cruiserShip.setBackground(UIManager.getColor("Button.darkShadow"));
 		cruiserShip.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		cruiserShip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -132,7 +132,7 @@ public class StartMenuWindow {
 		startMenuWindow.getContentPane().add(cruiserShip);
 		
 		//Dingy button
-		dingy.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		dingy.setBackground(UIManager.getColor("Button.darkShadow"));
 		dingy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				shipType = 4;

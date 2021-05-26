@@ -201,7 +201,7 @@ public class StoreWindow {
 					}
 				});
 				btnCompleteTransaction.setFont(new Font("Tahoma", Font.PLAIN, 22));
-				btnCompleteTransaction.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+				btnCompleteTransaction.setBackground(UIManager.getColor("Button.darkShadow"));
 				btnCompleteTransaction.setBounds(10, 654, 423, 136);
 				storeWindow.getContentPane().add(btnCompleteTransaction);
 				
@@ -212,7 +212,7 @@ public class StoreWindow {
 					}
 				});
 				btnSellSelected.setFont(new Font("Tahoma", Font.PLAIN, 22));
-				btnSellSelected.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+				btnSellSelected.setBackground(UIManager.getColor("Button.darkShadow"));
 				btnSellSelected.setBounds(441, 654, 431, 136);
 				storeWindow.getContentPane().add(btnSellSelected);
 				
@@ -223,7 +223,7 @@ public class StoreWindow {
 					}
 				});
 				btnExitWithoutSale.setFont(new Font("Tahoma", Font.PLAIN, 22));
-				btnExitWithoutSale.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+				btnExitWithoutSale.setBackground(UIManager.getColor("Button.darkShadow"));
 				btnExitWithoutSale.setBounds(882, 654, 421, 136);
 				storeWindow.getContentPane().add(btnExitWithoutSale);
 				

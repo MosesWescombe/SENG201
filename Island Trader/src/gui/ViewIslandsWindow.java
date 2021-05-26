@@ -75,11 +75,11 @@ public class ViewIslandsWindow {
 	 * @param btnLucia Lucia button
 	 */
 	private void resetButton(JButton btnNassau, JButton btnTimplore, JButton btnUgriad, JButton btnStGerbal, JButton btnLucia) {
-		btnNassau.setBackground(UIManager.getColor("CheckBox.darkShadow"));
-		btnTimplore.setBackground(UIManager.getColor("CheckBox.darkShadow"));
-		btnUgriad.setBackground(UIManager.getColor("CheckBox.darkShadow"));
-		btnStGerbal.setBackground(UIManager.getColor("CheckBox.darkShadow"));
-		btnLucia.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		btnNassau.setBackground(UIManager.getColor("Button.darkShadow"));
+		btnTimplore.setBackground(UIManager.getColor("Button.darkShadow"));
+		btnUgriad.setBackground(UIManager.getColor("Button.darkShadow"));
+		btnStGerbal.setBackground(UIManager.getColor("Button.darkShadow"));
+		btnLucia.setBackground(UIManager.getColor("Button.darkShadow"));
 		
 	}
 
@@ -131,7 +131,7 @@ public class ViewIslandsWindow {
 			}
 		});
 		btnTimplore.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnTimplore.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		btnTimplore.setBackground(UIManager.getColor("Button.darkShadow"));
 		btnTimplore.setBounds(10, 274, 209, 73);
 		viewIslandsWindow.getContentPane().add(btnTimplore);
 		
@@ -145,7 +145,7 @@ public class ViewIslandsWindow {
 			}
 		});
 		btnUgriad.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnUgriad.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		btnUgriad.setBackground(UIManager.getColor("Button.darkShadow"));
 		btnUgriad.setBounds(10, 358, 209, 73);
 		viewIslandsWindow.getContentPane().add(btnUgriad);
 		
@@ -159,7 +159,7 @@ public class ViewIslandsWindow {
 			}
 		});
 		btnStGerbal.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnStGerbal.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		btnStGerbal.setBackground(UIManager.getColor("Button.darkShadow"));
 		btnStGerbal.setBounds(10, 442, 209, 73);
 		viewIslandsWindow.getContentPane().add(btnStGerbal);
 		
@@ -173,7 +173,7 @@ public class ViewIslandsWindow {
 			}
 		});
 		btnLucia.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnLucia.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		btnLucia.setBackground(UIManager.getColor("Button.darkShadow"));
 		btnLucia.setBounds(10, 526, 209, 73);
 		viewIslandsWindow.getContentPane().add(btnLucia);
 		
@@ -286,7 +286,7 @@ public class ViewIslandsWindow {
 					returnToMenu();
 				}
 			});
-			btnReturn.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+			btnReturn.setBackground(UIManager.getColor("Button.darkShadow"));
 			btnReturn.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			btnReturn.setBounds(449, 89, 209, 73);
 			viewIslandsWindow.getContentPane().add(btnReturn);
