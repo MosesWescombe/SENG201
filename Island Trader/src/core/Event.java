@@ -1,12 +1,14 @@
 package core;
 
 import java.util.ArrayList;
-import gui.PiratesWindow;
 
 /**
  * Event class manages all functionality of random events.
+ * 
+ * EventOveride - Set to 0 to stop events from happening, used for unit tests. 1 Otherwise
  */
 public class Event {
+    private static int eventOveride = 1;
 
     /**
      * Decide if an event is going to happen based on a given event chance. Then decide what event and run it.
@@ -17,7 +19,7 @@ public class Event {
      */
     public static String checkEvent(double eventChance) {
         //Check Event occurance
-        boolean eventSuccess = Math.random() < eventChance;
+        boolean eventSuccess = Math.random() < (eventChance * eventOveride);
 
         //Pick random event
         if (eventSuccess) {
@@ -65,7 +67,7 @@ public class Event {
      * @param state PirateWindow holding the state of the current opened window
      * @return  String, A message to display. Or GAMEOVER indicating the game has been closed
      */
-    public static String piratesFailure(PiratesWindow state) {
+    public static String piratesFailure() {
         //Set a random cost for the pirates
         int piratesCost = (int)(Math.random() * (300 - 50 + 1) + 50);
         ArrayList<Entity> piratesLoot = new ArrayList<Entity>();
@@ -83,10 +85,6 @@ public class Event {
                 return "The pirates are satisfied with your items, they re-board thier ship with your items and leave with a smile and a wave.";
             }
         }
-
-        //Walk the plank
-        state.closeWindow();
-        GameEnvironment.exit("The Pirates are not satisfied with your items, they force you and the crew to walk the plank.");
         
         return "GAMEOVER";
     }
@@ -141,5 +139,11 @@ public class Event {
 
     	return ("You and your crew spot a ship wreck in the distance, looks like a giant squid caused some serious damage... I wonder how that happened?"
     			+ "\nYou rescue " + numberOfSailors + " thankful saliours\neach gift you $70 for saving their life. +$" + numberOfSailors * 70);
+    }
+
+
+    //Getters/Setters
+    public static void setEventOveride(int input) {
+        eventOveride = input;
     }
 }

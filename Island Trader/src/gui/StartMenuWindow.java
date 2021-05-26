@@ -56,7 +56,13 @@ public class StartMenuWindow {
 			return;
 		} else {
 			//Go back to game environment if the result is good
-			GameEnvironment.closeStartMenu(this);
+			String playerName = this.getPlayerNameInput().getText();
+			String shipName = this.getShipNameInput().getText();
+			int shipType = this.getShipType();
+			int gameDuration = this.getGameDuration().getValue();
+
+			GameEnvironment.setUpGame(playerName, shipName, shipType, gameDuration);
+			this.closeWindow();
 		}
 	}
 
@@ -273,6 +279,12 @@ public class StartMenuWindow {
 	}
 	public JSlider getGameDuration() {
 		return gameDuration;
+	}
+	public JLabel getShipNameWarning() {
+		return shipNameWarning;
+	}
+	public void setShipNameWarning(JLabel shipNameWarning) {
+		this.shipNameWarning = shipNameWarning;
 	}
 	public int getShipType() {
 		return shipType;

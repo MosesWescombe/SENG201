@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JLabel;
-
 import gui.EndWindow;
 import gui.MainWindow;
 import gui.StartMenuWindow;
@@ -62,15 +61,12 @@ public class GameEnvironment {
     /**
      * Closes the start menu, sets all the starting variables before opening the main window.
      * 
-     * @param state StartMenu object, the metheod will use it to close the window.
+     * @param playerName Users input for player name
+     * @param playerShipName Users input for ship name
+     * @param shipType Users selection for ship type, between 1-4
+     * @param gameDuration Users selection for game duration, between 20-50
      */
-    public static void closeStartMenu(StartMenuWindow state) {
-        //Set Initial Values
-        String playerName = state.getPlayerNameInput().getText();
-        String playerShipName = state.getShipNameInput().getText();
-        int shipType = state.getShipType();
-        int gameDuration = state.getGameDuration().getValue();
-
+    public static void setUpGame(String playerName, String playerShipName, int shipType, int gameDuration) {
         //Set up all other classes using the new variables as parameters
         time = new Time(gameDuration);
         setUpPlayer(playerName, playerShipName, shipType);
@@ -78,7 +74,6 @@ public class GameEnvironment {
         setUpRoutes();
 
         //Move on to the main window
-        state.closeWindow();
         new MainWindow();
     }
 
@@ -89,7 +84,7 @@ public class GameEnvironment {
      * @param shipName String, users chosen ship name
      * @param shipType int, Number from 1-4 defining the type of ship.
      */
-    private static void setUpPlayer(String playerName, String shipName, int shipType) {
+    public static void setUpPlayer(String playerName, String shipName, int shipType) {
        //Create Ship
        playerShip = new Ship(shipName, shipType);
 
@@ -101,7 +96,7 @@ public class GameEnvironment {
     /**
      * Set up Island objects and with each Island having its own Store object. These are hard coded and represent the map locations. 
      */
-    private static void setUpIslands() {
+    public static void setUpIslands() {
         Island tempIsland;
 
         //Island 1
@@ -137,7 +132,7 @@ public class GameEnvironment {
      * Set up routes by adding them to the Islands, these are hard coded and represent the paths between locations.
      * Routes are stored in the destination island.
      */
-    private static void setUpRoutes() {
+    public static void setUpRoutes() {
         //Route 1
         islands.get(0).addRoute(new Route(
             islands.get(1),
@@ -204,6 +199,7 @@ public class GameEnvironment {
     
     /**
      * Changes the Ships location and manages time events along the given route.
+     * Returns "NO_ROUTE" if there is no route
      * 
      * @param destination The island at the end of the route
      * @return  Information on the event that occurs (if any)
@@ -217,6 +213,10 @@ public class GameEnvironment {
                 currentRoute = route;
                 break;
             }
+        }
+
+        if (currentRoute == null) {
+            return "NO_ROUTE";
         }
 
         //Consume days and run all necisarry functions involved
