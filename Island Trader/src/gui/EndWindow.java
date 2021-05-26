@@ -11,6 +11,13 @@ import javax.swing.JPanel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+
+/**
+ * This is the final display window. At the end of the game this will show final stats and a custom message passed in.
+ * 
+ * EndWindow - Current Window object
+ * lblFinalMessage - Final message text box.
+ */
 public class EndWindow {
 
 	private JFrame endWindow;
@@ -20,6 +27,8 @@ public class EndWindow {
 
 	/**
 	 * Create the application.
+	 * 
+	 * @param message String, Message to display in window
 	 */
 	public EndWindow(String message) {
 		initialize();
@@ -41,6 +50,7 @@ public class EndWindow {
 		endWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		endWindow.getContentPane().setLayout(null);
 		
+		//Title
 		JTextPane txtpnGameOver = new JTextPane();
 		txtpnGameOver.setBounds(0, 0, 790, 67);
 		txtpnGameOver.setText("                Game Over!");
@@ -60,26 +70,29 @@ public class EndWindow {
 		btnExit.setBounds(0, 517, 790, 73);
 		endWindow.getContentPane().add(btnExit);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 255, 255));
-		panel.setBounds(10, 78, 770, 428);
-		endWindow.getContentPane().add(panel);
-		panel.setLayout(null);
-		
+		JPanel infoPanel = new JPanel();
+		infoPanel.setBackground(new Color(255, 255, 255));
+		infoPanel.setBounds(10, 78, 770, 428);
+		endWindow.getContentPane().add(infoPanel);
+		infoPanel.setLayout(null);
+
+			//Days remaining
 			JLabel lblDaysRemaining = new JLabel("Days Remaining: " + daysRemaining);
 			lblDaysRemaining.setBounds(57, 227, 394, 37);
-			panel.add(lblDaysRemaining);
+			infoPanel.add(lblDaysRemaining);
 			lblDaysRemaining.setFont(new Font("Tahoma", Font.PLAIN, 30));
 			
+			//Final wallet
 			JLabel lblFinalBalance = new JLabel("Final Wallet Ballance: $" + wallet);
 			lblFinalBalance.setFont(new Font("Tahoma", Font.PLAIN, 30));
 			lblFinalBalance.setBounds(57, 320, 436, 37);
-			panel.add(lblFinalBalance);
+			infoPanel.add(lblFinalBalance);
 			
+			//End message
 			lblFinalMessage = new JLabel("Ending Message");
 			lblFinalMessage.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			lblFinalMessage.setBounds(10, 75, 750, 71);
-			panel.add(lblFinalMessage);
+			infoPanel.add(lblFinalMessage);
 	}
 
 }

@@ -1,9 +1,9 @@
 package gui;
 
+import core.GameEnvironment;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
-import core.GameEnvironment;
 import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 import java.awt.Color;
@@ -19,13 +19,22 @@ import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.JLabel;
 
+/**
+ * Store Window. Here items are traded.
+ * 
+ * StoreWindow - Window object
+ * ItemsToPurchase - JTable displaying items the user can purchase
+ * ItemsToSell - JTable displaying items the user can sell to the store
+ * ItemsForPurchase - Object[][] of items the user can purchase
+ * ItemsToBuy - Object[][] of items the user can sell to the store
+ */
 public class StoreWindow {
 
 	private JFrame storeWindow;
 	private JTable itemsToPurchase;
 	private JTable itemsToSell;
-	private Object[][] itemsForPurchase = GameEnvironment.getPlayer().getShip().getLocation().getStore().getItemSellObjects(); //Items
-	private Object[][] itemsToBuy = GameEnvironment.getPlayer().getShip().getLocation().getStore().getItemsBuyObjects();
+	private Object[][] itemsForPurchase = GameEnvironment.getPlayerShip().getLocation().getStore().getItemSellObjects(); //Items
+	private Object[][] itemsToBuy = GameEnvironment.getPlayerShip().getLocation().getStore().getItemsBuyObjects();
 	
 
 	/**
@@ -40,19 +49,27 @@ public class StoreWindow {
 		storeWindow.dispose();
 	}
 
+	/**
+	 * Return to the main menu
+	 */
 	public void returnToMenu() {
 		GameEnvironment.returnToMenu();
 		this.closeWindow();
 	}
 	
+	/**
+	 * Calls the Stores sell function, selling an item to the user. Applies checks to see if the user can afford the items
+	 */
 	public void buyItem() {
 		int index = itemsToPurchase.getSelectedRow();
-		String result = GameEnvironment.getPlayer().getShip().getLocation().getStore().sell(this, index);
+		String result = GameEnvironment.getPlayerShip().getLocation().getStore().sell(this, index);
 
 		//Handle Errors
 		if (result == "WeightError") {
+			//Not enough capacity
 			JOptionPane.showMessageDialog(storeWindow, "You do not have enough CARGO CAPACITY to purchase this item.", "Cannot Select Item", JOptionPane.ERROR_MESSAGE);
 		} else if (result == "CostError") {
+			//Not enough money
 			JOptionPane.showMessageDialog(storeWindow, "You do not have enough MONEY to purchase this item.", "Cannot Select Item", JOptionPane.ERROR_MESSAGE);
 		} else if (result == "NoneSelected") {
 			//Do Nothing
@@ -63,9 +80,12 @@ public class StoreWindow {
 		}
 	}
 
+	/**
+	 * Sells an item to the store. Calling the stores purchase function.
+	 */
 	public void sellItem() {
 		int index = itemsToSell.getSelectedRow();
-		String result = GameEnvironment.getPlayer().getShip().getLocation().getStore().purchase(this, index);
+		String result = GameEnvironment.getPlayerShip().getLocation().getStore().purchase(this, index);
 
 		//Handle Errors
 		if (result == "NoneSelected") {
@@ -77,16 +97,65 @@ public class StoreWindow {
 		}
 	}
 
+	/**
+	 * Updates the purchase JTable
+	 */
+	private void updateSellGrid() {
+		//Items to purchase grid
+		String[] collumnNames = new String[] {"Name", "Description", "Value", "Weight"}; //Titles
+		itemsToBuy = GameEnvironment.getPlayerShip().getLocation().getStore().getItemsBuyObjects(); //Items
+		// Object[][] itemsToBuy = {
+		// 	{"This", "That" ,"Price","Other price", ""},
+		// 	{"This", "That" ,"Price","Other price", ""},
+		// 	{"This", "That" ,"Price","Other price", ""}
+		// };
+		
+		itemsToSell = new JTable(itemsToBuy, collumnNames);
+		itemsToSell.setDefaultEditor(Object.class, null);
+		itemsToSell.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		itemsToSell.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		itemsToSell.getColumnModel().getColumn(0).setPreferredWidth(170);
+		itemsToSell.getColumnModel().getColumn(1).setPreferredWidth(500);
+		itemsToSell.getColumnModel().getColumn(2).setPreferredWidth(100);
+		itemsToSell.getColumnModel().getColumn(3).setPreferredWidth(100);
+	}
+
+	/**
+	 * Updates the sell JTable
+	 */
+	private void updatePurchaseGrid() {
+		//Items to purchase grid
+		String[] collumnNames = {"Name", "Description", "Value", "Weight"}; //Titles
+		itemsForPurchase = GameEnvironment.getPlayerShip().getLocation().getStore().getItemSellObjects(); //Items
+		// Object[][] itemsForPurchase = {
+		// 	{"This", "That" ,"Price","Other price", ""},
+		// 	{"This", "That" ,"Price","Other price", ""},
+		// 	{"This", "That" ,"Price","Other price", ""}
+		// };
+		
+		itemsToPurchase = new JTable(itemsForPurchase, collumnNames);
+		itemsToPurchase.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		itemsToPurchase.setDefaultEditor(Object.class, null);
+		itemsToPurchase.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		itemsToPurchase.setFillsViewportHeight(true);
+		itemsToPurchase.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		itemsToPurchase.getColumnModel().getColumn(0).setPreferredWidth(170);
+		itemsToPurchase.getColumnModel().getColumn(1).setPreferredWidth(500);
+		itemsToPurchase.getColumnModel().getColumn(2).setPreferredWidth(100);
+		itemsToPurchase.getColumnModel().getColumn(3).setPreferredWidth(100);
+	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		storeWindow = new JFrame();
+		storeWindow.setTitle("Trader Game - Store");
 		storeWindow.setBounds(100, 100, 1329, 840);
 		storeWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		storeWindow.getContentPane().setLayout(null);
 		
+		//Title
 		JTextPane txtIslandStore = new JTextPane();
 		txtIslandStore.setBounds(0, 0, 1313, 78);
 		txtIslandStore.setText("                                 Island Store");
@@ -165,62 +234,20 @@ public class StoreWindow {
 				storeWindow.getContentPane().add(lblPlayerWallet);
 				
 				JLabel lblCargoCapacity = new JLabel("Cargo Capacity: ");
-				lblCargoCapacity.setText(lblCargoCapacity.getText() + GameEnvironment.getPlayer().getShip().getCapacity() + "/" + GameEnvironment.getPlayer().getShip().getmaxCapacity() + "kg");
+				lblCargoCapacity.setText(lblCargoCapacity.getText() + GameEnvironment.getPlayerShip().getCapacity() + "/" + GameEnvironment.getPlayerShip().getmaxCapacity() + "kg");
 				lblCargoCapacity.setFont(new Font("Tahoma", Font.PLAIN, 18));
 				lblCargoCapacity.setBounds(1069, 104, 234, 53);
 				storeWindow.getContentPane().add(lblCargoCapacity);
 	}
 
+
+	//Getters/Setters
 	public Object[][] getItemsForPurchase() {
 		return itemsForPurchase;
 	}
-
-	private void updateSellGrid() {
-		//Items to purchase grid
-		String[] collumnNames = new String[] {"Name", "Description", "Value", "Weight"}; //Titles
-		itemsToBuy = GameEnvironment.getPlayer().getShip().getLocation().getStore().getItemsBuyObjects(); //Items
-		// Object[][] itemsToBuy = {
-		// 	{"This", "That" ,"Price","Other price", ""},
-		// 	{"This", "That" ,"Price","Other price", ""},
-		// 	{"This", "That" ,"Price","Other price", ""}
-		// };
-		
-		itemsToSell = new JTable(itemsToBuy, collumnNames);
-		itemsToSell.setDefaultEditor(Object.class, null);
-		itemsToSell.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		itemsToSell.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-		itemsToSell.getColumnModel().getColumn(0).setPreferredWidth(170);
-		itemsToSell.getColumnModel().getColumn(1).setPreferredWidth(500);
-		itemsToSell.getColumnModel().getColumn(2).setPreferredWidth(100);
-		itemsToSell.getColumnModel().getColumn(3).setPreferredWidth(100);
-	}
-
-	private void updatePurchaseGrid() {
-		//Items to purchase grid
-		String[] collumnNames = {"Name", "Description", "Value", "Weight"}; //Titles
-		itemsForPurchase = GameEnvironment.getPlayer().getShip().getLocation().getStore().getItemSellObjects(); //Items
-		// Object[][] itemsForPurchase = {
-		// 	{"This", "That" ,"Price","Other price", ""},
-		// 	{"This", "That" ,"Price","Other price", ""},
-		// 	{"This", "That" ,"Price","Other price", ""}
-		// };
-		
-		itemsToPurchase = new JTable(itemsForPurchase, collumnNames);
-		itemsToPurchase.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		itemsToPurchase.setDefaultEditor(Object.class, null);
-		itemsToPurchase.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		itemsToPurchase.setFillsViewportHeight(true);
-		itemsToPurchase.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-		itemsToPurchase.getColumnModel().getColumn(0).setPreferredWidth(170);
-		itemsToPurchase.getColumnModel().getColumn(1).setPreferredWidth(500);
-		itemsToPurchase.getColumnModel().getColumn(2).setPreferredWidth(100);
-		itemsToPurchase.getColumnModel().getColumn(3).setPreferredWidth(100);
-	}
-
 	public void setItemsForPurchase(Object[][] itemsForPurchase) {
 		this.itemsForPurchase = itemsForPurchase;
 	}
-
 	public Object[][] getItemsToBuy() {
 		return itemsToBuy;
 	}

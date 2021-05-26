@@ -55,7 +55,7 @@ public class Store {
      */
     public String sell(StoreWindow state, int index) {
         int playerWallet = GameEnvironment.getPlayer().getWallet();
-        int playerCapacity = GameEnvironment.getPlayer().getShip().getCapacity();
+        int playerCapacity = GameEnvironment.getPlayerShip().getCapacity();
 
         //Check if none are selected
         if (index < 0) {
@@ -76,7 +76,7 @@ public class Store {
                 //If its an upgrade add it directly to the ship
                 if (selectedItem instanceof Upgrade) {
                     //Add upgrade to the ship
-                    GameEnvironment.getPlayer().getShip().addUpgrade((Upgrade)selectedItem);
+                    GameEnvironment.getPlayerShip().addUpgrade((Upgrade)selectedItem);
                 }
             } else {
                 return "WeightError";
@@ -85,7 +85,7 @@ public class Store {
             return "CostError";
         }
 
-        Ship shipToLoad = GameEnvironment.getPlayer().getShip();
+        Ship shipToLoad = GameEnvironment.getPlayerShip();
 
         //Add cargo to the ship
         shipToLoad.addCargo(selectedItem);
@@ -122,7 +122,7 @@ public class Store {
             return "NoneSelected";
         }
 
-        Ship playersShip = GameEnvironment.getPlayer().getShip();
+        Ship playersShip = GameEnvironment.getPlayerShip();
 
         //Remove cargo from the ship
         playersShip.removeCargo(selectedItem);
@@ -172,7 +172,7 @@ public class Store {
         Object[][] result = new Object[itemsBuy.size()][5];
         int i = 0;
         for (String[] itemBuy : itemsBuy) {
-            for  (Entity item : GameEnvironment.getPlayer().getShip().getCargo()) {
+            for  (Entity item : GameEnvironment.getPlayerShip().getCargo()) {
                 if (item.getName() == itemBuy[0]) {
                     item.setSalePrice(Integer.parseInt(itemBuy[1]));
                     result[i][0] = item.getItemDetails()[0];

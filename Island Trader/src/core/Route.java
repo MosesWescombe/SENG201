@@ -40,7 +40,7 @@ public class Route {
 	 */
 	public String viewRoute() {
 		//Get a route duration in days
-		int routeDuration = (distance / GameEnvironment.getPlayer().getShip().getSailSpeed()) / 24;
+		int routeDuration = (distance / GameEnvironment.getPlayerShip().getSailSpeed()) / 24;
 		return "Route to: " + destination.getName() + 
 		"<br/>Distance: " + distance + "km " +  " (" + routeDuration + " days)"
 		+ "<br/>Description: '" + description + "<br/>Event Chance: " + eventChance * 100 + "%";

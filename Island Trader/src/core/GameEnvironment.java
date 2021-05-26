@@ -1,9 +1,13 @@
 package core;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JLabel;
+
 import gui.EndWindow;
 import gui.MainWindow;
-import gui.StartMenu;
+import gui.StartMenuWindow;
 
 /**
  * Trader Game.
@@ -19,6 +23,7 @@ public class GameEnvironment {
     private static Time time;
     private static ArrayList<Island> islands = new ArrayList<Island>();
     private static Player player;
+    private static Ship playerShip;
 
     /**
      * Entry Point
@@ -27,15 +32,39 @@ public class GameEnvironment {
      */
     public static void main(String[] args) {
         //Initialize game environment
-        new StartMenu();
+        new StartMenuWindow();
     }
+
+    /**
+     * Test If the users input is of the correct formatt.
+     * 
+     * @param message JLabel, Reference to the message label to display if incorrect
+     * @param input String, Users input
+     * @return boolean, true if the tests pass, false otherwise
+     */
+    public static boolean checkNameInput(JLabel message, String input) {
+		//Check no special characters or double spaces
+		Pattern pattern = Pattern.compile("[a-z]+[ [a-z]+]*", Pattern.CASE_INSENSITIVE);
+		Matcher matcher = pattern.matcher(input);
+		boolean matchFound = matcher.matches();
+		//Check Length
+		boolean correctLength = !(input.length() < 3 || input.length() > 15);
+
+		if ( !correctLength || !matchFound) {
+			message.setVisible(true);
+			return false;
+		} else {
+			message.setVisible(false);
+			return true;
+		}
+	}
 
     /**
      * Closes the start menu, sets all the starting variables before opening the main window.
      * 
      * @param state StartMenu object, the metheod will use it to close the window.
      */
-    public static void closeStartMenu(StartMenu state) {
+    public static void closeStartMenu(StartMenuWindow state) {
         //Set Initial Values
         String playerName = state.getPlayerNameInput().getText();
         String playerShipName = state.getShipNameInput().getText();
@@ -62,10 +91,11 @@ public class GameEnvironment {
      */
     private static void setUpPlayer(String playerName, String shipName, int shipType) {
        //Create Ship
-       Ship ship = new Ship(shipName, shipType);
+       playerShip = new Ship(shipName, shipType);
 
        //Create Player
-       player = new Player(playerName, ship, 1000);
+       player = new Player(playerName, playerShip, 1000);
+
     }
 
     /**
@@ -227,5 +257,8 @@ public class GameEnvironment {
     }
     public static Player getPlayer() {
         return player;
+    }
+    public static Ship getPlayerShip() {
+        return playerShip;
     }
 }

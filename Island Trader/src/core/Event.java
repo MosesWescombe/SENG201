@@ -72,13 +72,13 @@ public class Event {
 
         //Go through players inventory and add it to the pirates loot untill the cost is met
         int value = 0;
-        for (Entity good : GameEnvironment.getPlayer().getShip().getCargo()) {
+        for (Entity good : GameEnvironment.getPlayerShip().getCargo()) {
             value += good.getPurchasePrice();
             piratesLoot.add(good);
 
             //Remove cargo
             if (value >= piratesCost) {
-                GameEnvironment.getPlayer().getShip().removeCargo(piratesLoot);
+                GameEnvironment.getPlayerShip().removeCargo(piratesLoot);
 
                 return "The pirates are satisfied with your items, they re-board thier ship with your items and leave with a smile and a wave.";
             }
@@ -98,7 +98,7 @@ public class Event {
      */
     public static int getChances() {
         int numberOfAttempts = 3;
-        for (Upgrade upgrade : GameEnvironment.getPlayer().getShip().getUpgrades()) {
+        for (Upgrade upgrade : GameEnvironment.getPlayerShip().getUpgrades()) {
             if (upgrade.getType() == 0) {
                 numberOfAttempts++;
             }
@@ -114,10 +114,10 @@ public class Event {
      */
     private static String weather() {
         //Generate random damage amount and remove it from ships health
-        int maxDamage = GameEnvironment.getPlayer().getShip().getHealth();
+        int maxDamage = GameEnvironment.getPlayerShip().getHealth();
         int minDamage = 20;
         int damage = (int)(Math.random() * (maxDamage - minDamage + 1) + minDamage);
-        GameEnvironment.getPlayer().getShip().takeDamage(damage);
+        GameEnvironment.getPlayerShip().takeDamage(damage);
 
         return "You and your crew run into some bad weather, big waves and storng winds.\nA giant squid is thrown from a tornado collapses the mast. \nYou must repeair the damage when you arrive at port.";
     }
@@ -130,7 +130,7 @@ public class Event {
     private static String rescue() {
         //Set number of sailors, accounting for any potential upgrades
         int numberOfSailors = (int)(Math.random() * (5 - 2 + 1) + 2);
-        for (Upgrade upgrade : GameEnvironment.getPlayer().getShip().getUpgrades()) {
+        for (Upgrade upgrade : GameEnvironment.getPlayerShip().getUpgrades()) {
             if (upgrade.getType() == 2) {
                 numberOfSailors += 2;
             }

@@ -29,7 +29,7 @@ public class Time {
         }
         
         //Subtract Wage
-        int crewCosts = GameEnvironment.getPlayer().getShip().getCrew() * GameEnvironment.getPlayer().getShip().getCrewWage();
+        int crewCosts = GameEnvironment.getPlayerShip().getCrew() * GameEnvironment.getPlayerShip().getCrewWage();
         if (GameEnvironment.getPlayer().getWallet() >= crewCosts) {
             GameEnvironment.getPlayer().changeWallet(-crewCosts);
         } else {

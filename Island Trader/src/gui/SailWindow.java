@@ -16,20 +16,26 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
 
-public class SailScreen {
+/**
+ * Display Islands and route info, choose a route to take.
+ * 
+ * SailScreen - Window object
+ * Islands - List of all islands
+ * lblShowRoute - Route information
+ * btnSetSail - Sail button
+ */
+public class SailWindow {
 
 	private JFrame sailScreen;
-	
 	private ArrayList<Island> islands = GameEnvironment.getIslands();
 	private Island currentSelected = islands.get(0);
-	
 	private JLabel lblShowRoute;
 	private JButton btnSetSail;
 
 	/**
 	 * Create the application.
 	 */
-	public SailScreen() {
+	public SailWindow() {
 		initialize();
 		sailScreen.setVisible(true);
 	}
@@ -38,14 +44,21 @@ public class SailScreen {
 		sailScreen.dispose();
 	}
 	
+	/**
+	 * Return to main menu
+	 */
 	public void returnToMenu() {
 		GameEnvironment.returnToMenu();
 		this.closeWindow();
 	}
 
+	/**
+	 * Set Sail. Call main sail function and manage returns.
+	 */
 	public void setSail() {
 		String result = GameEnvironment.sailToIsland(currentSelected);
 
+		//Manage Events, open pirate window if pirate event
 		if (result == "PIRATES") {
 			new PiratesWindow();
 			this.closeWindow();
@@ -53,9 +66,40 @@ public class SailScreen {
 			JOptionPane.showMessageDialog(sailScreen, "An unneventful journey, you have succesfully traveled to a new Island.", "Travel Success", JOptionPane.PLAIN_MESSAGE);
 			returnToMenu();
 		} else {
+			//Display event info
 			JOptionPane.showMessageDialog(sailScreen, result, "Event Occured!", JOptionPane.ERROR_MESSAGE);
 			returnToMenu();
 		}
+	}
+
+	/**
+	 * Updates the info displayed
+	 */
+	private void updateWindow() {
+		String[] result = currentSelected.viewIslandInfo(GameEnvironment.getPlayerShip().getLocation());
+		lblShowRoute.setText(result[0]);
+		if (result[1] == "false") {
+			btnSetSail.setVisible(false);
+		} else {
+			btnSetSail.setVisible(true);
+		}
+	}
+	
+	/**
+	 * Toggles the route buttons.
+	 * 
+	 * @param btnNassau Nassau button
+	 * @param btnTimplore Timlore
+	 * @param btnUgriad Ugraid button
+	 * @param btnStGerbal St. Gerbal button
+	 * @param btnLucia Lucia button
+	 */
+	private void resetButton(JButton btnNassau, JButton btnTimplore, JButton btnUgriad, JButton btnStGerbal, JButton btnLucia) {
+		btnNassau.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		btnTimplore.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		btnUgriad.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		btnStGerbal.setBackground(UIManager.getColor("CheckBox.darkShadow"));
+		btnLucia.setBackground(UIManager.getColor("CheckBox.darkShadow"));	
 	}
 
 	/**
@@ -67,7 +111,7 @@ public class SailScreen {
 		JButton btnUgriad = new JButton("Ugriad");
 		JButton btnStGerbal = new JButton("St. Gerbal");
 		JButton btnLucia = new JButton("Lucia");
-		
+
 		sailScreen = new JFrame();
 		sailScreen.setTitle("Trader Game Sail Screen");
 		sailScreen.setBounds(100, 100, 707, 649);
@@ -160,7 +204,7 @@ public class SailScreen {
 		sailScreen.getContentPane().add(panel);
 		
 		lblShowRoute = new JLabel("");
-		lblShowRoute.setText(currentSelected.viewIslandInfo(GameEnvironment.getPlayer().getShip().getLocation())[0]);
+		lblShowRoute.setText(currentSelected.viewIslandInfo(GameEnvironment.getPlayerShip().getLocation())[0]);
 		lblShowRoute.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblShowRoute.setBounds(10, 69, 365, 238);
 		panel.add(lblShowRoute);
@@ -192,7 +236,7 @@ public class SailScreen {
 		sailScreen.getContentPane().add(btnReturn);
 		
 		JLabel lblLocationStatus = new JLabel("You ship is currently docked at: ");
-		lblLocationStatus.setText(lblLocationStatus.getText() + GameEnvironment.getPlayer().getShip().getLocation().getName());
+		lblLocationStatus.setText(lblLocationStatus.getText() + GameEnvironment.getPlayerShip().getLocation().getName());
 		lblLocationStatus.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblLocationStatus.setBounds(10, 89, 447, 41);
 		sailScreen.getContentPane().add(lblLocationStatus);
@@ -202,24 +246,7 @@ public class SailScreen {
 		lblSelectionInfo.setBounds(10, 141, 351, 25);
 		sailScreen.getContentPane().add(lblSelectionInfo);
 
+		//Update window
 		updateWindow();
-	}
-	
-	private void updateWindow() {
-		String[] result = currentSelected.viewIslandInfo(GameEnvironment.getPlayer().getShip().getLocation());
-		lblShowRoute.setText(result[0]);
-		if (result[1] == "false") {
-			btnSetSail.setVisible(false);
-		} else {
-			btnSetSail.setVisible(true);
-		}
-	}
-	
-	private void resetButton(JButton btnNassau, JButton btnTimplore, JButton btnUgriad, JButton btnStGerbal, JButton btnLucia) {
-		btnNassau.setBackground(UIManager.getColor("CheckBox.darkShadow"));
-		btnTimplore.setBackground(UIManager.getColor("CheckBox.darkShadow"));
-		btnUgriad.setBackground(UIManager.getColor("CheckBox.darkShadow"));
-		btnStGerbal.setBackground(UIManager.getColor("CheckBox.darkShadow"));
-		btnLucia.setBackground(UIManager.getColor("CheckBox.darkShadow"));	
 	}
 }
