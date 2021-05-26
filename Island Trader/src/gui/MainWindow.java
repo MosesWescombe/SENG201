@@ -17,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 
 /**
  * Main Menu window. Contains links to all other windows and functionalities.
@@ -99,8 +100,8 @@ public class MainWindow {
 		JTextPane txtpnMainMenu = new JTextPane();
 		txtpnMainMenu.setForeground(new Color(255, 255, 255));
 		txtpnMainMenu.setEditable(false);
-		txtpnMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		txtpnMainMenu.setText("                             Main Menu");
+		txtpnMainMenu.setFont(new Font("Eras Bold ITC", Font.PLAIN, 55));
+		txtpnMainMenu.setText("                               Main Menu");
 		txtpnMainMenu.setBackground(new Color(0, 0, 51));
 		txtpnMainMenu.setBounds(0, 0, 1167, 78);
 		mainScreen.getContentPane().add(txtpnMainMenu);
@@ -111,6 +112,7 @@ public class MainWindow {
 			public void actionPerformed(ActionEvent e) {
 				//View Transactions Grid
 				String[] collumnNames = {"Name", "Sale Location", "Purchase Price", "Sale Price"}; //Titles
+				//Object[][] transactionHistory = {null, null, null, null};
 				Object[][] transactionHistory = GameEnvironment.getPlayerShip().getTransactionHistoryObjects();
 				
 				JTable transactionsTable = new JTable(transactionHistory, collumnNames);
@@ -224,8 +226,12 @@ public class MainWindow {
 				
 			JPanel imagePanel = new JPanel();
 			imagePanel.setBackground(Color.WHITE);
-			imagePanel.setBounds(0, 0, 485, 251);
+			imagePanel.setBounds(0, -10, 485, 261);
 			topPanel.add(imagePanel);
+			
+			JLabel lblImage = new JLabel("");
+			lblImage.setIcon(new ImageIcon(MainWindow.class.getResource("/images/Main ship image.png")));
+			imagePanel.add(lblImage);
 		
 		JPanel shipPropertiesPanel = new JPanel();
 		shipPropertiesPanel.setLayout(null);
@@ -270,9 +276,9 @@ public class MainWindow {
 			shipPropertiesPanel.add(lblCrew);
 
 			//Repair Cost
-			JLabel lblRepairCost = new JLabel("Repair Cost: ");
+			JLabel lblRepairCost = new JLabel("Repair Cost: $" + (GameEnvironment.getPlayerShip().getMaxHealth() - GameEnvironment.getPlayerShip().getHealth()));
 			lblRepairCost.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			lblRepairCost.setBounds(53, 151, 128, 31);
+			lblRepairCost.setBounds(53, 151, 178, 31);
 			shipPropertiesPanel.add(lblRepairCost);
 			
 			//Repair Button
@@ -334,7 +340,7 @@ public class MainWindow {
 			
 			//Time
 			JLabel lblDuration = new JLabel("Time Remaining: ");
-			lblDuration.setText(lblDuration.getText() + GameEnvironment.getTime().getTimeRemaining() + "days");
+			lblDuration.setText(lblDuration.getText() + GameEnvironment.getTime().getTimeRemaining() + " days");
 			lblDuration.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			lblDuration.setBounds(10, 72, 216, 29);
 			playerPanel.add(lblDuration);

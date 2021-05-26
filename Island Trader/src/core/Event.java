@@ -86,7 +86,7 @@ public class Event {
 
         //Walk the plank
         state.closeWindow();
-        GameEnvironment.exit("The Pirates are not satisfied with your items, they force you and the crew to walk the plank.");
+        GameEnvironment.exit("<html>The Pirates are not satisfied with your items </br>they force you and the crew to walk the plank.</html>");
         
         return "GAMEOVER";
     }

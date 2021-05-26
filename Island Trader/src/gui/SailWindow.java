@@ -65,9 +65,12 @@ public class SailWindow {
 		} else if (result == "NONE") {
 			JOptionPane.showMessageDialog(sailScreen, "An unneventful journey, you have succesfully traveled to a new Island.", "Travel Success", JOptionPane.PLAIN_MESSAGE);
 			returnToMenu();
+		} else if (result == "END") {
+			this.closeWindow();
+			return;
 		} else {
 			//Display event info
-			JOptionPane.showMessageDialog(sailScreen, result, "Event Occured!", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(sailScreen, result, "Event Occured!", JOptionPane.PLAIN_MESSAGE);
 			returnToMenu();
 		}
 	}
@@ -120,11 +123,12 @@ public class SailWindow {
 		
 		//title block for window.
 		JTextPane txtpnSetSail = new JTextPane();
+		txtpnSetSail.setForeground(new Color(255, 255, 255));
 		txtpnSetSail.setEditable(false);
-		txtpnSetSail.setText("                Set Sail");
-		txtpnSetSail.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		txtpnSetSail.setBackground(Color.LIGHT_GRAY);
-		txtpnSetSail.setBounds(0, 0, 691, 78);
+		txtpnSetSail.setText("                 Set Sail");
+		txtpnSetSail.setFont(new Font("Eras Bold ITC", Font.BOLD, 55));
+		txtpnSetSail.setBackground(new Color(0, 0, 51));
+		txtpnSetSail.setBounds(0, 0, 691, 73);
 		sailScreen.getContentPane().add(txtpnSetSail);
 		
 		//button action for Nassau

@@ -53,9 +53,9 @@ public class EndWindow {
 		//Title
 		JTextPane txtpnGameOver = new JTextPane();
 		txtpnGameOver.setBounds(0, 0, 790, 67);
-		txtpnGameOver.setText("                Game Over!");
+		txtpnGameOver.setText("                  Game Over!");
 		txtpnGameOver.setForeground(Color.WHITE);
-		txtpnGameOver.setFont(new Font("Tahoma", Font.PLAIN, 50));
+		txtpnGameOver.setFont(new Font("Eras Bold ITC", Font.BOLD, 50));
 		txtpnGameOver.setEditable(false);
 		txtpnGameOver.setBackground(new Color(0, 0, 51));
 		endWindow.getContentPane().add(txtpnGameOver);
@@ -78,19 +78,19 @@ public class EndWindow {
 
 			//Days remaining
 			JLabel lblDaysRemaining = new JLabel("Days Remaining: " + daysRemaining);
-			lblDaysRemaining.setBounds(57, 227, 394, 37);
+			lblDaysRemaining.setBounds(57, 172, 394, 37);
 			infoPanel.add(lblDaysRemaining);
 			lblDaysRemaining.setFont(new Font("Tahoma", Font.PLAIN, 30));
 			
 			//Final wallet
 			JLabel lblFinalBalance = new JLabel("Final Wallet Ballance: $" + wallet);
 			lblFinalBalance.setFont(new Font("Tahoma", Font.PLAIN, 30));
-			lblFinalBalance.setBounds(57, 320, 436, 37);
+			lblFinalBalance.setBounds(57, 220, 436, 37);
 			infoPanel.add(lblFinalBalance);
 			
 			//End message
 			lblFinalMessage = new JLabel("Ending Message");
-			lblFinalMessage.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			lblFinalMessage.setFont(new Font("Tahoma", Font.PLAIN, 20));
 			lblFinalMessage.setBounds(10, 75, 750, 71);
 			infoPanel.add(lblFinalMessage);
 	}

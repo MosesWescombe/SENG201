@@ -20,12 +20,13 @@ public class Time {
     /**
      * End Day. Subtract day from timeRemaining and subtract crew wages
      */
-    public void endDay() {
+    public boolean endDay() {
         //Subtract Day
         if (this.timeRemaining > 0) {
             this.timeRemaining -= 1;
         } else {
             GameEnvironment.exit("Game Over. Not enough time to travel to these locations");
+            return false;
         }
         
         //Subtract Wage
@@ -34,7 +35,9 @@ public class Time {
             GameEnvironment.getPlayer().changeWallet(-crewCosts);
         } else {
             GameEnvironment.exit("Game Over. Not enough funds to pay crew, a mutany has occured and you have died!");
+            return false;
         }
+        return true;
     }
 
     

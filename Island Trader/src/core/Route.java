@@ -51,6 +51,9 @@ public class Route {
 	public int getDistance() {
 		return distance;
 	}
+	public int getDuration() {
+		return ((distance / GameEnvironment.getPlayerShip().getSailSpeed()) / 24);
+	}
 	public Island getDestination() {
 		return destination;
 	}

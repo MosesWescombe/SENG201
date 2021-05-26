@@ -15,7 +15,7 @@ import gui.StartMenuWindow;
  * In this game the user will travel around different islands and trade goods in attempt to reach a high score.
  * The GameEnvironment is the entry point to the program and all other classes can be accessed statically through this. All key intitalizing and functions are a part of this class.
  * 
- * @author Moses Wescombe & Jeremy Roberts
+ * @author Moses Wescombe (mwe50) & Jeremy Roberts (jro162)
  * @version 1.0 25/05/2021
 */
 public class GameEnvironment {
@@ -221,7 +221,9 @@ public class GameEnvironment {
 
         //Consume days and run all necisarry functions involved
         for (int j=0; j < currentRoute.getDistance() / player.getShip().getSailSpeed() / 24; j++) {
-            time.endDay();
+            if (!time.endDay()) {
+            	return "END";
+            }
         }
 
         //Change ships location

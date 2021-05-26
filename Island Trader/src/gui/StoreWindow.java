@@ -159,7 +159,7 @@ public class StoreWindow {
 		JTextPane txtIslandStore = new JTextPane();
 		txtIslandStore.setBounds(0, 0, 1313, 78);
 		txtIslandStore.setText("                                 Island Store");
-		txtIslandStore.setFont(new Font("Tahoma", Font.PLAIN, 50));
+		txtIslandStore.setFont(new Font("Eras Bold ITC", Font.PLAIN, 55));
 		txtIslandStore.setEditable(false);
 		txtIslandStore.setBackground(new Color(0, 0, 51));
 		txtIslandStore.setForeground(new Color(255, 255, 255));

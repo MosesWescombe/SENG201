@@ -148,8 +148,8 @@ public class StartMenuWindow {
 		userInputPanel.setForeground(new Color(255, 255, 255));
 		userInputPanel.setEditable(false);
 		userInputPanel.setBackground(new Color(0, 0, 51));
-		userInputPanel.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		userInputPanel.setText("                  Trader Game");
+		userInputPanel.setFont(new Font("Eras Bold ITC", Font.PLAIN, 55));
+		userInputPanel.setText("                 Trader Game");
 		userInputPanel.setBounds(0, 0, 862, 81);
 		startMenuWindow.getContentPane().add(userInputPanel);
 

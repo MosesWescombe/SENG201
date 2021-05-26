@@ -100,10 +100,11 @@ public class ViewIslandsWindow {
 		viewIslandsWindow.getContentPane().setLayout(null);
 		
 		JTextPane txtpnViewIsland = new JTextPane();
+		txtpnViewIsland.setForeground(Color.WHITE);
 		txtpnViewIsland.setEditable(false);
-		txtpnViewIsland.setText("       View Island Properties");
-		txtpnViewIsland.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		txtpnViewIsland.setBackground(Color.LIGHT_GRAY);
+		txtpnViewIsland.setText("     View Island Properties");
+		txtpnViewIsland.setFont(new Font("Eras Bold ITC", Font.PLAIN, 50));
+		txtpnViewIsland.setBackground(new Color(0, 0, 51));
 		txtpnViewIsland.setBounds(0, 0, 691, 78);
 		viewIslandsWindow.getContentPane().add(txtpnViewIsland);
 		
