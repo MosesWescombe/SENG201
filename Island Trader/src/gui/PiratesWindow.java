@@ -58,11 +58,16 @@ public class PiratesWindow {
 
 		//Pirates steal yo goods
 		if (attemptsRemaining <= 0) {
-			String ending = Event.piratesFailure(this);
+			String ending = Event.piratesFailure();
 
 			if (ending != "GAMEOVER") {
 				JOptionPane.showMessageDialog(piratesWindow, ending, "The Pirates Leave...", JOptionPane.INFORMATION_MESSAGE);
 				returnToMenu();
+			} else {
+				this.closeWindow();
+				
+				//Walk the plank
+				GameEnvironment.exit("The Pirates are not satisfied with your items, they force you and the crew to walk the plank.");
 			}
 		}
 	}

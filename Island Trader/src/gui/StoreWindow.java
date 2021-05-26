@@ -234,7 +234,7 @@ public class StoreWindow {
 				storeWindow.getContentPane().add(lblPlayerWallet);
 				
 				JLabel lblCargoCapacity = new JLabel("Cargo Capacity: ");
-				lblCargoCapacity.setText(lblCargoCapacity.getText() + GameEnvironment.getPlayerShip().getCapacity() + "/" + GameEnvironment.getPlayerShip().getmaxCapacity() + "kg");
+				lblCargoCapacity.setText(lblCargoCapacity.getText() + GameEnvironment.getPlayerShip().getCapacity() + "/" + GameEnvironment.getPlayerShip().getMaxCapacity() + "kg");
 				lblCargoCapacity.setFont(new Font("Tahoma", Font.PLAIN, 18));
 				lblCargoCapacity.setBounds(1069, 104, 234, 53);
 				storeWindow.getContentPane().add(lblCargoCapacity);

@@ -2,6 +2,8 @@ package core;
 
 import java.util.ArrayList;
 
+import org.hamcrest.core.IsInstanceOf;
+
 /**
  * Ship Class. A ship is what the player uses to travel between islands. The items that the player buys also gets stored in the ships cargo.
  * 
@@ -100,6 +102,10 @@ public class Ship {
         //Update the ships cargo and capacity level
         this.cargo.add(item);
         this.capacity -= item.getWeight();
+
+        if (item instanceof Upgrade) {
+            addUpgrade((Upgrade)item);
+        }
 
         //Update Transaction History
         String[] transaction = {item.getName(), item.getLocationOfStore().getName(), Integer.toString(item.getPurchasePrice()), "Not Applicable"};
@@ -312,67 +318,54 @@ public class Ship {
     public String getName() {
         return name;
     }
-
     public int getCrew() {
         return crew;
     }
-
     public int getCrewWage() {
         return crewWage;
     }
-
-    public int getmaxCapacity() {
+    public int getMaxCapacity() {
         return maxCapacity;
     }
-
     public int getHealth() {
         return health;
     }
-
     public int getSailSpeed() {
         return sailSpeed;
     }
-
     public String getType() {
         return type;
     }
-
     public static String[] getSHIPTYPES() {
         return SHIPTYPES;
     }
-
     public ArrayList<Entity> getCargo() {
         return cargo;
     }
-
     public Island getLocation() {
         return location;
     }
-
     public void setLocation(Island location) {
         this.location = location;
     }
-
     public int getCapacity() {
         return capacity;
     }
-
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
-
+    public void setMaxCapacity(int capacity) {
+        this.maxCapacity = capacity;
+    }
     public ArrayList<Upgrade> getUpgrades() {
         return upgrades;
     }
-
     public int getMaxHealth() {
         return maxHealth;
     }
-
     public void setMaxHealth(int maxHealth) {
         this.maxHealth = maxHealth;
     }
-
     public ArrayList<String[]> getTransactionHistory() {
         return transactionHistory;
     }

@@ -249,7 +249,7 @@ public class MainWindow {
 
 			//Capacity
 			JLabel lblCapacity = new JLabel("Capacity: ");
-			lblCapacity.setText(lblCapacity.getText() + GameEnvironment.getPlayerShip().getCapacity() + "/" + GameEnvironment.getPlayerShip().getmaxCapacity() + "kg");
+			lblCapacity.setText(lblCapacity.getText() + GameEnvironment.getPlayerShip().getCapacity() + "/" + GameEnvironment.getPlayerShip().getMaxCapacity() + "kg");
 			lblCapacity.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			lblCapacity.setBounds(352, 99, 165, 38);
 			shipPropertiesPanel.add(lblCapacity);

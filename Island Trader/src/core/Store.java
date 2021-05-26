@@ -72,13 +72,7 @@ public class Store {
         //If player has enough money
         if (selectedItem.getPurchasePrice() <= playerWallet) {
             //If player has enough cargo space
-            if (selectedItem.getWeight() <= playerCapacity) {
-                //If its an upgrade add it directly to the ship
-                if (selectedItem instanceof Upgrade) {
-                    //Add upgrade to the ship
-                    GameEnvironment.getPlayerShip().addUpgrade((Upgrade)selectedItem);
-                }
-            } else {
+            if (selectedItem.getWeight() > playerCapacity) {
                 return "WeightError";
             }
         }  else {

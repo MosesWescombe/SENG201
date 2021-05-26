@@ -36,12 +36,15 @@ public class Player {
     
     //Getters/Setters
     public String getName() {
-        return name;
+        return this.name;
     }
     public int getWallet() {
-        return wallet;
+        return this.wallet;
+    }
+    public void setWallet(int amount) {
+        this.wallet = amount;
     }
     public Ship getShip() {
-        return ship;
+        return this.ship;
     }
 }
