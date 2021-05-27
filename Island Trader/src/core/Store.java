@@ -49,24 +49,12 @@ public class Store {
     /**
      * Sell an item. A user may purchase an item from the store, this method manages all the sale functions.
      * 
-     * @param state StoreWindow, store window to close and reopen to update the items.
-     * @param index int, Index of the item in the JTable that the user selected
+     * @param selectedItem Item to buy from the store
      * @return String, {'NoneSelected', 'WeightError', 'CostError'} depending on different checks
      */
-    public String sell(StoreWindow state, int index) {
+    public String sell(Entity selectedItem) {
         int playerWallet = GameEnvironment.getPlayer().getWallet();
         int playerCapacity = GameEnvironment.getPlayerShip().getCapacity();
-
-        //Check if none are selected
-        if (index < 0) {
-            return "NoneSelected";
-        }   
-
-        //Find the item that the user selected
-        Entity selectedItem = (Entity)state.getItemsForPurchase()[index][4];
-        if (selectedItem == null) {
-            return "NoneSelected";
-        }
 
         //Try to add item to the selectedItem, if the item is affordable and can fit on the ship
         //If player has enough money
@@ -98,24 +86,12 @@ public class Store {
     }
 
     /**
-     * Purchase an item. A user may sell an item from the store, this method manages all the sale functions.
+     * Purchase an item. A user may sell an item to the store, this method manages all the sale functions.
      * 
-     * @param state StoreWindow, store window to close and reopen to update the items.
-     * @param index int, Index of the item in the JTable that the user selected
+     * @param selectedItem Item to sell to the store
      * @return String, {'NoneSelected', 'Success'} depending on different checks
      */
-    public String purchase(StoreWindow state, int index) {
-        //Check the user selected an item
-        if (index < 0) {
-            return "NoneSelected";
-        }
-
-        //Find the item selected
-        Entity selectedItem = (Entity)state.getItemsToBuy()[index][4];
-        if (selectedItem == null) {
-            return "NoneSelected";
-        }
-
+    public String purchase(Entity selectedItem) {
         Ship playersShip = GameEnvironment.getPlayerShip();
 
         //Remove cargo from the ship

@@ -107,12 +107,12 @@ public class PiratesWindow {
 
 				JLabel lblEvent = new JLabel("Pirates are trying to board your ship.");
 				lblEvent.setFont(new Font("Tahoma", Font.PLAIN, 18));
-				lblEvent.setBounds(175, 43, 301, 35);
+				lblEvent.setBounds(175, 38, 407, 35);
 				mainPanel.add(lblEvent);
 				
 				JLabel lblInstruction = new JLabel("Quickly select a direction to try and avioid them!");
 				lblInstruction.setFont(new Font("Tahoma", Font.PLAIN, 18));
-				lblInstruction.setBounds(136, 77, 393, 29);
+				lblInstruction.setBounds(116, 75, 486, 29);
 				mainPanel.add(lblInstruction);
 				
 				//South button
@@ -166,7 +166,7 @@ public class PiratesWindow {
 				//Attempts remaining lbl
 				lblAttempts = new JLabel("Attempts Remaining: ");
 				lblAttempts.setFont(new Font("Tahoma", Font.PLAIN, 14));
-				lblAttempts.setBounds(250, 234, 156, 30);
+				lblAttempts.setBounds(237, 234, 201, 30);
 				mainPanel.add(lblAttempts);
 
 				//Update Attempts

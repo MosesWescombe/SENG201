@@ -1,5 +1,6 @@
 package gui;
 
+import core.Entity;
 import core.GameEnvironment;
 
 import javax.swing.JFrame;
@@ -62,7 +63,17 @@ public class StoreWindow {
 	 */
 	public void buyItem() {
 		int index = itemsToPurchase.getSelectedRow();
-		String result = GameEnvironment.getPlayerShip().getLocation().getStore().sell(this, index);
+		//Check the user selected an item
+		if (index < 0) {
+			return;
+		}
+		//Find the item selected
+		Entity selectedItem = (Entity)itemsForPurchase[index][4];
+		if (selectedItem == null) {
+			return;
+		}
+
+		String result = GameEnvironment.getPlayerShip().getLocation().getStore().sell(selectedItem);
 
 		//Handle Errors
 		if (result == "WeightError") {
@@ -71,8 +82,6 @@ public class StoreWindow {
 		} else if (result == "CostError") {
 			//Not enough money
 			JOptionPane.showMessageDialog(storeWindow, "You do not have enough MONEY to purchase this item.", "Cannot Select Item", JOptionPane.ERROR_MESSAGE);
-		} else if (result == "NoneSelected") {
-			//Do Nothing
 		} else {
 			//Update Window
 			closeWindow();
@@ -85,16 +94,20 @@ public class StoreWindow {
 	 */
 	public void sellItem() {
 		int index = itemsToSell.getSelectedRow();
-		String result = GameEnvironment.getPlayerShip().getLocation().getStore().purchase(this, index);
-
-		//Handle Errors
-		if (result == "NoneSelected") {
-			//Do Nothing
-		} else {
-			//Update Window
-			closeWindow();
-			new StoreWindow();
+		//Check the user selected an item
+		if (index < 0) {
+			return;
 		}
+		//Find the item selected
+		Entity selectedItem = (Entity)itemsToBuy[index][4];
+		if (selectedItem == null) {
+			return;
+		}
+		
+		GameEnvironment.getPlayerShip().getLocation().getStore().purchase(selectedItem);
+
+		closeWindow();
+		new StoreWindow();
 	}
 
 	/**

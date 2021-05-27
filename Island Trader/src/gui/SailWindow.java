@@ -125,7 +125,7 @@ public class SailWindow {
 		JTextPane txtpnSetSail = new JTextPane();
 		txtpnSetSail.setForeground(new Color(255, 255, 255));
 		txtpnSetSail.setEditable(false);
-		txtpnSetSail.setText("                 Set Sail");
+		txtpnSetSail.setText("            Set Sail");
 		txtpnSetSail.setFont(new Font("Eras Bold ITC", Font.BOLD, 55));
 		txtpnSetSail.setBackground(new Color(0, 0, 51));
 		txtpnSetSail.setBounds(0, 0, 691, 73);
@@ -208,12 +208,14 @@ public class SailWindow {
 		sailScreen.getContentPane().add(panel);
 		
 		lblShowRoute = new JLabel("");
+		lblShowRoute.setForeground(Color.WHITE);
 		lblShowRoute.setText(currentSelected.viewIslandInfo(GameEnvironment.getPlayerShip().getLocation())[0]);
 		lblShowRoute.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblShowRoute.setBounds(10, 69, 365, 238);
 		panel.add(lblShowRoute);
 		
 		JLabel lblRouteInfo = new JLabel("Route info:");
+		lblRouteInfo.setForeground(Color.WHITE);
 		lblRouteInfo.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblRouteInfo.setBounds(10, 11, 351, 25);
 		panel.add(lblRouteInfo);

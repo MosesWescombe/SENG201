@@ -196,12 +196,14 @@ public class ViewIslandsWindow {
 		islandInfoPanel.setLayout(null);
 		
 			lblForIsland = new JLabel("Island Properties for: ");
+			lblForIsland.setForeground(Color.WHITE);
 			lblForIsland.setText(lblForIsland.getText() + currentSelected.getName());
-			lblForIsland.setBounds(10, 11, 288, 22);
+			lblForIsland.setBounds(10, 11, 365, 22);
 			islandInfoPanel.add(lblForIsland);
 			lblForIsland.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			
 			lblRouteInfo = new JLabel("");
+			lblRouteInfo.setForeground(Color.WHITE);
 			lblRouteInfo.setText(currentSelected.viewIslandInfo(GameEnvironment.getPlayerShip().getLocation())[0]);
 			lblRouteInfo.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			lblRouteInfo.setBounds(10, 62, 365, 233);
@@ -276,6 +278,7 @@ public class ViewIslandsWindow {
 			islandInfoPanel.add(btnThisBuys);
 			
 			JLabel lblStoreButtonInfo = new JLabel("The selected Island store info:");
+			lblStoreButtonInfo.setForeground(Color.WHITE);
 			lblStoreButtonInfo.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			lblStoreButtonInfo.setBounds(10, 306, 365, 32);
 			islandInfoPanel.add(lblStoreButtonInfo);

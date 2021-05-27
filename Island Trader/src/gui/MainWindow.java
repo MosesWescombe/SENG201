@@ -101,7 +101,7 @@ public class MainWindow {
 		txtpnMainMenu.setForeground(new Color(255, 255, 255));
 		txtpnMainMenu.setEditable(false);
 		txtpnMainMenu.setFont(new Font("Eras Bold ITC", Font.PLAIN, 55));
-		txtpnMainMenu.setText("                               Main Menu");
+		txtpnMainMenu.setText("                         Main Menu");
 		txtpnMainMenu.setBackground(new Color(0, 0, 51));
 		txtpnMainMenu.setBounds(0, 0, 1167, 78);
 		mainScreen.getContentPane().add(txtpnMainMenu);
@@ -244,41 +244,41 @@ public class MainWindow {
 			JLabel lblShipProperties = new JLabel("Ship Properties for ");
 			lblShipProperties.setText(lblShipProperties.getText() + GameEnvironment.getPlayerShip().getName());
 			lblShipProperties.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			lblShipProperties.setBounds(170, 11, 267, 38);
+			lblShipProperties.setBounds(148, 12, 373, 38);
 			shipPropertiesPanel.add(lblShipProperties);
 
 			//Capacity
 			JLabel lblCapacity = new JLabel("Capacity: ");
 			lblCapacity.setText(lblCapacity.getText() + GameEnvironment.getPlayerShip().getCapacity() + "/" + GameEnvironment.getPlayerShip().getMaxCapacity() + "kg");
 			lblCapacity.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			lblCapacity.setBounds(352, 99, 165, 38);
+			lblCapacity.setBounds(352, 99, 231, 38);
 			shipPropertiesPanel.add(lblCapacity);
 			
 			//Speed
 			JLabel lblSpeed = new JLabel("Speed: ");
 			lblSpeed.setText(lblSpeed.getText() + GameEnvironment.getPlayerShip().getSailSpeed() + "km/h");
 			lblSpeed.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			lblSpeed.setBounds(53, 96, 150, 44);
+			lblSpeed.setBounds(53, 96, 257, 44);
 			shipPropertiesPanel.add(lblSpeed);
 			
 			//Health
 			JLabel lblHealth = new JLabel("Health: ");
 			lblHealth.setText(lblHealth.getText() + GameEnvironment.getPlayerShip().getHealth() + "/" + GameEnvironment.getPlayerShip().getMaxHealth());
 			lblHealth.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			lblHealth.setBounds(53, 45, 161, 54);
+			lblHealth.setBounds(53, 45, 257, 54);
 			shipPropertiesPanel.add(lblHealth);
 			
 			//Crew
 			JLabel lblCrew = new JLabel("Crew: ");
 			lblCrew.setText(lblCrew.getText() + GameEnvironment.getPlayerShip().getCrew());
 			lblCrew.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			lblCrew.setBounds(356, 53, 145, 38);
+			lblCrew.setBounds(356, 53, 187, 38);
 			shipPropertiesPanel.add(lblCrew);
 
 			//Repair Cost
 			JLabel lblRepairCost = new JLabel("Repair Cost: $" + (GameEnvironment.getPlayerShip().getMaxHealth() - GameEnvironment.getPlayerShip().getHealth()));
 			lblRepairCost.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			lblRepairCost.setBounds(53, 151, 178, 31);
+			lblRepairCost.setBounds(53, 151, 257, 31);
 			shipPropertiesPanel.add(lblRepairCost);
 			
 			//Repair Button
@@ -296,7 +296,7 @@ public class MainWindow {
 			//Upgrades Title
 			JLabel lblShipUpgrades = new JLabel("Ship Upgrades");
 			lblShipUpgrades.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			lblShipUpgrades.setBounds(191, 175, 218, 38);
+			lblShipUpgrades.setBounds(202, 178, 218, 38);
 			shipPropertiesPanel.add(lblShipUpgrades);
 			
 			//Upgrades Table
@@ -327,28 +327,28 @@ public class MainWindow {
 			//Welcome Title
 			JLabel lblWelcome = new JLabel("Welcome, ");
 			lblWelcome.setText(lblWelcome.getText() + GameEnvironment.getPlayer().getName());
-			lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			lblWelcome.setBounds(10, 11, 189, 46);
+			lblWelcome.setFont(new Font("Dialog", Font.BOLD, 16));
+			lblWelcome.setBounds(10, 11, 238, 46);
 			playerPanel.add(lblWelcome);
 			
 			//Wallet
 			JLabel lblWallet = new JLabel("Wallet: $");
 			lblWallet.setText(lblWallet.getText() + GameEnvironment.getPlayer().getWallet());
-			lblWallet.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			lblWallet.setFont(new Font("Dialog", Font.BOLD, 16));
 			lblWallet.setBounds(260, 68, 160, 36);
 			playerPanel.add(lblWallet);
 			
 			//Time
 			JLabel lblDuration = new JLabel("Time Remaining: ");
 			lblDuration.setText(lblDuration.getText() + GameEnvironment.getTime().getTimeRemaining() + " days");
-			lblDuration.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			lblDuration.setBounds(10, 72, 216, 29);
+			lblDuration.setFont(new Font("Dialog", Font.BOLD, 16));
+			lblDuration.setBounds(10, 72, 238, 29);
 			playerPanel.add(lblDuration);
 			
 			//Location
 			JLabel lblLocation = new JLabel("Location: ");
 			lblLocation.setText(lblLocation.getText() + GameEnvironment.getPlayerShip().getLocation().getName());
-			lblLocation.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			lblLocation.setFont(new Font("Dialog", Font.BOLD, 16));
 			lblLocation.setBounds(260, 20, 216, 29);
 			playerPanel.add(lblLocation);
 	}

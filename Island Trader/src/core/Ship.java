@@ -2,8 +2,6 @@ package core;
 
 import java.util.ArrayList;
 
-import org.hamcrest.core.IsInstanceOf;
-
 /**
  * Ship Class. A ship is what the player uses to travel between islands. The items that the player buys also gets stored in the ships cargo.
  * 
@@ -224,6 +222,7 @@ public class Ship {
 
         //check ship destroyed
         if (this.health <= 0) {
+            this.health = 0;
             GameEnvironment.exit("Game over, your ship is destroyed");
         }
     }

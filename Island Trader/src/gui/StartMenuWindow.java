@@ -176,7 +176,6 @@ public class StartMenuWindow {
 
 			//Player name input
 			playerNameInput = new JTextField();
-			playerNameInput.setText("Default");
 			playerNameInput.setFont(new Font("Tahoma", Font.PLAIN, 22));
 			playerNameInput.setBounds(37, 212, 319, 58);
 			startMenuWindow.getContentPane().add(playerNameInput);
@@ -184,7 +183,6 @@ public class StartMenuWindow {
 			
 			//Ship name input
 			shipNameInput = new JTextField();
-			shipNameInput.setText("Default");
 			shipNameInput.setFont(new Font("Tahoma", Font.PLAIN, 22));
 			shipNameInput.setColumns(10);
 			shipNameInput.setBounds(500, 212, 319, 58);
@@ -211,7 +209,7 @@ public class StartMenuWindow {
 		JTextPane txtpnCruiserDetails = new JTextPane();
 		txtpnCruiserDetails.setEditable(false);
 		txtpnCruiserDetails.setBackground(SystemColor.controlHighlight);
-		txtpnCruiserDetails.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtpnCruiserDetails.setFont(new Font("Dialog", Font.BOLD, 16));
 		txtpnCruiserDetails.setText("-Fastest\r\n-Weaker\r\n-Average Cargo\r\n-Average Crew Size");
 		txtpnCruiserDetails.setBounds(458, 593, 177, 105);
 		startMenuWindow.getContentPane().add(txtpnCruiserDetails);
@@ -219,7 +217,7 @@ public class StartMenuWindow {
 		JTextPane txtpnsBattleDetails = new JTextPane();
 		txtpnsBattleDetails.setEditable(false);
 		txtpnsBattleDetails.setText("-Slower\r\n-Stronger\r\n-Average Cargo\r\n-Large Crew Size");
-		txtpnsBattleDetails.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtpnsBattleDetails.setFont(new Font("Dialog", Font.BOLD, 16));
 		txtpnsBattleDetails.setBackground(SystemColor.controlHighlight);
 		txtpnsBattleDetails.setBounds(227, 593, 177, 105);
 		startMenuWindow.getContentPane().add(txtpnsBattleDetails);
@@ -227,7 +225,7 @@ public class StartMenuWindow {
 		JTextPane txtpnCargoDetails = new JTextPane();
 		txtpnCargoDetails.setEditable(false);
 		txtpnCargoDetails.setText("-Slower\r\n-Average Health\r\n-Large Cargo\r\n-Average Crew Size");
-		txtpnCargoDetails.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtpnCargoDetails.setFont(new Font("Dialog", Font.BOLD, 16));
 		txtpnCargoDetails.setBackground(SystemColor.controlHighlight);
 		txtpnCargoDetails.setBounds(10, 593, 177, 105);
 		startMenuWindow.getContentPane().add(txtpnCargoDetails);
@@ -235,7 +233,7 @@ public class StartMenuWindow {
 		JTextPane txtpnDingyDetails = new JTextPane();
 		txtpnDingyDetails.setEditable(false);
 		txtpnDingyDetails.setText("-Slowest\r\n-Weakest\r\n-Smallest Cargo\r\n-Smallest Crew");
-		txtpnDingyDetails.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtpnDingyDetails.setFont(new Font("Dialog", Font.BOLD, 16));
 		txtpnDingyDetails.setBackground(SystemColor.controlHighlight);
 		txtpnDingyDetails.setBounds(675, 593, 177, 105);
 		startMenuWindow.getContentPane().add(txtpnDingyDetails);
@@ -256,7 +254,7 @@ public class StartMenuWindow {
 		playerNameWarning.setVisible(false);
 		playerNameWarning.setForeground(new Color(255, 0, 0));
 		playerNameWarning.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		playerNameWarning.setBounds(23, 280, 381, 25);
+		playerNameWarning.setBounds(23, 280, 408, 25);
 		startMenuWindow.getContentPane().add(playerNameWarning);
 		
 		//Ship name warning
@@ -264,7 +262,7 @@ public class StartMenuWindow {
 		shipNameWarning.setVisible(false);
 		shipNameWarning.setForeground(new Color(255, 0, 0));
 		shipNameWarning.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		shipNameWarning.setBounds(471, 280, 381, 25);
+		shipNameWarning.setBounds(458, 280, 404, 25);
 		startMenuWindow.getContentPane().add(shipNameWarning);
 		
 	}
