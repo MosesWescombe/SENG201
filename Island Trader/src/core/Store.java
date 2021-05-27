@@ -1,7 +1,6 @@
 package core;
 
 import java.util.ArrayList;
-import gui.StoreWindow;
 
 /**
  * Store Class. A store is what the user interacts with when trading goods.
