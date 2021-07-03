@@ -1,14 +1,16 @@
 Island Trader Game -- Moses Wescombe -- Jeremey Roberts
 
 ## Getting Started
-1: Ensure you have Eclipse IDE and Java 14 are isntalled on the machine.
-2: Open the zip and extract it to your desired location.
-3: To open the code launch Eclipse. File > Open project from file directory... > Change Destination > Finish.
-4: Launch from GameEnvironment class.
+To launch the program via code.
+- 1: Ensure you have Eclipse IDE and Java 14 are isntalled on the machine.
+- 2: Open the zip and extract it to your desired location.
+- 3: To open the code launch Eclipse. File > Open project from file directory... > Change Destination > Finish.
+- 4: Launch from GameEnvironment class.
 
 To Launch the jar file.
-1: Open the zip file in a terminal window.
-2: Run "java -jar mwe50_jro162_IslandTrader.jar"
+- 1: Open the zip file in a terminal window.
+- 2: Run "java -jar mwe50_jro162_IslandTrader.jar"
+
 
 ## Folder Structure
 The workspace contains two folders by default, where:
